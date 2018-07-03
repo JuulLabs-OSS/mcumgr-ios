@@ -13,11 +13,11 @@ public class BleCentralManager: NSObject {
     // MARK: Properties
     //*******************************************************************************************
 
-    /// Central Manager
+    /// Central Manager.
     private var centralManager: CBCentralManager!
     
-    /// Dictionary of scanned peripherals keyed by peripheral's address
-    private(set) var scannedPeripherals = [String:CBPeripheral]()
+    /// Dictionary of scanned peripherals keyed by peripheral's address.
+    private(set) var scannedPeripherals = [String : CBPeripheral]()
     
     /// Array of delegates for CoreBluetooth callbacks.
     private var delegates = [CBCentralManagerDelegate]()
@@ -26,24 +26,44 @@ public class BleCentralManager: NSObject {
     // MARK: Singleton
     //*****************************************************************************************
 
-    /// Singleton instance of GatewayService
+    /// Singleton instance of GatewayService.
     static var instance: BleCentralManager?
     
-    /// Initialize the Central Manager
+    /// Initialize the Central Manager.
     private override init() {
         super.init()
         centralManager = CBCentralManager(delegate: self, queue: nil)
     }
     
+    /// Initialize the Central Manager.
+    private init(wrap manager: CBCentralManager) {
+        super.init()
+        centralManager = manager
+    }
+    
     /// Get the singleton instance of Central Manager. This method will create the singleton
-    /// instance if not already.
+    /// instance if not already created.
     ///
-    /// - returns: the singleton instance of Central Manager
+    /// - returns: the singleton instance of Central Manager.
     public static func getInstance() -> BleCentralManager {
         if instance == nil {
             instance = BleCentralManager()
         }
         return instance!
+    }
+    
+    /// Create and return the singleton instance. If already created, this will return nil.
+    /// Call this method before getInstance() to wrap the manager.
+    ///
+    /// - parameter manager: The Central Manager to be wrapped.
+    /// - returns: The singleton instance of Central Manager, or nil if instance was created
+    ///   before.
+    public static func getInstance(wrap manager: CBCentralManager) -> BleCentralManager? {
+        if instance == nil {
+            instance = BleCentralManager(wrap: manager)
+            return instance!
+        }
+        return nil
     }
     
     //*****************************************************************************************
@@ -52,14 +72,14 @@ public class BleCentralManager: NSObject {
     
     /// Add delegate for getting CoreBluetooth callbacks such as didScanPeripheral.
     ///
-    /// - parameter delegate: the delegate to add
+    /// - parameter delegate: The delegate to add.
     public func addDelegate(_ delegate: CBCentralManagerDelegate) {
         delegates.append(delegate)
     }
     
-    /// Add delegate for getting CoreBluetooth callbacks such as didScanPeripheral.
+    /// Remove delegate for getting CoreBluetooth callbacks such as didScanPeripheral.
     ///
-    /// - parameter delegate: the delegate to add
+    /// - parameter delegate: The delegate to remove.
     public func removeDelegate(_ delegate: CBCentralManagerDelegate) -> Bool {
         if let index = delegates.index(where: {$0.hash == delegate.hash}) {
             delegates.remove(at: index)
@@ -72,33 +92,32 @@ public class BleCentralManager: NSObject {
     // MARK: Scanning
     //*****************************************************************************************
 
-    /// Start a BLE scan for peripherals with services matching the UUIDs given
+    /// Start a BLE scan for peripherals with services matching the given UUIDs.
     ///
-    /// - parameter forUUIDs: the service UUIDs to scan for
-    public func startScan(forUUIDs: [CBUUID] = []) {
-        centralManager.scanForPeripherals(withServices: forUUIDs, options: [CBCentralManagerScanOptionAllowDuplicatesKey:false])
+    /// - parameter uuids: The service UUIDs to scan for.
+    public func startScan(forUUIDs uuids: [CBUUID]? = nil) {
+        centralManager.scanForPeripherals(withServices: uuids, options: [CBCentralManagerScanOptionAllowDuplicatesKey : false])
     }
     
-    /// Stop the GatewayService from scanning.
+    /// Stop the BLE scan.
     public func stopScan() {
         centralManager.stopScan()
     }
     
     /// Get the dictionary of scanned peripherals. This dictionary is keyed by the string of
-    /// the peripherals address
-    /// (identifier).
+    /// the peripherals address (identifier).
     ///
-    /// - returns: the dictionary of scanned peripherals
-    public func getScannedPeripherals() -> [String: CBPeripheral] {
+    /// - returns: The dictionary of scanned peripherals.
+    public func getScannedPeripherals() -> [String : CBPeripheral] {
         return scannedPeripherals
     }
     
     /// Get a scanned peripheral object using the address (identifier).
     ///
-    /// - parameter address: the address of the peripheral to get
+    /// - parameter address: The identifier of the peripheral to get.
     ///
-    /// - returns: foobar
-    public func getScannedPeripheral(_ address: String) -> CBPeripheral? {
+    /// - returns: The peripheral scanned, or nil.
+    public func getScannedPeripheral(withAddress address: String) -> CBPeripheral? {
         return scannedPeripherals[address]
     }
     
@@ -106,20 +125,20 @@ public class BleCentralManager: NSObject {
     /// will return the first peripheral whose name matches the provided
     /// parameter.
     ///
-    /// - parameter name: the advertised name of the peripheral to get
+    /// - parameter name: the advertised name of the peripheral to get.
     ///
-    /// - returns: foobar
-    public func getScannedPeripheralWithName(_ name: String) -> CBPeripheral? {
+    /// - returns: The peripheral scanned with given name, or nil.
+    public func getScannedPeripheral(withName name: String) -> CBPeripheral? {
         return scannedPeripherals.values.first(where: {$0.name == name})
     }
     
     /// Removes a scanned peripheral from the dictionary.
     ///
-    /// - parameter address: the address of the peripheral to remove
+    /// - parameter address: The address of the peripheral to remove.
     ///
-    /// - returns: the removed peripheral or nil if not found
-    public func removeScannedPeripheral(_ address: String) -> CBPeripheral? {
-        if let peripheral = getScannedPeripheral(address) {
+    /// - returns: The removed peripheral or nil if not found.
+    public func removeScannedPeripheral(withAddress address: String) -> CBPeripheral? {
+        if let peripheral = getScannedPeripheral(withAddress: address) {
             centralManager.cancelPeripheralConnection(peripheral)
         }
         return scannedPeripherals.removeValue(forKey: address)
@@ -127,12 +146,12 @@ public class BleCentralManager: NSObject {
     
     /// Connects to a peripheral with a given address.
     ///
-    /// - parameter address: the address of the peripheral to connect to
-    /// - parameter options: connection options
+    /// - parameter address: The address of the peripheral to connect to.
+    /// - parameter options: Connection options.
     ///
-    /// - returns: true if a peripheral with the given address was found, else otherwise
-    public func connectPeripheralWithAddress(_ address: String, options: [String : Any]? = nil) -> Bool {
-        if let prph = getScannedPeripheral(address) {
+    /// - returns: True if a peripheral with the given address was found, else otherwise.
+    public func connect(toPeripheralWithAddress address: String, options: [String : Any]? = nil) -> Bool {
+        if let prph = getScannedPeripheral(withAddress: address) {
             centralManager.connect(prph, options: nil)
             return true
         }
@@ -142,26 +161,25 @@ public class BleCentralManager: NSObject {
     
     /// Connects to the given peripheral object.
     ///
-    /// - parameter peripheral: the peripheral to connect to.
-    /// - parameter options: connection options
-    ///
-    public func connectPeripheral(_ peripheral: CBPeripheral, options: [String : Any]? = nil) {
+    /// - parameter peripheral: The peripheral to connect to.
+    /// - parameter options: Connection options.
+    public func connect(_ peripheral: CBPeripheral, options: [String : Any]? = nil) {
         centralManager.connect(peripheral, options: options)
     }
     
-    /// Forces the GatewayService to disconnect to the peripheral
+    /// Forces the manager to disconnect from the peripheral.
     ///
-    /// - parameter peripheral: the peripheral to disconnect
-    public func disconnectPeripheral(_ peripheral: CBPeripheral) {
+    /// - parameter peripheral: The peripheral to disconnect.
+    public func disconnect(_ peripheral: CBPeripheral) {
         centralManager.cancelPeripheralConnection(peripheral)
     }
     
-    /// Get the MTU for this central and the peripheral with the given address.
+    /// Get the MTU for this central and the given peripheral.
     ///
-    /// - parameter address: The address of the peripheral from which to determine the MTU
+    /// - parameter peripheral: The peripheral from which to determine the MTU.
     ///
-    /// - returns: The MTU or nil if no peripheral was found with the given address
-    public func getMTU(peripheral: CBPeripheral) -> Int {
+    /// - returns: The MTU.
+    public func getMTU(_ peripheral: CBPeripheral) -> Int {
         var centralMTU: Int = 0
         if #available(iOS 10.0, *) {
             // For iOS 10.0+
@@ -174,7 +192,7 @@ public class BleCentralManager: NSObject {
         return min(centralMTU, peripheralMTU)
     }
     
-    /// Prints each peripheral in the scanned peripheral dictionary
+    /// Prints each peripheral in the scanned peripheral dictionary.
     public func printScannedPeripherals() {
         for (address, peripheral) in scannedPeripherals {
             print("\(peripheral.name ?? "Unknown")\t - \(address)")
@@ -195,6 +213,7 @@ public class BleCentralManager: NSObject {
 }
 
 extension BleCentralManager: CBCentralManagerDelegate {
+    
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         GWSLog("Central Manager: centralManagerDidUpdateState - \(central.state.rawValue)")
         for delegate in delegates {

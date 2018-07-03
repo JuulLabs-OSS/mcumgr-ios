@@ -51,11 +51,6 @@ class ViewController: UIViewController {
         // state callbacks
         BleCentralManager.getInstance().addDelegate(self)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     //**************************************************************************
     // MARK: Button Actions
@@ -95,7 +90,7 @@ class ViewController: UIViewController {
         hideImageStateUI()
         hideFirmwareUpgradeUI()
         if let peripheral = peripheral {
-            BleCentralManager.getInstance().disconnectPeripheral(peripheral)
+            BleCentralManager.getInstance().disconnect(peripheral)
             self.peripheral = nil
         }
     }
@@ -134,14 +129,14 @@ class ViewController: UIViewController {
         
         // Disconnect from the current peripheral
         if self.peripheral != nil {
-            BleCentralManager.getInstance().disconnectPeripheral(self.peripheral!)
+            BleCentralManager.getInstance().disconnect(self.peripheral!)
         }
         
-        // Set the periphearl
+        // Set the peripheral
         self.peripheral = peripheral
         
         // Connect to the peripheral
-        BleCentralManager.getInstance().connectPeripheral(peripheral)
+        BleCentralManager.getInstance().connect(peripheral)
         
         // Update the UI
         updateDeviceInfoUI()

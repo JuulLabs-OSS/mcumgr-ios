@@ -12,31 +12,31 @@ public class McuMgrBleTransport: NSObject {
     public static let SMP_SERVICE = CBUUID(string: "8D53DC1D-1DB7-4CD3-868B-8A527460AA84")
     public static let SMP_CHARACTERISTIC = CBUUID(string: "DA2E7828-FBCE-4E01-AE9E-261174997C48")
     
-    /// Logging TAG
+    /// Logging TAG.
     private let TAG: String
     
-    /// Max number of retries until the transaction is failed
+    /// Max number of retries until the transaction is failed.
     private static let MAX_RETRIES = 3
-    /// Transaction Timout (seconds)
+    /// Transaction Timout (seconds).
     private static let TIMEOUT = 10
     
     /// The CBPeripheral for this transport to communicate with.
     private var peripheral: CBPeripheral
-    /// The central manager
+    /// The central manager.
     private var bleCentralManager: BleCentralManager
-    /// Dispatch queue for queuing requests
+    /// Dispatch queue for queuing requests.
     private var dispatchQueue: DispatchQueue
     /// Lock used to wait for callbacks before continuing the request. This lock
     /// is used to wait for the device to setup (i.e. connection, descriptor
     /// writes) and the device to be received.
     private var lock: ResultLock
     
-    /// SMP Service object
+    /// SMP Service object.
     private var smpService: CBService?
     /// SMP Characteristic object. Used to write requests.
     private var smpCharacteristic: CBCharacteristic?
     
-    // Used to store fragmented response data
+    // Used to store fragmented response data.
     private var responseData: Data?
     
     //**************************************************************************
@@ -47,20 +47,20 @@ public class McuMgrBleTransport: NSObject {
     private static let lock = NSObject()
     
     /// Get the shared isntance of the McuMgrBleTransporter for a given
-    /// peripheral
-    public static func getInstance(_ forPeripheral: CBPeripheral) -> McuMgrBleTransport {
+    /// peripheral.
+    public static func getInstance(for peripheral: CBPeripheral) -> McuMgrBleTransport {
         objc_sync_enter(McuMgrBleTransport.lock)
-        var transporter = McuMgrBleTransport.transporters[forPeripheral]
+        var transporter = McuMgrBleTransport.transporters[peripheral]
         if transporter == nil {
-            transporter = McuMgrBleTransport(peripheral: forPeripheral)
+            transporter = McuMgrBleTransport(peripheral)
         }
-        McuMgrBleTransport.transporters.updateValue(transporter!, forKey: forPeripheral)
+        McuMgrBleTransport.transporters.updateValue(transporter!, forKey: peripheral)
         objc_sync_exit(McuMgrBleTransport.lock)
         return transporter!
     }
     
-    /// Private initializer
-    private init(peripheral: CBPeripheral) {
+    /// Private initializer.
+    private init(_ peripheral: CBPeripheral) {
         self.peripheral = peripheral
         self.TAG = "SMP \(peripheral.name ?? "Unknown") (\(peripheral.identifier.uuidString.prefix(4)))"
         self.bleCentralManager = BleCentralManager.getInstance()
@@ -96,7 +96,7 @@ extension McuMgrBleTransport: McuMgrTransport {
         }
     }
     
-    /// Return true if the send should be retried until the max retries has been met
+    /// Return true if the send should be retried until the max retries has been met.
     private func _send<T: McuMgrResponse>(data: Data, retry: Int, callback: @escaping McuMgrCallback<T>) -> Bool {
         Log.v(TAG, msg: "Send McuManager request to deivce (\(peripheral.state.rawValue))")
         if peripheral.state == .connecting || peripheral.state == .disconnecting {
@@ -115,13 +115,13 @@ extension McuMgrBleTransport: McuMgrTransport {
                 // connecting to the device. Once the characteristic's
                 // notification is enabled, the semaphore will be signalled and
                 // the request can be sent.
-                bleCentralManager.connectPeripheral(peripheral)
+                bleCentralManager.connect(peripheral)
             }
             
-            // Wait for the setup process to complete
+            // Wait for the setup process to complete.
             let result = lock.block(timeout: DispatchTime.now() + .seconds(McuMgrBleTransport.TIMEOUT))
             
-            // Check for timeout, failure, or success
+            // Check for timeout, failure, or success.
             if case .timeout = result {
                 fail(error: McuMgrError.connectionTimout, callback: callback)
                 return false
@@ -133,24 +133,24 @@ extension McuMgrBleTransport: McuMgrTransport {
             }
         }
         
-        // Make sure the SMP characteristic is not nil
+        // Make sure the SMP characteristic is not nil.
         guard let smpCharacteristic = smpCharacteristic else {
             Log.e(TAG, msg: "Missing the SMP characteristic after connection setup.")
             fail(error: McuMgrError.missingCharacteristic, callback: callback)
             return false
         }
         
-        // Close the lock
+        // Close the lock.
         lock.close()
         
-        // Fragment the packet if too large
-        let mtu = bleCentralManager.getMTU(peripheral: peripheral)
+        // Fragment the packet if too large.
+        let mtu = bleCentralManager.getMTU(peripheral)
         for fragment in data.fragment(size: mtu) {
             Log.v(TAG, msg: "Writing request to device...")
             peripheral.writeValue(fragment, for: smpCharacteristic, type: .withoutResponse)
         }
         
-        // Wait for the response
+        // Wait for the response.
         let result = lock.block(timeout: DispatchTime.now() + .seconds(McuMgrBleTransport.TIMEOUT))
         
         if case .timeout = result {
@@ -160,7 +160,7 @@ extension McuMgrBleTransport: McuMgrTransport {
         } else if case .success = result {
             Log.v(TAG, msg: "Response received! (\(responseData?.description ?? "nil"))" )
             do {
-                // Build the McuMgrResponse
+                // Build the McuMgrResponse.
                 let response: T = try McuMgrResponse.buildResponse(scheme: getScheme(), data: responseData)
                 success(response: response, callback: callback)
             } catch {
@@ -191,7 +191,7 @@ extension McuMgrBleTransport: McuMgrTransport {
 extension McuMgrBleTransport: CBCentralManagerDelegate {
     
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        
+        // ignore
     }
     
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
@@ -230,23 +230,24 @@ extension McuMgrBleTransport: CBCentralManagerDelegate {
 //******************************************************************************
 
 extension McuMgrBleTransport: CBPeripheralDelegate {
+    
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        // Check for error
+        // Check for error.
         if let error = error {
             lock.open(error)
             return
         }
         Log.v(TAG, msg: "didDiscoverServices: \(peripheral.services ?? [])")
         self.peripheral = peripheral
-        // Get peripheral's services
+        // Get peripheral's services.
         guard let services = peripheral.services else {
             lock.open(McuMgrError.missingService)
             return
         }
-        // Find the service matching the SMP service UUID
+        // Find the service matching the SMP service UUID.
         for service in services {
             if service.uuid == McuMgrBleTransport.SMP_SERVICE {
-                // Set the smp service
+                // Set the smp service.
                 smpService = service
                 peripheral.discoverCharacteristics([McuMgrBleTransport.SMP_CHARACTERISTIC], for: service)
             }
@@ -254,7 +255,7 @@ extension McuMgrBleTransport: CBPeripheralDelegate {
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-        // Check for error
+        // Check for error.
         if let error = error {
             lock.open(error)
             return
@@ -262,15 +263,15 @@ extension McuMgrBleTransport: CBPeripheralDelegate {
         Log.v(TAG, msg: "didDiscoverCharacteristics: \(service.characteristics ?? [])")
         self.peripheral = peripheral
         
-        // Get service's characteristics
+        // Get service's characteristics.
         guard let characteristics = service.characteristics else {
             lock.open(McuMgrError.missingCharacteristic)
             return
         }
-        // Find the characteristic matching the SMP characteristic UUID
+        // Find the characteristic matching the SMP characteristic UUID.
         for characteristic in characteristics {
             if characteristic.uuid == McuMgrBleTransport.SMP_CHARACTERISTIC {
-                // Set the characteristic notification if available
+                // Set the characteristic notification if available.
                 if characteristic.properties.contains(.notify) {
                     peripheral.setNotifyValue(true, for: characteristic)
                     return
@@ -290,15 +291,13 @@ extension McuMgrBleTransport: CBPeripheralDelegate {
         Log.v(TAG, msg: "didUpdateNotificationState")
         self.peripheral = peripheral
         
-        // Set the smp characteristic
+        // Set the smp characteristic.
         smpCharacteristic = characteristic
         
         // The SMP Service and characateristic have now been discovered and set
-        // up. Signal the dispatch semaphore to continue to send the request
+        // up. Signal the dispatch semaphore to continue to send the request.
         lock.open()
     }
-    
-    
     
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         if let error = error {
@@ -333,17 +332,17 @@ extension McuMgrBleTransport: CBPeripheralDelegate {
         }
         Log.v(TAG, msg: "expectedLength = \(expectedLength)")
                 
-        // Append the response data
+        // Append the response data.
         responseData!.append(data)
         
-        // If we have recevied all the bytes, signal the waiting lock
+        // If we have recevied all the bytes, signal the waiting lock.
         if responseData!.count >= expectedLength {
             lock.open()
         }
     }
 }
 
-// TODO: add more specific errors & error messages
+// TODO: Add more specific errors & error messages.
 public enum McuMgrError: Error {
     case connectionTimout
     case writeTimeout

@@ -19,7 +19,7 @@ public class ResultLock {
     
     /// Block the current thread until the condition is opened.
     ///
-    /// If the condition is already opened, return immediately
+    /// If the condition is already opened, return immediately.
     public func block() -> LockResult {
         if !isOpen {
             semaphore.wait()
@@ -33,7 +33,7 @@ public class ResultLock {
     
     /// Block the current thread until the condition is opened or until timeout.
     ///
-    /// If the condition is opened, return immediately
+    /// If the condition is opened, return immediately.
     public func block(timeout: DispatchTime) -> LockResult {
         let dispatchTimeoutResult: DispatchTimeoutResult
         if !isOpen {
@@ -51,7 +51,7 @@ public class ResultLock {
         }
     }
     
-    /// Open the condition, and release all threads that are blocked
+    /// Open the condition, and release all threads that are blocked.
     ///
     /// Any threads that later approach block() will not block unless close() is called.
     public func open(_ error: Error? = nil) {
@@ -64,7 +64,7 @@ public class ResultLock {
         objc_sync_exit(self)
     }
     
-    /// Reset the condtion to the closed state
+    /// Reset the condtion to the closed state.
     public func close() {
         objc_sync_enter(self)
         error = nil
