@@ -14,12 +14,13 @@ public class ImageManager: McuManager {
     //**************************************************************************
 
     // Mcu Image Manager command IDs.
-    let ID_STATE    = UInt8(0)
-    let ID_UPLOAD   = UInt8(1)
-    let ID_FILE     = UInt8(2)
-    let ID_CORELIST = UInt8(3)
-    let ID_CORELOAD = UInt8(4)
-    let ID_ERASE    = UInt8(5)
+    let ID_STATE       = UInt8(0)
+    let ID_UPLOAD      = UInt8(1)
+    let ID_FILE        = UInt8(2)
+    let ID_CORELIST    = UInt8(3)
+    let ID_CORELOAD    = UInt8(4)
+    let ID_ERASE       = UInt8(5)
+    let ID_ERASE_STATE = UInt8(6)
     
     //**************************************************************************
     // MARK: Initializers
@@ -78,25 +79,36 @@ public class ImageManager: McuManager {
     public func erase(callback: @escaping McuMgrCallback<McuMgrResponse>) {
         send(op: .write, commandId: ID_ERASE, payload: nil, callback: callback)
     }
+    
+    /// Erases the state of the secondary image slot on the device.
+    ///
+    /// - parameter callback: The response callback.
+    public func eraseState(callback: @escaping McuMgrCallback<McuMgrResponse>) {
+        send(op: .write, commandId: ID_ERASE_STATE, payload: nil, callback: callback)
+    }
 
-    /// The newtmgr image corelist command lists the core(s) on a device.
+    /// Requst core dump on the device. The data will be stored in the dump area.
     ///
     /// - parameter callback: The response callback.
     public func coreList(callback: @escaping McuMgrCallback<McuMgrResponse>) {
         send(op: .read, commandId: ID_CORELIST, payload: nil, callback: callback)
     }
     
-    /// TODO: What does this do?
-    public func coreLoad(offset: UInt, callback: @escaping McuMgrCallback<McuMgrResponse>) {
+    /// Read core dump from the given offset.
+    ///
+    /// - parameter offset: The offset to load from, in bytes.
+    /// - parameter callback: The response callback.
+    public func coreLoad(offset: UInt, callback: @escaping McuMgrCallback<McuMgrCoreLoadResponse>) {
         let payload: [String:CBOR] = ["off": CBOR.unsignedInt(offset)]
         send(op: .read, commandId: ID_CORELOAD, payload: payload, callback: callback)
     }
 
-    /// TODO: What does this do?
+    /// Erase the area if it has a core dump, or the header is empty.
+    ///
+    /// - parameter callback: The response callback.
     public func coreErase(callback: @escaping McuMgrCallback<McuMgrResponse>) {
         send(op: .write, commandId: ID_CORELOAD, payload: nil, callback: callback)
     }
-
     
     //**************************************************************************
     // MARK: Image Upload
@@ -316,7 +328,6 @@ public class ImageManager: McuManager {
             self.sendUploadData(offset: offset)
         } else {
             self.cancelUpload(error: ImageUploadError.invalidPayload)
-            return
         }
     }
 

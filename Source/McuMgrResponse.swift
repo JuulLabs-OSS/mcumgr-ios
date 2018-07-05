@@ -27,7 +27,7 @@ public class McuMgrResponse: CBORMappable, CustomStringConvertible, CustomDebugS
     
     /// The response's raw packet data. For CoAP transport schemes, this will
     /// include the CoAP header.
-    public var data: Data?
+    public var rawData: Data?
     
     /// The 8-byte McuMgrHeader included in the response.
     public var header: McuMgrHeader!
@@ -92,11 +92,11 @@ public class McuMgrResponse: CBORMappable, CustomStringConvertible, CustomDebugS
     /// - parameter coapCode: (Optional) CoAP response code.
     ///
     /// - returns: The McuMgrResponse on success or nil on failure.
-    public static func buildResponse<T: McuMgrResponse>(scheme: McuMgrScheme, data: Data?, coapPayload: Data? = nil, coapCode: Int = 0) throws -> T {
-        guard let data = data else {
+    public static func buildResponse<T: McuMgrResponse>(scheme: McuMgrScheme, response: Data?, coapPayload: Data? = nil, coapCode: Int = 0) throws -> T {
+        guard let bytes = response else {
             throw McuMgrResponseParseError.invalidDataSize
         }
-        if data.count < McuMgrHeader.HEADER_LENGTH {
+        if bytes.count < McuMgrHeader.HEADER_LENGTH {
             throw McuMgrResponseParseError.invalidDataSize
         }
         
@@ -122,9 +122,9 @@ public class McuMgrResponse: CBORMappable, CustomStringConvertible, CustomDebugS
             }
         } else {
             // Parse the header.
-            header = try McuMgrHeader(data: data)
+            header = try McuMgrHeader(data: bytes)
             // Get header and payload from raw data.
-            payloadData = data.subdata(in: McuMgrHeader.HEADER_LENGTH..<data.count)
+            payloadData = bytes.subdata(in: McuMgrHeader.HEADER_LENGTH..<bytes.count)
             if payloadData != nil {
                 // Parse CBOR from raw payload.
                 payload = try CBOR.decode([UInt8](payloadData!))
@@ -142,7 +142,7 @@ public class McuMgrResponse: CBORMappable, CustomStringConvertible, CustomDebugS
         response.payload = payload
         response.header = header
         response.scheme = scheme
-        response.data = data
+        response.rawData = bytes
         response.returnCode = McuMgrReturnCode(rawValue: response.rc)
         response.coapCode = coapCode
         
@@ -161,7 +161,7 @@ public class McuMgrResponse: CBORMappable, CustomStringConvertible, CustomDebugS
     ///
     /// - returns: The McuMgrResponse on success or nil on failure.
     public static func buildResponse<T: McuMgrResponse>(scheme: McuMgrScheme, data: Data?) throws -> T {
-        return try buildResponse(scheme: scheme, data: data, coapPayload: nil, coapCode: 0)
+        return try buildResponse(scheme: scheme, response: data, coapPayload: nil, coapCode: 0)
     }
     
     /// Build a McuMgrResponse for CoAP transport schemes to return to the
@@ -180,7 +180,7 @@ public class McuMgrResponse: CBORMappable, CustomStringConvertible, CustomDebugS
     ///
     /// - returns: The McuMgrResponse on success or nil on failure.
     public static func buildCoapResponse<T: McuMgrResponse>(scheme: McuMgrScheme, data: Data, coapPayload: Data, codeClass: Int, codeDetail: Int) throws -> T? {
-        return try buildResponse(scheme: scheme, data: data, coapPayload: coapPayload, coapCode: (codeClass * 100 + codeDetail))
+        return try buildResponse(scheme: scheme, response: data, coapPayload: coapPayload, coapCode: (codeClass * 100 + codeDetail))
     }
     
     //**************************************************************************
@@ -394,6 +394,24 @@ public class McuMgrUploadResponse: McuMgrResponse {
     }
 }
 
+public class McuMgrCoreLoadResponse: McuMgrResponse {
+    
+    /// The offset of the data.
+    public var off: UInt?
+    /// The length of the core (in bytes). Set only in the
+    /// first packet, when the off is equal to 0.
+    public var len: UInt?
+    /// The core data received.
+    public var data: [UInt8]?
+    
+    public required init(cbor: CBOR?) throws {
+        try super.init(cbor: cbor)
+        if case let CBOR.unsignedInt(off)? = cbor?["off"] {self.off = off}
+        if case let CBOR.unsignedInt(len)? = cbor?["len"] {self.len = len}
+        if case let CBOR.byteString(data)? = cbor?["data"] {self.data = data}
+    }
+}
+
 //******************************************************************************
 // MARK: Logs Responses
 //******************************************************************************
@@ -407,7 +425,6 @@ public class McuMgrLevelListResponse: McuMgrResponse {
         try super.init(cbor: cbor)
         if case let CBOR.array(logLevelNames)? = cbor?["level_map"]  {
             self.logLevelNames = try CBOR.toArray(array: logLevelNames)
-            
         }
     }
 }
@@ -421,7 +438,6 @@ public class McuMgrLogListResponse: McuMgrResponse {
         try super.init(cbor: cbor)
         if case let CBOR.array(logNames)? = cbor?["log_list"]  {
             self.logNames = try CBOR.toArray(array: logNames)
-            
         }
     }
 }
