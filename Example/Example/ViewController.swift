@@ -40,16 +40,17 @@ class ViewController: UIViewController {
     @IBOutlet weak var uploadProgressLabel: UILabel!
     @IBOutlet weak var upgradeStateLabel: UILabel!
     
-    var peripheral: CBPeripheral?
+    var transport: McuMgrBleTransport?
+    var centralManager: CBCentralManager!
     var firmwareUpgradeManager: FirmwareUpgradeManager?
     var imageData: [UInt8]?
+    var name: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Add self as a delegate to the BleCentralManager to receive connection
-        // state callbacks
-        BleCentralManager.getInstance().addDelegate(self)
+        self.centralManager = CBCentralManager(delegate: nil, queue: nil)
+        self.centralManager.delegate = self
     }
     
     //**************************************************************************
@@ -62,26 +63,9 @@ class ViewController: UIViewController {
         guard let name = findDeviceName.text else {
             return
         }
-        if self.peripheral?.name == name {
-            return
-        }
-        var peripheral: CBPeripheral?
-        let scannedPeripherals = BleCentralManager.getInstance().getScannedPeripherals().values
-        for scannedPeripheral in scannedPeripherals {
-            guard let scannedPeripheralName = scannedPeripheral.name else {
-                // Peripheral does not advertise a name
-                continue
-            }
-            
-            // Check that the name matches the Text Field input
-            if scannedPeripheralName == name {
-                peripheral = scannedPeripheral
-                break
-            }
-        }
-        if peripheral != nil {
-            setupPeripheral(peripheral)
-        }
+        self.name = name
+        print("Starting Scan...")
+        centralManager.scanForPeripherals(withServices: [McuMgrBleTransport.SMP_SERVICE])
     }
     
     /// Disconnect from the current peripheral and reset the UI
@@ -89,10 +73,10 @@ class ViewController: UIViewController {
         hideDeviceInfoUI()
         hideImageStateUI()
         hideFirmwareUpgradeUI()
-        if let peripheral = peripheral {
-            BleCentralManager.getInstance().disconnect(peripheral)
-            self.peripheral = nil
+        if let transport = transport {
+            transport.close()
         }
+        transport = nil
     }
     
     /// Select an image from documents
@@ -104,7 +88,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func eraseImage(_ sender: Any) {
-        self.peripheral?.getImageManager().erase(callback:  { [unowned self] (response: McuMgrResponse?, error: Error?) in
+        guard let transport = transport else {
+            return
+        }
+        ImageManager(transporter: transport).erase(callback:  { [unowned self] (response: McuMgrResponse?, error: Error?) in
             if let error = error {
                 print(error)
                 return
@@ -121,22 +108,15 @@ class ViewController: UIViewController {
     /// for the device. This function also updates the Device info UI and calls
     /// getImageState().
     ///
-    /// parameter peripheral: the peripheral to setup
+    /// - parameter peripheral: The peripheral to setup.
     func setupPeripheral(_ peripheral: CBPeripheral?) {
         guard let peripheral = peripheral else {
             return
         }
         
-        // Disconnect from the current peripheral
-        if self.peripheral != nil {
-            BleCentralManager.getInstance().disconnect(self.peripheral!)
-        }
-        
         // Set the peripheral
-        self.peripheral = peripheral
-        
-        // Connect to the peripheral
-        BleCentralManager.getInstance().connect(peripheral)
+        transport = McuMgrBleTransport(peripheral)
+        transport!.addObserver(self)
         
         // Update the UI
         updateDeviceInfoUI()
@@ -148,9 +128,12 @@ class ViewController: UIViewController {
     
     /// Get the connected peripheral's image state.
     func getImageState() {
+        guard let transport = transport else {
+            return
+        }
         // Call the list command from the Image command group with an inline
         // callback
-        peripheral?.getImageManager().list(callback: { [unowned self] (response: McuMgrImageStateResponse?, error: Error?) in
+        ImageManager(transporter: transport).list(callback: { [unowned self] (response: McuMgrImageStateResponse?, error: Error?) in
             if let error = error {
                 print(error)
                 return
@@ -172,6 +155,7 @@ class ViewController: UIViewController {
 
 /// Presents the document picker menu
 extension ViewController: UIDocumentMenuDelegate {
+    
     func documentMenu(_ documentMenu: UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
         documentPicker.delegate = self
         present(documentPicker, animated: true, completion: nil)
@@ -179,8 +163,9 @@ extension ViewController: UIDocumentMenuDelegate {
 }
 
 extension ViewController: UIDocumentPickerDelegate {
+    
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
-        guard let peripheral = self.peripheral else {
+        guard let transport = transport else {
             return
         }
         if let imageData = dataFrom(url: url) {
@@ -189,7 +174,7 @@ extension ViewController: UIDocumentPickerDelegate {
             showFirmwareUpgradeUI()
             do {
                 // Initialize the firmware upgrade manager and start the upgrade
-                firmwareUpgradeManager = try FirmwareUpgradeManager(transporter: peripheral.getTransporter(), imageData: imageData, delegate: self)
+                firmwareUpgradeManager = try FirmwareUpgradeManager(transporter: transport, imageData: imageData, delegate: self)
                 firmwareUpgradeManager?.start()
             } catch {
                 showErrorDialog(error: error)
@@ -214,6 +199,7 @@ extension ViewController: UIDocumentPickerDelegate {
 //******************************************************************************
 
 extension ViewController: FirmwareUpgradeDelegate {
+    
     func didStart(manager: FirmwareUpgradeManager) {
         // Do nothing...
     }
@@ -258,17 +244,49 @@ extension ViewController: FirmwareUpgradeDelegate {
 //******************************************************************************
 
 extension ViewController: CBCentralManagerDelegate {
+    
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        if central.state == .poweredOn {
-            print("Starting Scan...")
-            // Begin scanning
-            BleCentralManager.getInstance().startScan()
-        }
+        // TODO: implement
     }
     
-    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        guard let name = advertisementData[CBAdvertisementDataLocalNameKey] as? String? else {
+            return
+        }
+        guard self.name == name else {
+            return
+        }
+        print("Stopping scan...")
+        centralManager.stopScan()
+        
         // Update the UI on connection state changes
-        updateDeviceInfoUI()
+        setupPeripheral(peripheral)
+    }
+}
+
+//******************************************************************************
+// MARK: ConnectionObserver
+//******************************************************************************
+
+extension ViewController: ConnectionStateObserver {
+    
+    func peripheral(_ transport: McuMgrTransport, didChangeStateTo state: CBPeripheralState) {
+        DispatchQueue.main.async {
+            switch(state) {
+            case .connected:
+                self.connectionStateLabel.text = "Connected"
+                break
+            case .connecting:
+                self.connectionStateLabel.text = "Connecting..."
+                break
+            case .disconnecting:
+                self.connectionStateLabel.text = "Disconnecting..."
+                break
+            case .disconnected:
+                self.connectionStateLabel.text = "Disconnected"
+                break
+            }
+        }
     }
 }
 
@@ -290,25 +308,11 @@ extension ViewController {
     
     /// Update device info UI
     func updateDeviceInfoUI() {
-        guard let peripheral = peripheral else {
+        guard let transport = transport else {
             return
         }
-        addressLabel.text = peripheral.identifier.uuidString
-        nameLabel.text = peripheral.name ?? "Unknown"
-        switch(peripheral.state) {
-        case .connected:
-            connectionStateLabel.text = "Connected"
-            break
-        case .connecting:
-            connectionStateLabel.text = "Connecting"
-            break
-        case .disconnecting:
-            connectionStateLabel.text = "Disconnecting"
-            break
-        case .disconnected:
-            connectionStateLabel.text = "Disconnected"
-            break
-        }
+        addressLabel.text = transport.identifier.uuidString
+        nameLabel.text = transport.name ?? "Unknown"
     }
     
     /// Show image state UI
