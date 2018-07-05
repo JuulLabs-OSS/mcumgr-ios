@@ -42,6 +42,5 @@ public class CrashManager: McuManager {
     public func test(crash: CrashTest, callback: @escaping McuMgrCallback<McuMgrResponse>) {
         let payload: [String:CBOR] = ["t": CBOR.utf8String(crash.rawValue)]
         send(op: .write, commandId: ID_TEST, payload: payload, callback: callback)
-        
     }
 }

@@ -6,9 +6,16 @@
 
 import Foundation
 
+public enum LockResult {
+    case timeout
+    case success
+    case error(Error)
+}
+
 public class ResultLock {
     
     private var semaphore: DispatchSemaphore
+    
     public var isOpen: Bool = false
     public var error: Error?
     
@@ -72,10 +79,4 @@ public class ResultLock {
         isOpen = false
         objc_sync_exit(self)
     }
-}
-
-public enum LockResult {
-    case timeout
-    case success
-    case error(Error)
 }
