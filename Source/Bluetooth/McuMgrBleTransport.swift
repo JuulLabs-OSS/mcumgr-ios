@@ -138,12 +138,11 @@ extension McuMgrBleTransport: McuMgrTransport {
     /// - returns: True if the send should be retried until the max retries
     ///   has been met, false if it has been handled.
     private func _send<T: McuMgrResponse>(data: Data, callback: @escaping McuMgrCallback<T>) -> Bool {
-        Log.d(TAG, msg: "Send McuManager request to deivce (\(peripheral.state))")
-        
         centralManager.delegate = self
         
         // Is Bluetooth operational?
         if centralManager.state == .poweredOff || centralManager.state == .unsupported {
+            Log.w(TAG, msg: "Central Manager powered off")
             fail(error: McuMgrError.centralManagerPoweredOff, callback: callback)
             return false
         }
@@ -241,7 +240,6 @@ extension McuMgrBleTransport: McuMgrTransport {
         let mtu = peripheral.maximumWriteValueLength(for: .withoutResponse)
         for fragment in data.fragment(size: mtu) {
             Log.v(TAG, msg: "Writing request to device...")
-            Log.d(TAG, msg: "Writing " + fragment.hexEncodedString(options: .space))
             peripheral.writeValue(fragment, for: smpCharacteristic, type: .withoutResponse)
         }
         
@@ -422,7 +420,7 @@ extension McuMgrBleTransport: CBPeripheralDelegate {
             return
         }
         
-        Log.d(TAG, msg: "Notification received: \(data.hexEncodedString(options: .space))")
+        Log.i(TAG, msg: "Notification received")
         
         // Get the expected length from the response data.
         let expectedLength: Int
