@@ -166,8 +166,6 @@ public class FirmwareUpgradeManager : FirmwareUpgradeController, ConnectionState
         objc_sync_enter(self)
         if !paused {
             switch state {
-            case .none:
-                break
             case .validate:
                 validate()
             case .upload:
@@ -178,7 +176,7 @@ public class FirmwareUpgradeManager : FirmwareUpgradeController, ConnectionState
                 reset()
             case .confirm:
                 confirm()
-            case .success:
+            default:
                 break
             }
         }
