@@ -63,6 +63,7 @@ class ViewController: UIViewController {
         guard let name = findDeviceName.text else {
             return
         }
+        findDeviceName.resignFirstResponder()
         self.name = name
         print("Starting Scan...")
         centralManager.scanForPeripherals(withServices: [McuMgrBleTransport.SMP_SERVICE])
