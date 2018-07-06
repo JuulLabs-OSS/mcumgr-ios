@@ -71,6 +71,8 @@ class ViewController: UIViewController {
     
     /// Disconnect from the current peripheral and reset the UI
     @IBAction func reset(_ sender: Any) {
+        print("Stopping scan...")
+        centralManager.stopScan()
         hideDeviceInfoUI()
         hideImageStateUI()
         hideFirmwareUpgradeUI()
@@ -173,13 +175,34 @@ extension ViewController: UIDocumentPickerDelegate {
             // Update Firmware upgrade UI
             fileLabel.text = url.lastPathComponent
             showFirmwareUpgradeUI()
-            do {
-                // Initialize the firmware upgrade manager and start the upgrade
-                firmwareUpgradeManager = FirmwareUpgradeManager(transporter: transport, delegate: self)
-                try firmwareUpgradeManager!.start(data: imageData)
-            } catch {
-                showErrorDialog(error: error)
-            }
+            firmwareUpgradeManager = FirmwareUpgradeManager(transporter: transport, delegate: self)
+            
+            let alertController = UIAlertController(title: "Select mode", message: nil, preferredStyle: .actionSheet)
+            alertController.addAction(UIAlertAction(title: "Test and confirm", style: .default) {
+                action in
+                self.firmwareUpgradeManager!.mode = .testAndConfirm
+                self.start(imageData)
+            })
+            alertController.addAction(UIAlertAction(title: "Test only", style: .default) {
+                action in
+                self.firmwareUpgradeManager!.mode = .testOnly
+                self.start(imageData)
+            })
+            alertController.addAction(UIAlertAction(title: "Confirm only", style: .default) {
+                action in
+                self.firmwareUpgradeManager!.mode = .confirmOnly
+                self.start(imageData)
+            })
+            present(alertController, animated: true)
+        }
+    }
+    
+    private func start(_ imageData: Data) {
+        do {
+            // Initialize the firmware upgrade manager and start the upgrade
+            try self.firmwareUpgradeManager!.start(data: imageData)
+        } catch {
+            self.showErrorDialog(error: error)
         }
     }
     
@@ -213,11 +236,13 @@ extension ViewController: FirmwareUpgradeDelegate {
     
     func upgradeDidComplete() {
         DispatchQueue.main.async {
+            self.upgradeStateLabel.text = String(describing: "complete")
             self.getImageState()
+            
             let alertController = UIAlertController(title: "Firmware Upgrade Success!", message:
                 "The device's firmware has been upgraded succesfully.", preferredStyle: UIAlertControllerStyle.alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
-            self.present(alertController, animated: true, completion: nil)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default))
+            self.present(alertController, animated: true)
         }
     }
     
