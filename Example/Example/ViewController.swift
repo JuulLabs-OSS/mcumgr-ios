@@ -174,8 +174,8 @@ extension ViewController: UIDocumentPickerDelegate {
             showFirmwareUpgradeUI()
             do {
                 // Initialize the firmware upgrade manager and start the upgrade
-                firmwareUpgradeManager = try FirmwareUpgradeManager(transporter: transport, imageData: imageData, delegate: self)
-                firmwareUpgradeManager?.start()
+                firmwareUpgradeManager = FirmwareUpgradeManager(transporter: transport, delegate: self)
+                try firmwareUpgradeManager!.start(data: imageData)
             } catch {
                 showErrorDialog(error: error)
             }
@@ -198,19 +198,19 @@ extension ViewController: UIDocumentPickerDelegate {
 // MARK: FimrwareUpgradeDelegate
 //******************************************************************************
 
-extension ViewController: FirmwareUpgradeDelegate {
+extension ViewController: FirmwareUpgradeDelegate {    
     
-    func didStart(manager: FirmwareUpgradeManager) {
+    func upgradeDidStart(controller: FirmwareUpgradeController) {
         // Do nothing...
     }
     
-    func didStateChange(previousState: FirmwareUpgradeState, newState: FirmwareUpgradeState) {
+    func upgradeStateDidChange(from previousState: FirmwareUpgradeState, to newState: FirmwareUpgradeState) {
         DispatchQueue.main.async {
             self.upgradeStateLabel.text = String(describing: newState)
         }
     }
     
-    func didComplete() {
+    func upgradeDidComplete() {
         DispatchQueue.main.async {
             self.getImageState()
             let alertController = UIAlertController(title: "Firmware Upgrade Success!", message:
@@ -220,18 +220,18 @@ extension ViewController: FirmwareUpgradeDelegate {
         }
     }
     
-    func didFail(failedState: FirmwareUpgradeState, error: Error) {
+    func upgradeDidFail(inState state: FirmwareUpgradeState, with error: Error) {
         DispatchQueue.main.async {
             self.getImageState()
             self.showErrorDialog(error: error)
         }
     }
     
-    func didCancel(state: FirmwareUpgradeState) {
+    func upgradeDidCancel(state: FirmwareUpgradeState) {
         // Do nothing...
     }
     
-    func didUploadProgressChange(bytesSent: Int, imageSize: Int, timestamp: Date) {
+    func uploadProgressDidChange(bytesSent: Int, imageSize: Int, timestamp: Date) {
         DispatchQueue.main.async {
             let progress: Int = Int((Float(bytesSent) / Float(imageSize)) * 100.0)
             self.uploadProgressLabel.text = "\(progress)%"
@@ -272,7 +272,7 @@ extension ViewController: ConnectionStateObserver {
     
     func peripheral(_ transport: McuMgrTransport, didChangeStateTo state: CBPeripheralState) {
         DispatchQueue.main.async {
-            switch(state) {
+            switch state {
             case .connected:
                 self.connectionStateLabel.text = "Connected"
                 break
