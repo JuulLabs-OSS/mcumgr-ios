@@ -45,6 +45,26 @@ public enum McuMgrTransportError: Error {
     case badResponse
 }
 
+extension McuMgrTransportError: CustomStringConvertible {
+    
+    public var description: String {
+        switch self {
+        case .connectionTimeout:
+            return "Connection to the remote device has timed out."
+        case .connectionFailed:
+            return "Connection to the remote device has failed."
+        case .sendTimeout:
+            return "Sending the request to the device has timed out."
+        case .sendFailed:
+            return "Sending the request to the device has failed."
+        case .insufficientMtu(mtu: let mtu):
+            return "Insufficient MTU: \(mtu)."
+        case .badResponse:
+            return "Bad response received."
+        }
+    }
+}
+
 /// Mcu Mgr transport object. The transport object
 /// should automatically handle connection on first request.
 public protocol McuMgrTransport: class {
