@@ -66,6 +66,7 @@ public class McuMgrBleTransport: NSObject {
         self.lock = ResultLock(isOpen: false)
         self.observers = []
         super.init()
+        addObserver(self)
     }
     
     public var state: CBPeripheralState {
@@ -257,13 +258,12 @@ extension McuMgrBleTransport: McuMgrTransport {
         
         switch result {
         case .timeout:
-            Log.w(TAG, msg: "Request timed out")
+            Log.e(TAG, msg: "Request timed out")
             fail(error: McuMgrTransportError.sendTimeout, callback: callback)
-        case let .error(error):
-            Log.w(TAG, msg: "Request failed: \(error)")
+        case .error(let error):
+            Log.e(TAG, msg: "Request failed: \(error)")
             fail(error: error, callback: callback)
         case .success:
-            Log.i(TAG, msg: "Response received")
             do {
                 // Build the McuMgrResponse.
                 let response: T = try McuMgrResponse.buildResponse(scheme: getScheme(), data: responseData)
@@ -285,6 +285,15 @@ extension McuMgrBleTransport: McuMgrTransport {
         responseData = nil
         lock.close()
         callback(nil, error)
+    }
+}
+
+extension McuMgrBleTransport: ConnectionStateObserver {
+    
+    public func peripheral(_ transport: McuMgrTransport, didChangeStateTo state: CBPeripheralState) {
+        if state == .disconnected {
+            lock.open(McuMgrTransportError.sendFailed)
+        }
     }
 }
 
@@ -428,8 +437,6 @@ extension McuMgrBleTransport: CBPeripheralDelegate {
             lock.open(McuMgrTransportError.badResponse)
             return
         }
-        
-        Log.i(TAG, msg: "Notification received")
         
         // Get the expected length from the response data.
         let expectedLength: Int
