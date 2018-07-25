@@ -40,6 +40,7 @@ public class McuMgrBleTransport: NSObject {
     
     /// Used to store fragmented response data.
     private var responseData: Data?
+    private var responseLength: Int?
     /// An array of observers.
     private var observers: [ConnectionStateObserver]
     
@@ -66,7 +67,6 @@ public class McuMgrBleTransport: NSObject {
         self.lock = ResultLock(isOpen: false)
         self.observers = []
         super.init()
-        addObserver(self)
     }
     
     public var state: CBPeripheralState {
@@ -277,23 +277,16 @@ extension McuMgrBleTransport: McuMgrTransport {
     
     private func success<T: McuMgrResponse>(response: T, callback: @escaping McuMgrCallback<T>) {
         responseData = nil
+        responseLength = nil
         lock.close()
         callback(response, nil)
     }
     
     private func fail<T: McuMgrResponse>(error: Error, callback: @escaping McuMgrCallback<T>) {
         responseData = nil
+        responseLength = nil
         lock.close()
         callback(nil, error)
-    }
-}
-
-extension McuMgrBleTransport: ConnectionStateObserver {
-    
-    public func peripheral(_ transport: McuMgrTransport, didChangeStateTo state: CBPeripheralState) {
-        if state == .disconnected {
-            lock.open(McuMgrTransportError.sendFailed)
-        }
     }
 }
 
@@ -330,6 +323,7 @@ extension McuMgrBleTransport: CBCentralManagerDelegate {
         self.centralManager.delegate = nil
         self.peripheral.delegate = nil
         self.smpCharacteristic = nil
+        lock.open(McuMgrTransportError.disconnected)
         notifyStateChanged(CBPeripheralState.disconnected)
     }
     
@@ -337,7 +331,7 @@ extension McuMgrBleTransport: CBCentralManagerDelegate {
         guard self.peripheral.identifier == peripheral.identifier else {
             return
         }
-        Log.i(TAG, msg: "Peripheral failed to connect")
+        Log.w(TAG, msg: "Peripheral failed to connect")
         lock.open(McuMgrTransportError.connectionFailed)
     }
 }
@@ -394,10 +388,10 @@ extension McuMgrBleTransport: CBPeripheralDelegate {
                 if characteristic.properties.contains(.notify) {
                     Log.v(TAG, msg: "Enabling notifications...")
                     peripheral.setNotifyValue(true, for: characteristic)
-                    return
                 } else {
                     lock.open(McuMgrBleTransportError.missingNotifyProperty)
                 }
+                return
             }
         }
         lock.open(McuMgrBleTransportError.missingCharacteristic)
@@ -439,7 +433,6 @@ extension McuMgrBleTransport: CBPeripheralDelegate {
         }
         
         // Get the expected length from the response data.
-        let expectedLength: Int
         if responseData == nil {
             // If we do not have any current response data, this is the initial
             // packet in a potentially fragmented response. Get the expected
@@ -450,21 +443,14 @@ extension McuMgrBleTransport: CBPeripheralDelegate {
                 return
             }
             responseData = Data(capacity: len)
-            expectedLength = len
-        } else {
-            if let len = McuMgrResponse.getExpectedLength(scheme: getScheme(), responseData: responseData!) {
-                expectedLength = len
-            } else {
-                lock.open(McuMgrTransportError.badResponse)
-                return
-            }
+            responseLength = len
         }
                 
         // Append the response data.
         responseData!.append(data)
         
         // If we have recevied all the bytes, signal the waiting lock.
-        if responseData!.count >= expectedLength {
+        if responseData!.count >= responseLength! {
             lock.open()
         }
     }

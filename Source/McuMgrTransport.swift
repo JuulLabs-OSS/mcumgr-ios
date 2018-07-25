@@ -34,6 +34,8 @@ public enum McuMgrTransportError: Error {
     case connectionTimeout
     /// Connection to the remote device has failed.
     case connectionFailed
+    /// Device has disconnected.
+    case disconnected
     /// Sending the request to the device has timed out.
     case sendTimeout
     /// Sending the request to the device has failed.
@@ -53,6 +55,8 @@ extension McuMgrTransportError: CustomStringConvertible {
             return "Connection to the remote device has timed out."
         case .connectionFailed:
             return "Connection to the remote device has failed."
+        case .disconnected:
+            return "Device has disconnected unexpectedly."
         case .sendTimeout:
             return "Sending the request to the device has timed out."
         case .sendFailed:
