@@ -66,6 +66,7 @@ class ScannerViewController: UITableViewController, CBCentralManagerDelegate, UI
         }
     }
     
+    // MARK: - Segue control
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let identifier = segue.identifier!
         switch identifier {
@@ -100,22 +101,6 @@ class ScannerViewController: UITableViewController, CBCentralManagerDelegate, UI
             }
         }
         tableView.reloadData()
-    }
-    
-    /// Returns true if the discovered peripheral matches
-    /// current filter settings.
-    ///
-    /// - parameter discoveredPeripheral: a peripheral to check.
-    /// - returns: true, if the peripheral matches the filter,
-    ///   false otherwise.
-    func matchesFilters(_ discoveredPeripheral: DiscoveredPeripheral) -> Bool {
-        if filterByUuid && discoveredPeripheral.advertisedServices?.contains(McuMgrBleTransport.SMP_SERVICE) != true {
-            return false
-        }
-        if filterByRssi && discoveredPeripheral.highestRSSI.decimalValue < -50 {
-            return false
-        }
-        return true
     }
     
     // MARK: - Table view data source
@@ -188,11 +173,16 @@ class ScannerViewController: UITableViewController, CBCentralManagerDelegate, UI
     }
     
     // MARK: - Private helper methods
+    
+    /// Shows the No Peripherals view.
     private func showEmptyPeripheralsView() {
         if !view.subviews.contains(emptyPeripheralsView) {
             view.addSubview(emptyPeripheralsView)
             emptyPeripheralsView.alpha = 0
-            emptyPeripheralsView.frame = CGRect(x: 0, y: (view.frame.height / 2) - (emptyPeripheralsView.frame.size.height / 2), width: view.frame.width, height: emptyPeripheralsView.frame.height)
+            emptyPeripheralsView.frame = CGRect(x: 0,
+                                                y: (view.frame.height / 2) - (emptyPeripheralsView.frame.size.height / 2),
+                                                width: view.frame.width,
+                                                height: emptyPeripheralsView.frame.height)
             view.bringSubview(toFront: emptyPeripheralsView)
             UIView.animate(withDuration: 0.5, animations: {
                 self.emptyPeripheralsView.alpha = 1
@@ -200,6 +190,8 @@ class ScannerViewController: UITableViewController, CBCentralManagerDelegate, UI
         }
     }
     
+    /// Hides the No Peripherals view. This method should be
+    /// called when a first peripheral was found.
     private func hideEmptyPeripheralsView() {
         if view.subviews.contains(emptyPeripheralsView) {
             UIView.animate(withDuration: 0.5, animations: {
@@ -208,5 +200,21 @@ class ScannerViewController: UITableViewController, CBCentralManagerDelegate, UI
                 self.emptyPeripheralsView.removeFromSuperview()
             })
         }
+    }
+    
+    /// Returns true if the discovered peripheral matches
+    /// current filter settings.
+    ///
+    /// - parameter discoveredPeripheral: A peripheral to check.
+    /// - returns: True, if the peripheral matches the filter,
+    ///   false otherwise.
+    private func matchesFilters(_ discoveredPeripheral: DiscoveredPeripheral) -> Bool {
+        if filterByUuid && discoveredPeripheral.advertisedServices?.contains(McuMgrBleTransport.SMP_SERVICE) != true {
+            return false
+        }
+        if filterByRssi && discoveredPeripheral.highestRSSI.decimalValue < -50 {
+            return false
+        }
+        return true
     }
 }
