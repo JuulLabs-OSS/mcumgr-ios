@@ -76,6 +76,9 @@ class ScannerViewController: UITableViewController, CBCentralManagerDelegate, UI
             filterController.filterByUuidEnabled = filterByUuid
             filterController.filterByRssiEnabled = filterByRssi
             filterController.delegate = self
+        case "connect":
+            let controller = segue.destination as! BaseViewController
+            controller.peripheral = sender as! DiscoveredPeripheral
         default:
             break
         }
@@ -129,7 +132,7 @@ class ScannerViewController: UITableViewController, CBCentralManagerDelegate, UI
         centralManager.stopScan()
         activityIndicator.stopAnimating()
         
-        // performSegue(withIdentifier: "connect", sender: filteredPeripherals[indexPath.row])
+        performSegue(withIdentifier: "connect", sender: filteredPeripherals[indexPath.row])
     }
     
     // MARK: - CBCentralManagerDelegate

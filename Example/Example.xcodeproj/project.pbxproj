@@ -10,6 +10,10 @@
 		5246368A2108DE77008B3D5B /* ScannerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524636892108DE77008B3D5B /* ScannerTableViewCell.swift */; };
 		5246368E2108DF23008B3D5B /* DiscoveredPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246368D2108DF23008B3D5B /* DiscoveredPeripheral.swift */; };
 		524636962109D0D7008B3D5B /* ScannerFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524636952109D0D7008B3D5B /* ScannerFilterViewController.swift */; };
+		524DCFD0210B0EB6000E110D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524DCFCF210B0EB6000E110D /* BaseViewController.swift */; };
+		524DCFD4210B1C17000E110D /* DeviceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524DCFD3210B1C17000E110D /* DeviceController.swift */; };
+		524DCFD6210B21D6000E110D /* ConnectionStateLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524DCFD5210B21D6000E110D /* ConnectionStateLabel.swift */; };
+		524DCFD9210B4241000E110D /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524DCFD8210B4241000E110D /* UIColor.swift */; };
 		BD5A285820CB44AF0061F0EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5A285720CB44AF0061F0EE /* AppDelegate.swift */; };
 		BD5A285A20CB44AF0061F0EE /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5A285920CB44AF0061F0EE /* ScannerViewController.swift */; };
 		BD5A285D20CB44AF0061F0EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD5A285B20CB44AF0061F0EE /* Main.storyboard */; };
@@ -37,6 +41,10 @@
 		524636892108DE77008B3D5B /* ScannerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerTableViewCell.swift; sourceTree = "<group>"; };
 		5246368D2108DF23008B3D5B /* DiscoveredPeripheral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredPeripheral.swift; sourceTree = "<group>"; };
 		524636952109D0D7008B3D5B /* ScannerFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerFilterViewController.swift; sourceTree = "<group>"; };
+		524DCFCF210B0EB6000E110D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		524DCFD3210B1C17000E110D /* DeviceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceController.swift; sourceTree = "<group>"; };
+		524DCFD5210B21D6000E110D /* ConnectionStateLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionStateLabel.swift; sourceTree = "<group>"; };
+		524DCFD8210B4241000E110D /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		BD54DE5320CEE16F0023F980 /* Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Example.entitlements; sourceTree = "<group>"; };
 		BD5A285420CB44AF0061F0EE /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD5A285720CB44AF0061F0EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -63,9 +71,8 @@
 		524636882108DCF1008B3D5B /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				BD5A285920CB44AF0061F0EE /* ScannerViewController.swift */,
-				524636892108DE77008B3D5B /* ScannerTableViewCell.swift */,
-				524636952109D0D7008B3D5B /* ScannerFilterViewController.swift */,
+				524DCFCD210B0E50000E110D /* Scanner */,
+				524DCFCE210B0E6E000E110D /* Manager */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -76,6 +83,34 @@
 				5246368D2108DF23008B3D5B /* DiscoveredPeripheral.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		524DCFCD210B0E50000E110D /* Scanner */ = {
+			isa = PBXGroup;
+			children = (
+				BD5A285920CB44AF0061F0EE /* ScannerViewController.swift */,
+				524636892108DE77008B3D5B /* ScannerTableViewCell.swift */,
+				524636952109D0D7008B3D5B /* ScannerFilterViewController.swift */,
+			);
+			path = Scanner;
+			sourceTree = "<group>";
+		};
+		524DCFCE210B0E6E000E110D /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				524DCFCF210B0EB6000E110D /* BaseViewController.swift */,
+				524DCFD3210B1C17000E110D /* DeviceController.swift */,
+				524DCFD5210B21D6000E110D /* ConnectionStateLabel.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		524DCFD7210B421E000E110D /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				524DCFD8210B4241000E110D /* UIColor.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 		BD5A284B20CB44AF0061F0EE = {
@@ -101,6 +136,7 @@
 				BD54DE5320CEE16F0023F980 /* Example.entitlements */,
 				5246368C2108DEFC008B3D5B /* Model */,
 				524636882108DCF1008B3D5B /* View Controllers */,
+				524DCFD7210B421E000E110D /* Util */,
 				BD5A285720CB44AF0061F0EE /* AppDelegate.swift */,
 				BD5A285B20CB44AF0061F0EE /* Main.storyboard */,
 				BD5A285E20CB44B00061F0EE /* Assets.xcassets */,
@@ -199,7 +235,11 @@
 				524636962109D0D7008B3D5B /* ScannerFilterViewController.swift in Sources */,
 				5246368E2108DF23008B3D5B /* DiscoveredPeripheral.swift in Sources */,
 				BD5A285A20CB44AF0061F0EE /* ScannerViewController.swift in Sources */,
+				524DCFD9210B4241000E110D /* UIColor.swift in Sources */,
+				524DCFD4210B1C17000E110D /* DeviceController.swift in Sources */,
 				BD5A285820CB44AF0061F0EE /* AppDelegate.swift in Sources */,
+				524DCFD6210B21D6000E110D /* ConnectionStateLabel.swift in Sources */,
+				524DCFD0210B0EB6000E110D /* BaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
