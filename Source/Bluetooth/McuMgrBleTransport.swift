@@ -65,7 +65,17 @@ public class McuMgrBleTransport: NSObject {
     /// An array of observers.
     private var observers: [ConnectionObserver]
     /// BLE transport delegate.
-    public var delegate: PeripheralDelegate?
+    public var delegate: PeripheralDelegate? {
+        didSet {
+            delegate?.peripheral(peripheral, didChangeStateTo: state)
+        }
+    }
+    
+    public var state: PeripheralState = .disconnected {
+        didSet {
+            delegate?.peripheral(peripheral, didChangeStateTo: state)
+        }
+    }
     
     /// Creates a BLE transport object for the peripheral matching given
     /// identifier. The implementation will create internal instance of
@@ -90,10 +100,6 @@ public class McuMgrBleTransport: NSObject {
         self.lock = ResultLock(isOpen: false)
         self.observers = []
         super.init()
-    }
-    
-    public var state: CBPeripheralState {
-        return peripheral.state
     }
     
     public var name: String? {
@@ -134,7 +140,7 @@ extension McuMgrBleTransport: McuMgrTransport {
     public func close() {
         if peripheral.state == .connected || peripheral.state == .connecting {
             Log.v(TAG, msg: "Cancelling connection...")
-            delegate?.peripheral(peripheral, didChangeStateTo: .disconnecting)
+            state = .disconnecting
             centralManager.cancelPeripheralConnection(peripheral)
         }
     }
@@ -212,7 +218,7 @@ extension McuMgrBleTransport: McuMgrTransport {
                 // the semaphore will be signalled and the request can be sent.
                 Log.i(TAG, msg: "Peripheral already connected")
                 Log.v(TAG, msg: "Discovering services...")
-                delegate?.peripheral(peripheral, didChangeStateTo: .connecting)
+                state = .connecting
                 peripheral.delegate = self
                 peripheral.discoverServices([McuMgrBleTransport.SMP_SERVICE])
             case .disconnected:
@@ -221,11 +227,11 @@ extension McuMgrBleTransport: McuMgrTransport {
                 // notification is enabled, the semaphore will be signalled and
                 // the request can be sent.
                 Log.v(TAG, msg: "Connecting...")
-                delegate?.peripheral(peripheral, didChangeStateTo: .connecting)
+                state = .connecting
                 centralManager.connect(peripheral)
             case .connecting:
                 Log.i(TAG, msg: "Device is connecting. Wait...")
-                delegate?.peripheral(peripheral, didChangeStateTo: .connecting)
+                state = .connecting
                 // Do nothing. It will switch to .connected or .disconnected.
             case .disconnecting:
                 Log.i(TAG, msg: "Device is disconnecting. Wait...")
@@ -334,7 +340,7 @@ extension McuMgrBleTransport: CBCentralManagerDelegate {
             return
         }
         Log.i(TAG, msg: "Peripheral connected")
-        delegate?.peripheral(peripheral, didChangeStateTo: .initializing)
+        state = .initializing
         Log.v(TAG, msg: "Discovering services...")
         peripheral.delegate = self
         peripheral.discoverServices([McuMgrBleTransport.SMP_SERVICE])
@@ -349,7 +355,7 @@ extension McuMgrBleTransport: CBCentralManagerDelegate {
         peripheral.delegate = nil
         smpCharacteristic = nil
         lock.open(McuMgrTransportError.disconnected)
-        delegate?.peripheral(peripheral, didChangeStateTo: .disconnected)
+        state = .disconnected
         notifyStateChanged(.disconnected)
     }
     
@@ -437,7 +443,7 @@ extension McuMgrBleTransport: CBPeripheralDelegate {
         
         // Set the SMP characteristic.
         smpCharacteristic = characteristic
-        delegate?.peripheral(peripheral, didChangeStateTo: .connected)
+        state = .connected
         notifyStateChanged(.connected)
         
         // The SMP Service and characateristic have now been discovered and set

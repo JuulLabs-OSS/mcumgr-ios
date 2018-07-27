@@ -216,21 +216,21 @@
                         <sections>
                             <tableViewSection headerTitle="Device Status" id="pf6-Ic-Pry">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="connectionStatus" rowHeight="43" id="QNJ-81-oO7">
-                                        <rect key="frame" x="0.0" y="55.5" width="375" height="43"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="connectionStatus" rowHeight="50" id="QNJ-81-oO7">
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QNJ-81-oO7" id="I7E-bn-agI" customClass="ConnectionStatusCell" customModule="Example" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="42.5"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QNJ-81-oO7" id="I7E-bn-agI">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Connection status:" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SsM-3J-yvH">
-                                                    <rect key="frame" x="16" y="11" width="144" height="21"/>
+                                                    <rect key="frame" x="16" y="11" width="144" height="28"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOT CONNECTED" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jgr-Dh-KA4" customClass="ConnectionStateLabel" customModule="Example" customModuleProvider="target">
-                                                    <rect key="frame" x="168" y="11" width="146.5" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DISCONNECTED" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jgr-Dh-KA4" customClass="ConnectionStateLabel" customModule="Example" customModuleProvider="target">
+                                                    <rect key="frame" x="168" y="11" width="134.5" height="28"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -252,7 +252,7 @@
                             <tableViewSection headerTitle="Echo" id="kqi-gm-qXF">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="echo" rowHeight="178" id="O93-A3-Gjq">
-                                        <rect key="frame" x="0.0" y="154.5" width="375" height="178"/>
+                                        <rect key="frame" x="0.0" y="161.5" width="375" height="178"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="O93-A3-Gjq" id="n8S-JU-HlX">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="177.5"/>
@@ -364,27 +364,57 @@
         <!--Image-->
         <scene sceneID="URt-ni-pll">
             <objects>
-                <tableViewController title="Image" id="SO7-PQ-cvq" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="jkl-Te-ecj">
+                <tableViewController title="Image" id="SO7-PQ-cvq" customClass="ImageController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="jkl-Te-ecj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="todo" id="Htu-5c-gwQ">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Htu-5c-gwQ" id="iyd-zr-ran">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection headerTitle="Device Status" id="B5G-Ep-35b">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="connectionStatus" rowHeight="50" id="ErA-Wn-SrC">
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ErA-Wn-SrC" id="WZZ-wV-7hV">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Connection status:" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ulO-Tc-dqB">
+                                                    <rect key="frame" x="16" y="11" width="144" height="28"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DISCONNECTED" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QCq-OE-I5p" customClass="ConnectionStateLabel" customModule="Example" customModuleProvider="target">
+                                                    <rect key="frame" x="168" y="11" width="134.5" height="28"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="QCq-OE-I5p" firstAttribute="bottom" secondItem="WZZ-wV-7hV" secondAttribute="bottomMargin" id="4JJ-6R-DIf"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="QCq-OE-I5p" secondAttribute="trailing" constant="8" id="5ir-Qh-2aa"/>
+                                                <constraint firstItem="QCq-OE-I5p" firstAttribute="top" secondItem="WZZ-wV-7hV" secondAttribute="topMargin" id="C7B-oj-xj1"/>
+                                                <constraint firstItem="QCq-OE-I5p" firstAttribute="leading" secondItem="ulO-Tc-dqB" secondAttribute="trailing" constant="8" id="G1u-ef-rXB"/>
+                                                <constraint firstItem="ulO-Tc-dqB" firstAttribute="bottom" secondItem="WZZ-wV-7hV" secondAttribute="bottomMargin" id="XSA-Gv-ipZ"/>
+                                                <constraint firstItem="ulO-Tc-dqB" firstAttribute="top" secondItem="WZZ-wV-7hV" secondAttribute="topMargin" id="c2y-IN-ewG"/>
+                                                <constraint firstItem="ulO-Tc-dqB" firstAttribute="leading" secondItem="WZZ-wV-7hV" secondAttribute="leadingMargin" id="cOj-Xo-QQS"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
                         <connections>
                             <outlet property="dataSource" destination="SO7-PQ-cvq" id="G2X-zv-WQz"/>
                             <outlet property="delegate" destination="SO7-PQ-cvq" id="kNE-A3-xs1"/>
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Image" image="baseline_get_app_black_24dp" id="hDb-aC-i7i"/>
+                    <connections>
+                        <outlet property="connectionStatus" destination="QCq-OE-I5p" id="nfj-EN-Bll"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6wy-pp-4s9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
