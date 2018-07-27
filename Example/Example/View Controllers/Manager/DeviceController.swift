@@ -52,10 +52,11 @@ class DeviceController: UITableViewController, UITextFieldDelegate {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 1 {
-            return UITableViewAutomaticDimension
+        if indexPath.section == 0 {
+            // Connection status
+            return 50
         }
-        return 50
+        return UITableViewAutomaticDimension
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

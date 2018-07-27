@@ -28,6 +28,14 @@ class ImageController: UITableViewController, FirmwareUpgradeDelegate {
         bleTransporter?.delegate = connectionStatus
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            // Connection status
+            return 50
+        }
+        return UITableViewAutomaticDimension
+    }
+    
     // MARK: - Firmware Upgrade Delegate
     func upgradeDidStart(controller: FirmwareUpgradeController) {
         
