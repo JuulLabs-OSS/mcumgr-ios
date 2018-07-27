@@ -8,18 +8,22 @@ import UIKit
 import CoreBluetooth
 import McuManager
 
-class ConnectionStateLabel: UILabel, ConnectionStateObserver {
+class ConnectionStateLabel: UILabel, PeripheralDelegate {
     
-    func peripheral(_ transport: McuMgrTransport, didChangeStateTo state: CBPeripheralState) {
-        switch state {
-        case .connected:
-            text = "CONNECTED"
-        case .connecting:
-            text = "CONNECTING"
-        case .disconnected:
-            text = "DISCONNECTED"
-        case .disconnecting:
-            text = "DISCONNECTING"
+    func peripheral(_ peripheral: CBPeripheral, didChangeStateTo state: PeripheralState) {
+        DispatchQueue.main.async {
+            switch state {
+            case .connected:
+                self.text = "CONNECTED"
+            case .connecting:
+                self.text = "CONNECTING"
+            case .initializing:
+                self.text = "INITIALIZING"
+            case .disconnected:
+                self.text = "DISCONNECTED"
+            case .disconnecting:
+                self.text = "DISCONNECTING"
+            }
         }
     }
 

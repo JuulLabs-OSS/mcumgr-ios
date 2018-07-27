@@ -7,7 +7,7 @@
 import Foundation
 import CoreBluetooth
 
-public class FirmwareUpgradeManager : FirmwareUpgradeController, ConnectionStateObserver {
+public class FirmwareUpgradeManager : FirmwareUpgradeController, ConnectionObserver {
     
     private let TAG = "FirmwareUpgradeManager"
     
@@ -333,7 +333,7 @@ public class FirmwareUpgradeManager : FirmwareUpgradeController, ConnectionState
         self.reset()
     }
     
-    public func peripheral(_ transport: McuMgrTransport, didChangeStateTo state: CBPeripheralState) {
+    public func transport(_ transport: McuMgrTransport, didChangeStateTo state: McuMgrTransportState) {
         transport.removeObserver(self)
         Log.i(self.TAG, msg: "Reset successful")
         switch mode {

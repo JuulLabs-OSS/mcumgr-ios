@@ -7,6 +7,27 @@
 import Foundation
 import CoreBluetooth
 
+public enum PeripheralState {
+    /// State set when the manager starts connecting with the
+    /// peripheral.
+    case connecting
+    /// State set when the peripheral gets connected and the
+    /// manager starts service discovery.
+    case initializing
+    /// State set when device becones ready, that is all required
+    /// services have been discovered and notifications enabled.
+    case connected
+    /// State set when close() method has been called.
+    case disconnecting
+    /// State set when the connection to the peripheral has closed.
+    case disconnected
+}
+
+public protocol PeripheralDelegate: class {
+    /// Callback called whenever peripheral state changes.
+    func peripheral(_ peripheral: CBPeripheral, didChangeStateTo state: PeripheralState)
+}
+
 public class McuMgrBleTransport: NSObject {
     
     public static let SMP_SERVICE = CBUUID(string: "8D53DC1D-1DB7-4CD3-868B-8A527460AA84")
@@ -42,7 +63,9 @@ public class McuMgrBleTransport: NSObject {
     private var responseData: Data?
     private var responseLength: Int?
     /// An array of observers.
-    private var observers: [ConnectionStateObserver]
+    private var observers: [ConnectionObserver]
+    /// BLE transport delegate.
+    public var delegate: PeripheralDelegate?
     
     /// Creates a BLE transport object for the peripheral matching given
     /// identifier. The implementation will create internal instance of
@@ -111,27 +134,27 @@ extension McuMgrBleTransport: McuMgrTransport {
     public func close() {
         if peripheral.state == .connected || peripheral.state == .connecting {
             Log.v(TAG, msg: "Cancelling connection...")
-            notifyStateChanged(CBPeripheralState.disconnecting)
+            delegate?.peripheral(peripheral, didChangeStateTo: .disconnecting)
             centralManager.cancelPeripheralConnection(peripheral)
         }
     }
     
-    public func addObserver(_ observer: ConnectionStateObserver) {
+    public func addObserver(_ observer: ConnectionObserver) {
         observers.append(observer)
     }
     
-    public func removeObserver(_ observer: ConnectionStateObserver) {
+    public func removeObserver(_ observer: ConnectionObserver) {
         if let index = observers.index(where: {$0 === observer}) {
             observers.remove(at: index)
         }
     }
     
-    private func notifyStateChanged(_ state: CBPeripheralState) {
+    private func notifyStateChanged(_ state: McuMgrTransportState) {
         // The list of observers may be modified by each observer.
         // Better iterate a copy of it.
-        let array = [ConnectionStateObserver](observers)
+        let array = [ConnectionObserver](observers)
         for observer in array {
-            observer.peripheral(self, didChangeStateTo: state)
+            observer.transport(self, didChangeStateTo: state)
         }
     }
     
@@ -189,7 +212,7 @@ extension McuMgrBleTransport: McuMgrTransport {
                 // the semaphore will be signalled and the request can be sent.
                 Log.i(TAG, msg: "Peripheral already connected")
                 Log.v(TAG, msg: "Discovering services...")
-                notifyStateChanged(CBPeripheralState.connecting)
+                delegate?.peripheral(peripheral, didChangeStateTo: .connecting)
                 peripheral.delegate = self
                 peripheral.discoverServices([McuMgrBleTransport.SMP_SERVICE])
             case .disconnected:
@@ -198,10 +221,11 @@ extension McuMgrBleTransport: McuMgrTransport {
                 // notification is enabled, the semaphore will be signalled and
                 // the request can be sent.
                 Log.v(TAG, msg: "Connecting...")
-                notifyStateChanged(CBPeripheralState.connecting)
+                delegate?.peripheral(peripheral, didChangeStateTo: .connecting)
                 centralManager.connect(peripheral)
             case .connecting:
                 Log.i(TAG, msg: "Device is connecting. Wait...")
+                delegate?.peripheral(peripheral, didChangeStateTo: .connecting)
                 // Do nothing. It will switch to .connected or .disconnected.
             case .disconnecting:
                 Log.i(TAG, msg: "Device is disconnecting. Wait...")
@@ -310,9 +334,10 @@ extension McuMgrBleTransport: CBCentralManagerDelegate {
             return
         }
         Log.i(TAG, msg: "Peripheral connected")
+        delegate?.peripheral(peripheral, didChangeStateTo: .initializing)
         Log.v(TAG, msg: "Discovering services...")
-        self.peripheral.delegate = self
-        self.peripheral.discoverServices([McuMgrBleTransport.SMP_SERVICE])
+        peripheral.delegate = self
+        peripheral.discoverServices([McuMgrBleTransport.SMP_SERVICE])
     }
     
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
@@ -320,11 +345,12 @@ extension McuMgrBleTransport: CBCentralManagerDelegate {
             return
         }
         Log.i(TAG, msg: "Peripheral disconnected")
-        self.centralManager.delegate = nil
-        self.peripheral.delegate = nil
-        self.smpCharacteristic = nil
+        centralManager.delegate = nil
+        peripheral.delegate = nil
+        smpCharacteristic = nil
         lock.open(McuMgrTransportError.disconnected)
-        notifyStateChanged(CBPeripheralState.disconnected)
+        delegate?.peripheral(peripheral, didChangeStateTo: .disconnected)
+        notifyStateChanged(.disconnected)
     }
     
     public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
@@ -411,7 +437,8 @@ extension McuMgrBleTransport: CBPeripheralDelegate {
         
         // Set the SMP characteristic.
         smpCharacteristic = characteristic
-        notifyStateChanged(CBPeripheralState.connected)
+        delegate?.peripheral(peripheral, didChangeStateTo: .connected)
+        notifyStateChanged(.connected)
         
         // The SMP Service and characateristic have now been discovered and set
         // up. Signal the dispatch semaphore to continue to send the request.

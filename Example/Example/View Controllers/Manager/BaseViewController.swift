@@ -9,7 +9,7 @@ import McuManager
 
 class BaseViewController: UITabBarController {
 
-    var transporter: McuMgrBleTransport!
+    var transporter: McuMgrTransport!
     var peripheral: DiscoveredPeripheral! {
         didSet {
             transporter = McuMgrBleTransport(peripheral.basePeripheral)

@@ -10,8 +10,8 @@ import McuManager
 class DeviceController: UITableViewController, UITextFieldDelegate {
 
     @IBOutlet weak var connectionStatus: ConnectionStateLabel!
-    @IBOutlet weak var message: UITextField!
     @IBOutlet weak var actionSend: UIButton!
+    @IBOutlet weak var message: UITextField!
     @IBOutlet weak var messageSent: UILabel!
     @IBOutlet weak var messageSentBackground: UIImageView!
     @IBOutlet weak var messageReceived: UILabel!
@@ -30,23 +30,25 @@ class DeviceController: UITableViewController, UITextFieldDelegate {
         message.delegate = self
         actionSend.tintColor = UIColor.accent
         
-        let sentBackground = UIImage(named: "bubble_sent")!
+        let sentBackground = #imageLiteral(resourceName: "bubble_sent")
             .resizableImage(withCapInsets: UIEdgeInsets(top: 17, left: 21, bottom: 17, right: 21), resizingMode: .stretch)
             .withRenderingMode(.alwaysTemplate)
         messageSentBackground.image = sentBackground
         
-        let receivedBackground = UIImage(named: "bubble_received")!
+        let receivedBackground = #imageLiteral(resourceName: "bubble_received")
             .resizableImage(withCapInsets: UIEdgeInsets(top: 17, left: 21, bottom: 17, right: 21), resizingMode: .stretch)
             .withRenderingMode(.alwaysTemplate)
         messageReceivedBackground.image = receivedBackground
         
         let baseController = parent as! BaseViewController
         let transporter = baseController.transporter!
-        
         defaultManager = DefaultManager(transporter: transporter)
-        
-        // Add the Connection Status label as state observer
-        transporter.addObserver(connectionStatus)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        // Set the connection status label as transport delegate.
+        let bleTransporter = defaultManager.transporter as? McuMgrBleTransport
+        bleTransporter?.delegate = connectionStatus
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
