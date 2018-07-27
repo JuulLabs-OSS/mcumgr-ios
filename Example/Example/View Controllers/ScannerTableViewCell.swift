@@ -7,7 +7,7 @@
 import UIKit
 import CoreBluetooth
 
-class DeviceTableViewCell: UITableViewCell {
+class ScannerTableViewCell: UITableViewCell {
     
     static let reuseIdentifier = "deviceItem"
     
@@ -21,11 +21,12 @@ class DeviceTableViewCell: UITableViewCell {
         peripheral = aPeripheral
         peripheralName.text = aPeripheral.advertisedName
 
-        if peripheral!.RSSI.decimalValue < -60 {
+        let rssi = aPeripheral.RSSI.decimalValue
+        if rssi < -60 {
             peripheralRSSIIcon.image = #imageLiteral(resourceName: "rssi_2")
-        } else if peripheral!.RSSI.decimalValue < -50 {
+        } else if rssi < -50 {
             peripheralRSSIIcon.image = #imageLiteral(resourceName: "rssi_3")
-        } else if peripheral!.RSSI.decimalValue < -30 {
+        } else if rssi < -30 {
             peripheralRSSIIcon.image = #imageLiteral(resourceName: "rssi_4")
         } else {
             peripheralRSSIIcon.image = #imageLiteral(resourceName: "rssi_1")

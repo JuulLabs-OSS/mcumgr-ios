@@ -102,6 +102,12 @@ class ScannerViewController: UITableViewController, CBCentralManagerDelegate, UI
         tableView.reloadData()
     }
     
+    /// Returns true if the discovered peripheral matches
+    /// current filter settings.
+    ///
+    /// - parameter discoveredPeripheral: a peripheral to check.
+    /// - returns: true, if the peripheral matches the filter,
+    ///   false otherwise.
     func matchesFilters(_ discoveredPeripheral: DiscoveredPeripheral) -> Bool {
         if filterByUuid && discoveredPeripheral.advertisedServices?.contains(McuMgrBleTransport.SMP_SERVICE) != true {
             return false
@@ -127,7 +133,7 @@ class ScannerViewController: UITableViewController, CBCentralManagerDelegate, UI
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let aCell = tableView.dequeueReusableCell(withIdentifier: DeviceTableViewCell.reuseIdentifier, for: indexPath) as! DeviceTableViewCell
+        let aCell = tableView.dequeueReusableCell(withIdentifier: ScannerTableViewCell.reuseIdentifier, for: indexPath) as! ScannerTableViewCell
         aCell.setupViewWithPeripheral(filteredPeripherals[indexPath.row])
         return aCell
     }
@@ -143,24 +149,28 @@ class ScannerViewController: UITableViewController, CBCentralManagerDelegate, UI
     
     // MARK: - CBCentralManagerDelegate
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        
-        // Find peripheral among already doscovered ones
+        // Find peripheral among already discovered ones, or create a new
+        // object if it is a new one.
         var discoveredPeripheral = discoveredPeripherals.first(where: { $0.basePeripheral.identifier == peripheral.identifier })
-        
         if discoveredPeripheral == nil {
             discoveredPeripheral = DiscoveredPeripheral(peripheral)
             discoveredPeripherals.append(discoveredPeripheral!)
         }
         
+        // Update the object with new values.
         discoveredPeripheral!.update(withAdvertisementData: advertisementData, andRSSI: RSSI)
         
-        // If the device is already on the filtered list, update it
+        // If the device is already on the filtered list, update it.
+        // It will be shown even if the advertising packet is no longer
+        // matching the filter. We don't want any blinking on the device list.
         if let index = filteredPeripherals.index(of: discoveredPeripheral!) {
-            if let aCell = tableView.cellForRow(at: [0, index]) as? DeviceTableViewCell {
+            // Update the cell views directly, without refreshing the
+            // whole table.
+            if let aCell = tableView.cellForRow(at: [0, index]) as? ScannerTableViewCell {
                 aCell.peripheralUpdatedAdvertisementData(discoveredPeripheral!)
             }
         } else {
-            // Check if the peripheral matches the current filters
+            // Check if the peripheral matches the current filters.
             if matchesFilters(discoveredPeripheral!) {
                 filteredPeripherals.append(discoveredPeripheral!)
                 tableView.reloadData()

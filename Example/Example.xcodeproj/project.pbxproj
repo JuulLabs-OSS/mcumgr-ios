@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5246368A2108DE77008B3D5B /* DeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524636892108DE77008B3D5B /* DeviceTableViewCell.swift */; };
+		5246368A2108DE77008B3D5B /* ScannerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524636892108DE77008B3D5B /* ScannerTableViewCell.swift */; };
 		5246368E2108DF23008B3D5B /* DiscoveredPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246368D2108DF23008B3D5B /* DiscoveredPeripheral.swift */; };
 		524636962109D0D7008B3D5B /* ScannerFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524636952109D0D7008B3D5B /* ScannerFilterViewController.swift */; };
 		BD5A285820CB44AF0061F0EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5A285720CB44AF0061F0EE /* AppDelegate.swift */; };
@@ -34,7 +34,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		524636892108DE77008B3D5B /* DeviceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTableViewCell.swift; sourceTree = "<group>"; };
+		524636892108DE77008B3D5B /* ScannerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerTableViewCell.swift; sourceTree = "<group>"; };
 		5246368D2108DF23008B3D5B /* DiscoveredPeripheral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredPeripheral.swift; sourceTree = "<group>"; };
 		524636952109D0D7008B3D5B /* ScannerFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerFilterViewController.swift; sourceTree = "<group>"; };
 		BD54DE5320CEE16F0023F980 /* Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Example.entitlements; sourceTree = "<group>"; };
@@ -64,7 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				BD5A285920CB44AF0061F0EE /* ScannerViewController.swift */,
-				524636892108DE77008B3D5B /* DeviceTableViewCell.swift */,
+				524636892108DE77008B3D5B /* ScannerTableViewCell.swift */,
 				524636952109D0D7008B3D5B /* ScannerFilterViewController.swift */,
 			);
 			path = "View Controllers";
@@ -195,7 +195,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5246368A2108DE77008B3D5B /* DeviceTableViewCell.swift in Sources */,
+				5246368A2108DE77008B3D5B /* ScannerTableViewCell.swift in Sources */,
 				524636962109D0D7008B3D5B /* ScannerFilterViewController.swift in Sources */,
 				5246368E2108DF23008B3D5B /* DiscoveredPeripheral.swift in Sources */,
 				BD5A285A20CB44AF0061F0EE /* ScannerViewController.swift in Sources */,
