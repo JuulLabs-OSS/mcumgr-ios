@@ -9,21 +9,21 @@ import McuManager
 
 class FirmwareUpgradeViewController: UIViewController {
     
-    @IBOutlet weak var firmwareUpgradeActionSelect: UIButton!
-    @IBOutlet weak var firmwareUpgradeActionStart: UIButton!
-    @IBOutlet weak var firmwareUpgradeActionPause: UIButton!
-    @IBOutlet weak var firmwareUpgradeActionResume: UIButton!
-    @IBOutlet weak var firmwareUpgradeActionCancel: UIButton!
-    @IBOutlet weak var firmwareUpgradeStatus: UILabel!
-    @IBOutlet weak var firmwareUpgradeFileHash: UILabel!
-    @IBOutlet weak var firmwareUpgradeFileSize: UILabel!
-    @IBOutlet weak var firmwareUpgradeFileName: UILabel!
-    @IBOutlet weak var firmwareUpgradeProgress: UIProgressView!
+    @IBOutlet weak var actionSelect: UIButton!
+    @IBOutlet weak var actionStart: UIButton!
+    @IBOutlet weak var actionPause: UIButton!
+    @IBOutlet weak var actionResume: UIButton!
+    @IBOutlet weak var actionCancel: UIButton!
+    @IBOutlet weak var status: UILabel!
+    @IBOutlet weak var fileName: UILabel!
+    @IBOutlet weak var fileSize: UILabel!
+    @IBOutlet weak var fileHash: UILabel!
+    @IBOutlet weak var progress: UIProgressView!
     
     @IBAction func selectFirmware(_ sender: UIButton) {
         let importMenu = UIDocumentMenuViewController(documentTypes: ["public.data", "public.content"], in: .import)
         importMenu.delegate = self
-        importMenu.popoverPresentationController?.sourceView = firmwareUpgradeActionSelect
+        importMenu.popoverPresentationController?.sourceView = actionSelect
         present(importMenu, animated: true, completion: nil)
     }
     @IBAction func start(_ sender: UIButton) {
@@ -31,26 +31,27 @@ class FirmwareUpgradeViewController: UIViewController {
     }
     @IBAction func pause(_ sender: UIButton) {
         dfuManager.pause()
-        firmwareUpgradeActionPause.isHidden = true
-        firmwareUpgradeActionResume.isHidden = false
+        actionPause.isHidden = true
+        actionResume.isHidden = false
+        status.text = "PAUSED"
     }
     @IBAction func resume(_ sender: UIButton) {
         dfuManager.resume()
-        firmwareUpgradeActionPause.isHidden = false
-        firmwareUpgradeActionResume.isHidden = true
+        actionPause.isHidden = false
+        actionResume.isHidden = true
+        status.text = "UPLOADING..."
     }
     @IBAction func cancel(_ sender: UIButton) {
         dfuManager.cancel()
     }
     
+    private var imageData: Data?
     private var dfuManager: FirmwareUpgradeManager!
     var transporter: McuMgrTransport! {
         didSet {
             dfuManager = FirmwareUpgradeManager(transporter: transporter, delegate: self)
         }
     }
-    
-    var imageData: Data?
     
     private func selectMode(for imageData: Data) {
         let alertController = UIAlertController(title: "Select mode", message: nil, preferredStyle: .actionSheet)
@@ -85,8 +86,9 @@ class FirmwareUpgradeViewController: UIViewController {
             try dfuManager.start(data: imageData)
         } catch {
             print("Error reading hash: \(error)")
-            firmwareUpgradeStatus.text = "ERROR"
-            firmwareUpgradeActionStart.isEnabled = false
+            status.textColor = UIColor.red
+            status.text = "ERROR"
+            actionStart.isEnabled = false
         }
     }
 }
@@ -95,64 +97,67 @@ class FirmwareUpgradeViewController: UIViewController {
 extension FirmwareUpgradeViewController: FirmwareUpgradeDelegate {
     
     func upgradeDidStart(controller: FirmwareUpgradeController) {
-        firmwareUpgradeActionStart.isHidden = true
-        firmwareUpgradeActionPause.isHidden = false
-        firmwareUpgradeActionCancel.isHidden = false
-        firmwareUpgradeActionSelect.isEnabled = false
+        actionStart.isHidden = true
+        actionPause.isHidden = false
+        actionCancel.isHidden = false
+        actionSelect.isEnabled = false
     }
     
     func upgradeStateDidChange(from previousState: FirmwareUpgradeState, to newState: FirmwareUpgradeState) {
+        status.textColor = UIColor.darkGray
         switch newState {
         case .validate:
-            firmwareUpgradeStatus.text = "VALIDATING..."
+            status.text = "VALIDATING..."
         case .upload:
-            firmwareUpgradeStatus.text = "UPLOADING..."
+            status.text = "UPLOADING..."
         case .test:
-            firmwareUpgradeStatus.text = "TESTING..."
+            status.text = "TESTING..."
         case .confirm:
-            firmwareUpgradeStatus.text = "CONFIRMING..."
+            status.text = "CONFIRMING..."
         case .reset:
-            firmwareUpgradeStatus.text = "RESETTING..."
+            status.text = "RESETTING..."
         case .success:
-            firmwareUpgradeStatus.text = "UPLOAD COMPLETE"
+            status.text = "UPLOAD COMPLETE"
         default:
-            firmwareUpgradeStatus.text = ""
+            status.text = ""
         }
     }
     
     func upgradeDidComplete() {
-        firmwareUpgradeProgress.setProgress(0, animated: false)
-        firmwareUpgradeActionPause.isHidden = true
-        firmwareUpgradeActionResume.isHidden = true
-        firmwareUpgradeActionCancel.isHidden = true
-        firmwareUpgradeActionStart.isHidden = false
-        firmwareUpgradeActionStart.isEnabled = false
-        firmwareUpgradeActionSelect.isEnabled = true
+        progress.setProgress(0, animated: false)
+        actionPause.isHidden = true
+        actionResume.isHidden = true
+        actionCancel.isHidden = true
+        actionStart.isHidden = false
+        actionStart.isEnabled = false
+        actionSelect.isEnabled = true
         imageData = nil
     }
     
     func upgradeDidFail(inState state: FirmwareUpgradeState, with error: Error) {
-        firmwareUpgradeProgress.setProgress(0, animated: true)
-        firmwareUpgradeActionPause.isHidden = true
-        firmwareUpgradeActionResume.isHidden = true
-        firmwareUpgradeActionCancel.isHidden = true
-        firmwareUpgradeActionStart.isHidden = false
-        firmwareUpgradeActionSelect.isEnabled = true
-        firmwareUpgradeStatus.text = "\(error)"
+        progress.setProgress(0, animated: true)
+        actionPause.isHidden = true
+        actionResume.isHidden = true
+        actionCancel.isHidden = true
+        actionStart.isHidden = false
+        actionSelect.isEnabled = true
+        status.textColor = UIColor.red
+        status.text = "\(error)"
     }
     
     func upgradeDidCancel(state: FirmwareUpgradeState) {
-        firmwareUpgradeProgress.setProgress(0, animated: true)
-        firmwareUpgradeActionPause.isHidden = true
-        firmwareUpgradeActionResume.isHidden = true
-        firmwareUpgradeActionCancel.isHidden = true
-        firmwareUpgradeActionStart.isHidden = false
-        firmwareUpgradeActionSelect.isEnabled = true
-        firmwareUpgradeStatus.text = "CANCELLED"
+        progress.setProgress(0, animated: true)
+        actionPause.isHidden = true
+        actionResume.isHidden = true
+        actionCancel.isHidden = true
+        actionStart.isHidden = false
+        actionSelect.isEnabled = true
+        status.textColor = UIColor.darkGray
+        status.text = "CANCELLED"
     }
     
     func uploadProgressDidChange(bytesSent: Int, imageSize: Int, timestamp: Date) {
-        firmwareUpgradeProgress.setProgress(Float(bytesSent) / Float(imageSize), animated: true)
+        progress.setProgress(Float(bytesSent) / Float(imageSize), animated: true)
     }
 }
 
@@ -166,21 +171,23 @@ extension FirmwareUpgradeViewController: UIDocumentMenuDelegate, UIDocumentPicke
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
         if let data = dataFrom(url: url) {
-            firmwareUpgradeFileName.text = url.lastPathComponent
-            firmwareUpgradeFileSize.text = "\(data.count) bytes"
+            fileName.text = url.lastPathComponent
+            fileSize.text = "\(data.count) bytes"
             
             do {
                 let hash = try McuMgrImage(data: data).hash
                 
                 imageData = data
-                firmwareUpgradeFileHash.text = hash.hexEncodedString(options: .upperCase)
-                firmwareUpgradeStatus.text = "READY"
-                firmwareUpgradeActionStart.isEnabled = true
+                fileHash.text = hash.hexEncodedString(options: .upperCase)
+                status.textColor = UIColor.darkGray
+                status.text = "READY"
+                actionStart.isEnabled = true
             } catch {
                 print("Error reading hash: \(error)")
-                firmwareUpgradeFileHash.text = ""
-                firmwareUpgradeStatus.text = "INVALID FILE"
-                firmwareUpgradeActionStart.isEnabled = false
+                fileHash.text = ""
+                status.textColor = UIColor.red
+                status.text = "INVALID FILE"
+                actionStart.isEnabled = false
             }
         }
     }
@@ -191,6 +198,8 @@ extension FirmwareUpgradeViewController: UIDocumentMenuDelegate, UIDocumentPicke
             return try Data(contentsOf: url)
         } catch {
             print("Error reading file: \(error)")
+            status.textColor = UIColor.red
+            status.text = "COULD NOT OPEN FILE"
             return nil
         }
     }

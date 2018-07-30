@@ -119,7 +119,7 @@ public class ImageManager: McuManager {
     /// - parameter delegate: The delegate to recieve progress callbacks.
     ///
     /// - returns: True if the upload has started successfully, false otherwise.
-    public func upload(data: [UInt8], delegate: ImageUploadDelegate) -> Bool {
+    public func upload(data: Data, delegate: ImageUploadDelegate) -> Bool {
         // Make sure two uploads cant start at once.
         objc_sync_enter(self)
         // If upload is already in progress or paused, do not continue.
@@ -136,7 +136,7 @@ public class ImageManager: McuManager {
         uploadDelegate = delegate
         
         // Set inage data.
-        imageData = Data(bytes: data)
+        imageData = data
         
         upload(data: imageData!, offset: 0, callback: uploadCallback)
         return true
@@ -354,7 +354,7 @@ public class ImageManager: McuManager {
         let tempData = imageData
         let tempDelegate = uploadDelegate
         resetUploadVariables()
-        _ = upload(data: [UInt8](tempData), delegate: tempDelegate)
+        _ = upload(data: tempData, delegate: tempDelegate)
         objc_sync_exit(self)
     }
     
@@ -396,7 +396,7 @@ extension ImageUploadError: CustomStringConvertible {
         case .invalidData:
             return "Image data is nil."
         case .mcuMgrErrorCode(let code):
-            return "Error: \(code)"
+            return "\(code)"
         }
     }
 }

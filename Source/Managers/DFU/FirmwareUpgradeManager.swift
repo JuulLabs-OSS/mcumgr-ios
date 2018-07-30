@@ -124,7 +124,7 @@ public class FirmwareUpgradeManager : FirmwareUpgradeController, ConnectionObser
     private func upload() {
         setState(.upload)
         if !paused {
-            _ = imageManager.upload(data: [UInt8](imageData), delegate: self)
+            _ = imageManager.upload(data: imageData, delegate: self)
         }
     }
     
@@ -482,7 +482,7 @@ extension FirmwareUpgradeError: CustomStringConvertible {
         case .invalidResponse(let response):
             return "Invalid response: \(response)"
         case .mcuMgrReturnCodeError(let code):
-            return "Error: \(code)"
+            return "\(code)"
         case .connectionFailedAfterReset:
             return "Connection failed after reset"
         }
