@@ -7,57 +7,77 @@
 import UIKit
 import McuManager
 
-class ImageController: UITableViewController, FirmwareUpgradeDelegate {
+class ImageController: UITableViewController {
     @IBOutlet weak var connectionStatus: ConnectionStateLabel!
     
-    private var defaultManager: DefaultManager!
-    private var imageManager: ImageManager!
-    private var dfuManager: FirmwareUpgradeManager!
-    
-    override func viewDidLoad() {
-        let baseController = parent as! BaseViewController
-        let transporter = baseController.transporter!
-        defaultManager = DefaultManager(transporter: transporter)
-        imageManager = ImageManager(transporter: transporter)
-        dfuManager = FirmwareUpgradeManager(transporter: transporter, delegate: self)
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
+        showModeSwitch()
+        
         // Set the connection status label as transport delegate.
-        let bleTransporter = defaultManager.transporter as? McuMgrBleTransport
+        let baseController = parent as! BaseViewController
+        let bleTransporter = baseController.transporter as? McuMgrBleTransport
         bleTransporter?.delegate = connectionStatus
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            // Connection status
-            return 50
+    override func viewWillDisappear(_ animated: Bool) {
+        tabBarController!.navigationItem.rightBarButtonItem = nil
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let baseController = parent as! BaseViewController
+        let transporter = baseController.transporter
+        
+        let identifier = segue.identifier!
+        switch identifier {
+        case "firmwareUpgrade":
+            let controller = segue.destination as! FirmwareUpgradeViewController
+            controller.transporter = transporter
+        default:
+            break
         }
-        return UITableViewAutomaticDimension
     }
     
-    // MARK: - Firmware Upgrade Delegate
-    func upgradeDidStart(controller: FirmwareUpgradeController) {
-        
+    // MARK: - Handling Basic / Advanced mode
+    private var advancedMode: Bool = false
+    
+    @objc func modeSwitched() {
+        showModeSwitch(toggle: true)
+        tableView.reloadData()
     }
     
-    func upgradeStateDidChange(from previousState: FirmwareUpgradeState, to newState: FirmwareUpgradeState) {
-        
+    private func showModeSwitch(toggle: Bool = false) {
+        if toggle {
+            advancedMode = !advancedMode
+        }
+        let action = advancedMode ? "Basic" : "Advanced"
+        tabBarController!.navigationItem.rightBarButtonItem = UIBarButtonItem(title: action, style: .plain, target: self, action: #selector(modeSwitched))
     }
     
-    func upgradeDidComplete() {
-        
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if (advancedMode && section == 1) || (!advancedMode && 2...4 ~= section) {
+            return 0.1
+        }
+        return super.tableView(tableView, heightForHeaderInSection: section)
     }
     
-    func upgradeDidFail(inState state: FirmwareUpgradeState, with error: Error) {
-        
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if (advancedMode && section == 1) || (!advancedMode && 2...4 ~= section) {
+            return 0.1
+        }
+        return super.tableView(tableView, heightForFooterInSection: section)
     }
     
-    func upgradeDidCancel(state: FirmwareUpgradeState) {
-        
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (advancedMode && section == 1) || (!advancedMode && 2...4 ~= section) {
+            return 0
+        }
+        return super.tableView(tableView, numberOfRowsInSection: section)
     }
     
-    func uploadProgressDidChange(bytesSent: Int, imageSize: Int, timestamp: Date) {
-        
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if (advancedMode && section == 1) || (!advancedMode && 2...4 ~= section) {
+            return nil
+        }
+        return super.tableView(tableView, titleForHeaderInSection: section)
     }
 }
