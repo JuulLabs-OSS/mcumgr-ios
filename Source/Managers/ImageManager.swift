@@ -303,7 +303,7 @@ public class ImageManager: McuManager {
             self.offset = offset
             self.uploadDelegate?.uploadProgressDidChange(bytesSent: Int(offset), imageSize: imageData.count, timestamp: Date())
             
-            if self.uploadState == .paused {
+            if self.uploadState == .none {
                 self.resetUploadVariables()
                 self.uploadDelegate?.uploadDidCancel()
                 self.uploadDelegate = nil
@@ -327,7 +327,6 @@ public class ImageManager: McuManager {
     
     private func sendNext(from offset: UInt) {
         if uploadState != .uploading {
-            Log.d(ImageManager.TAG, msg: "Image Manager is not in uploading state")
             return
         }
         upload(data: imageData!, offset: offset, callback: uploadCallback)

@@ -159,6 +159,7 @@ public class FirmwareUpgradeManager : FirmwareUpgradeController, ConnectionObser
     }
     
     private func success() {
+        setState(.success)
         objc_sync_enter(self)
         state = .none
         paused = false
