@@ -51,14 +51,6 @@ class DeviceController: UITableViewController, UITextFieldDelegate {
         bleTransporter?.delegate = connectionStatus
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            // Connection status
-            return 50
-        }
-        return UITableViewAutomaticDimension
-    }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         sendTapped(actionSend)
         return true
@@ -72,18 +64,16 @@ class DeviceController: UITableViewController, UITextFieldDelegate {
         messageReceivedBackground.isHidden = true
         
         defaultManager.echo(message) { (response, error) in
-            DispatchQueue.main.async {
-                if let response = response {
-                    self.messageReceived.text = response.response
-                    self.messageReceivedBackground.tintColor = UIColor.zephyr
-                }
-                if let error = error {
-                    self.messageReceived.text = "\(error)"
-                    self.messageReceivedBackground.tintColor = UIColor.red
-                }
-                self.messageReceived.isHidden = false
-                self.messageReceivedBackground.isHidden = false
+            if let response = response {
+                self.messageReceived.text = response.response
+                self.messageReceivedBackground.tintColor = UIColor.zephyr
             }
+            if let error = error {
+                self.messageReceived.text = "\(error)"
+                self.messageReceivedBackground.tintColor = UIColor.red
+            }
+            self.messageReceived.isHidden = false
+            self.messageReceivedBackground.isHidden = false
         }
     }
 }

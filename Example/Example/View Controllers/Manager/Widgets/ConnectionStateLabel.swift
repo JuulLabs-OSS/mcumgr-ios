@@ -11,19 +11,17 @@ import McuManager
 class ConnectionStateLabel: UILabel, PeripheralDelegate {
     
     func peripheral(_ peripheral: CBPeripheral, didChangeStateTo state: PeripheralState) {
-        DispatchQueue.main.async {
-            switch state {
-            case .connected:
-                self.text = "CONNECTED"
-            case .connecting:
-                self.text = "CONNECTING"
-            case .initializing:
-                self.text = "INITIALIZING"
-            case .disconnected:
-                self.text = "DISCONNECTED"
-            case .disconnecting:
-                self.text = "DISCONNECTING"
-            }
+        switch state {
+        case .connected:
+            self.text = "CONNECTED"
+        case .connecting:
+            self.text = "CONNECTING"
+        case .initializing:
+            self.text = "INITIALIZING"
+        case .disconnected:
+            self.text = "DISCONNECTED"
+        case .disconnecting:
+            self.text = "DISCONNECTING"
         }
     }
 
