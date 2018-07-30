@@ -27,20 +27,8 @@ class ImageController: UITableViewController {
         let baseController = parent as! BaseViewController
         let transporter = baseController.transporter
         
-        let identifier = segue.identifier!
-        switch identifier {
-        case "firmwareUpgrade":
-            let controller = segue.destination as! FirmwareUpgradeViewController
-            controller.transporter = transporter
-        case "firmwareUpload":
-            let controller = segue.destination as! FirmwareUploadViewController
-            controller.transporter = transporter
-        case "reset":
-            let controller = segue.destination as! ResetViewController
-            controller.transporter = transporter
-        default:
-            break
-        }
+        var destination = segue.destination as? McuMgrViewController
+        destination?.transporter = transporter!
     }
     
     // MARK: - Handling Basic / Advanced mode

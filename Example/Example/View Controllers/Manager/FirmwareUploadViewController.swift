@@ -7,7 +7,7 @@
 import UIKit
 import McuManager
 
-class FirmwareUploadViewController: UIViewController {
+class FirmwareUploadViewController: UIViewController, McuMgrViewController {
     
     @IBOutlet weak var actionSelect: UIButton!
     @IBOutlet weak var actionStart: UIButton!

@@ -7,7 +7,7 @@
 import UIKit
 import McuManager
 
-class ResetViewController: UIViewController {
+class ResetViewController: UIViewController, McuMgrViewController {
 
     @IBOutlet weak var resetAction: UIButton!
     

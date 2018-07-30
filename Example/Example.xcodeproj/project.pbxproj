@@ -18,6 +18,8 @@
 		5264C1D6210E26C20044FBBA /* FirmwareUpgradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5264C1D5210E26C20044FBBA /* FirmwareUpgradeViewController.swift */; };
 		5264C1D8210F32A60044FBBA /* FirmwareUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5264C1D7210F32A60044FBBA /* FirmwareUploadViewController.swift */; };
 		5264C1DA210F43B40044FBBA /* ResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5264C1D9210F43B40044FBBA /* ResetViewController.swift */; };
+		5264C1DC210F63850044FBBA /* ImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5264C1DB210F63850044FBBA /* ImagesViewController.swift */; };
+		5264C1DE210F640F0044FBBA /* McuMgrViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5264C1DD210F640F0044FBBA /* McuMgrViewController.swift */; };
 		BD5A285820CB44AF0061F0EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5A285720CB44AF0061F0EE /* AppDelegate.swift */; };
 		BD5A285A20CB44AF0061F0EE /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5A285920CB44AF0061F0EE /* ScannerViewController.swift */; };
 		BD5A285D20CB44AF0061F0EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD5A285B20CB44AF0061F0EE /* Main.storyboard */; };
@@ -53,6 +55,8 @@
 		5264C1D5210E26C20044FBBA /* FirmwareUpgradeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirmwareUpgradeViewController.swift; sourceTree = "<group>"; };
 		5264C1D7210F32A60044FBBA /* FirmwareUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirmwareUploadViewController.swift; sourceTree = "<group>"; };
 		5264C1D9210F43B40044FBBA /* ResetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetViewController.swift; sourceTree = "<group>"; };
+		5264C1DB210F63850044FBBA /* ImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImagesViewController.swift; path = Widgets/ImagesViewController.swift; sourceTree = "<group>"; };
+		5264C1DD210F640F0044FBBA /* McuMgrViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = McuMgrViewController.swift; sourceTree = "<group>"; };
 		BD54DE5320CEE16F0023F980 /* Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Example.entitlements; sourceTree = "<group>"; };
 		BD5A285420CB44AF0061F0EE /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD5A285720CB44AF0061F0EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +116,7 @@
 				526270A3210B8E8000FC17D4 /* ImageController.swift */,
 				5264C1D5210E26C20044FBBA /* FirmwareUpgradeViewController.swift */,
 				5264C1D7210F32A60044FBBA /* FirmwareUploadViewController.swift */,
+				5264C1DB210F63850044FBBA /* ImagesViewController.swift */,
 				5264C1D9210F43B40044FBBA /* ResetViewController.swift */,
 			);
 			path = Manager;
@@ -129,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				524DCFD5210B21D6000E110D /* ConnectionStateLabel.swift */,
+				5264C1DD210F640F0044FBBA /* McuMgrViewController.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -259,7 +265,9 @@
 				5264C1D6210E26C20044FBBA /* FirmwareUpgradeViewController.swift in Sources */,
 				BD5A285A20CB44AF0061F0EE /* ScannerViewController.swift in Sources */,
 				524DCFD9210B4241000E110D /* UIColor.swift in Sources */,
+				5264C1DC210F63850044FBBA /* ImagesViewController.swift in Sources */,
 				526270A4210B8E8000FC17D4 /* ImageController.swift in Sources */,
+				5264C1DE210F640F0044FBBA /* McuMgrViewController.swift in Sources */,
 				524DCFD4210B1C17000E110D /* DeviceController.swift in Sources */,
 				BD5A285820CB44AF0061F0EE /* AppDelegate.swift in Sources */,
 				524DCFD6210B21D6000E110D /* ConnectionStateLabel.swift in Sources */,
