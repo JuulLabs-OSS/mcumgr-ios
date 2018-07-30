@@ -67,13 +67,17 @@ public class McuMgrBleTransport: NSObject {
     /// BLE transport delegate.
     public var delegate: PeripheralDelegate? {
         didSet {
-            delegate?.peripheral(peripheral, didChangeStateTo: state)
+            DispatchQueue.main.async {
+                self.delegate?.peripheral(self.peripheral, didChangeStateTo: self.state)
+            }
         }
     }
     
     public var state: PeripheralState = .disconnected {
         didSet {
-            delegate?.peripheral(peripheral, didChangeStateTo: state)
+            DispatchQueue.main.async {
+                self.delegate?.peripheral(self.peripheral, didChangeStateTo: self.state)
+            }
         }
     }
     
