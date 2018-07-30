@@ -309,14 +309,18 @@ extension McuMgrBleTransport: McuMgrTransport {
         responseData = nil
         responseLength = nil
         lock.close()
-        callback(response, nil)
+        DispatchQueue.main.async {
+            callback(response, nil)
+        }
     }
     
     private func fail<T: McuMgrResponse>(error: Error, callback: @escaping McuMgrCallback<T>) {
         responseData = nil
         responseLength = nil
         lock.close()
-        callback(nil, error)
+        DispatchQueue.main.async {
+            callback(nil, error)
+        }
     }
 }
 
