@@ -19,4 +19,8 @@ class BaseViewController: UITabBarController {
     override func viewDidLoad() {
         title = peripheral.advertisedName
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        transporter!.close()
+    }
 }
