@@ -35,6 +35,9 @@ class ImageController: UITableViewController {
         case "firmwareUpload":
             let controller = segue.destination as! FirmwareUploadViewController
             controller.transporter = transporter
+        case "reset":
+            let controller = segue.destination as! ResetViewController
+            controller.transporter = transporter
         default:
             break
         }

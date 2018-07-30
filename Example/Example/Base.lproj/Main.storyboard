@@ -415,7 +415,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Oq-KC-zNT">
-                                                    <rect key="frame" x="0.0" y="16" width="375" height="169"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="168.5"/>
                                                     <connections>
                                                         <segue destination="iEC-sa-48q" kind="embed" identifier="firmwareUpgrade" id="Sri-M0-jMF"/>
                                                     </connections>
@@ -478,17 +478,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o87-hi-iTg">
-                                                    <rect key="frame" x="107" y="12" width="162" height="30"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                    <state key="normal" title="Send Reset Command">
-                                                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
-                                                </button>
+                                                <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RQ8-Ym-6Bo">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                                    <connections>
+                                                        <segue destination="AQx-Yv-Ia3" kind="embed" identifier="reset" id="KaR-ME-aOA"/>
+                                                    </connections>
+                                                </containerView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="o87-hi-iTg" firstAttribute="centerX" secondItem="BoL-pg-khF" secondAttribute="centerX" id="ITb-ag-fne"/>
-                                                <constraint firstItem="o87-hi-iTg" firstAttribute="top" secondItem="BoL-pg-khF" secondAttribute="top" constant="12" id="RpE-RY-sRV"/>
+                                                <constraint firstItem="RQ8-Ym-6Bo" firstAttribute="top" secondItem="BoL-pg-khF" secondAttribute="top" id="1h6-Ch-h26"/>
+                                                <constraint firstAttribute="bottom" secondItem="RQ8-Ym-6Bo" secondAttribute="bottom" id="JVp-jy-I06"/>
+                                                <constraint firstItem="RQ8-Ym-6Bo" firstAttribute="leading" secondItem="BoL-pg-khF" secondAttribute="leading" id="Kam-7p-yeZ"/>
+                                                <constraint firstAttribute="trailing" secondItem="RQ8-Ym-6Bo" secondAttribute="trailing" id="ZzP-S7-9Z3"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -565,7 +566,7 @@
             <objects>
                 <viewController title="Firmware Upgrade" id="iEC-sa-48q" customClass="FirmwareUpgradeViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="r1I-lh-Yqh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="169"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="168.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No file selected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DGc-qz-dJz">
@@ -685,6 +686,9 @@
                                 </constraints>
                                 <state key="normal" title="Cancel">
                                     <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <state key="disabled">
+                                    <color key="titleColor" red="0.96078431369999995" green="0.70744344869999998" blue="0.7120465936" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="cancel:" destination="iEC-sa-48q" eventType="touchUpInside" id="Nbc-mx-cuj"/>
@@ -879,6 +883,9 @@
                                 <state key="normal" title="Cancel">
                                     <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <state key="disabled">
+                                    <color key="titleColor" red="0.96078431369999995" green="0.70744344869999998" blue="0.7120465936" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="cancel:" destination="xg9-8C-9qN" eventType="touchUpInside" id="Aha-F4-VFy"/>
                                 </connections>
@@ -945,6 +952,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="POl-uN-r4q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3278" y="609"/>
+        </scene>
+        <!--Reset View Controller-->
+        <scene sceneID="xe9-Vo-LsE">
+            <objects>
+                <viewController id="AQx-Yv-Ia3" customClass="ResetViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="f8x-hR-7lO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g5X-EB-8z1">
+                                <rect key="frame" x="107" y="10" width="162" height="30"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Send Reset Command">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <state key="disabled">
+                                    <color key="titleColor" red="0.96078431369999995" green="0.707443448653444" blue="0.71204659359691869" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="reset:" destination="AQx-Yv-Ia3" eventType="touchUpInside" id="h42-Kd-jLq"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="g5X-EB-8z1" firstAttribute="centerY" secondItem="f8x-hR-7lO" secondAttribute="centerY" id="akD-l0-gdJ"/>
+                            <constraint firstItem="g5X-EB-8z1" firstAttribute="centerX" secondItem="f8x-hR-7lO" secondAttribute="centerX" id="zrP-7R-NbQ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="resetAction" destination="g5X-EB-8z1" id="nwZ-xp-hNV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iIR-8p-8hU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3278" y="1041"/>
         </scene>
     </scenes>
     <resources>
