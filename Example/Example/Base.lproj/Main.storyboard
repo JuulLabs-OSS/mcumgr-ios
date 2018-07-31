@@ -274,7 +274,7 @@
                                                     </connections>
                                                 </button>
                                                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DI1-Lk-JIP">
-                                                    <rect key="frame" x="291.5" y="70" width="67.5" height="36.5"/>
+                                                    <rect key="frame" x="295.5" y="70" width="63.5" height="36.5"/>
                                                     <color key="tintColor" red="0.0" green="0.61176470589999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sent" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fGF-Hx-0JJ">
@@ -284,7 +284,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KIo-km-dCT">
-                                                    <rect key="frame" x="16" y="122.5" width="102" height="36.5"/>
+                                                    <rect key="frame" x="16" y="122.5" width="98" height="36.5"/>
                                                     <color key="tintColor" red="0.23137254901960785" green="0.24313725490196078" blue="0.30588235294117649" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Received" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sy5-h6-KFF">
@@ -306,11 +306,11 @@
                                                 <constraint firstItem="sy5-h6-KFF" firstAttribute="leading" secondItem="n8S-JU-HlX" secondAttribute="leadingMargin" constant="16" id="VXA-2M-Trn"/>
                                                 <constraint firstItem="KIo-km-dCT" firstAttribute="height" secondItem="sy5-h6-KFF" secondAttribute="height" constant="16" id="W41-Td-XBq"/>
                                                 <constraint firstItem="DI1-Lk-JIP" firstAttribute="trailing" secondItem="n8S-JU-HlX" secondAttribute="trailingMargin" id="byg-7d-kX0"/>
-                                                <constraint firstItem="DI1-Lk-JIP" firstAttribute="width" secondItem="fGF-Hx-0JJ" secondAttribute="width" constant="32" id="g42-YC-WC4"/>
+                                                <constraint firstItem="DI1-Lk-JIP" firstAttribute="width" secondItem="fGF-Hx-0JJ" secondAttribute="width" constant="28" id="g42-YC-WC4"/>
                                                 <constraint firstItem="KIo-km-dCT" firstAttribute="top" secondItem="sy5-h6-KFF" secondAttribute="top" constant="-8" id="gKb-FO-mCK"/>
                                                 <constraint firstItem="gr2-JJ-dW5" firstAttribute="leading" secondItem="j00-vu-YAN" secondAttribute="trailing" constant="8" id="jiV-CE-N5s"/>
                                                 <constraint firstItem="DI1-Lk-JIP" firstAttribute="height" secondItem="fGF-Hx-0JJ" secondAttribute="height" constant="16" id="ltO-X4-2Nx"/>
-                                                <constraint firstItem="KIo-km-dCT" firstAttribute="width" secondItem="sy5-h6-KFF" secondAttribute="width" constant="32" id="rYb-l3-Yvh"/>
+                                                <constraint firstItem="KIo-km-dCT" firstAttribute="width" secondItem="sy5-h6-KFF" secondAttribute="width" constant="28" id="rYb-l3-Yvh"/>
                                                 <constraint firstItem="fGF-Hx-0JJ" firstAttribute="top" secondItem="j00-vu-YAN" secondAttribute="bottom" constant="24" id="uAK-Ly-opo"/>
                                                 <constraint firstItem="j00-vu-YAN" firstAttribute="leading" secondItem="n8S-JU-HlX" secondAttribute="leadingMargin" id="uOm-vb-Crg"/>
                                                 <constraint firstItem="DI1-Lk-JIP" firstAttribute="top" secondItem="fGF-Hx-0JJ" secondAttribute="top" constant="-8" id="vAy-sj-TGa"/>
