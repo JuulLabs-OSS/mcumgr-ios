@@ -41,16 +41,20 @@ class ImagesViewController: UIViewController , McuMgrViewController{
         }
     }
     
-    var imageHash: [UInt8]?
-    
+    private var imageHash: [UInt8]?
     private var imageManager: ImageManager!
     var transporter: McuMgrTransport! {
         didSet {
             imageManager = ImageManager(transporter: transporter)
         }
     }
+    var height: CGFloat = 110
+    var tableView: UITableView!
     
     private func handle(_ response: McuMgrImageStateResponse?, _ error: Error?) {
+        let bounds = CGSize(width: message.frame.width, height: CGFloat.greatestFiniteMagnitude)
+        let oldRect = message.sizeThatFits(bounds)
+        
         if let response = response {
             var info = "Split status: \(response.splitStatus ?? 0)"
             if let images = response.images {
@@ -58,8 +62,8 @@ class ImagesViewController: UIViewController , McuMgrViewController{
                 for image in images {
                     info += "\nSlot \(i)\n" +
                         "• Version: \(image.version!)\n" +
-                        "• Hash: \(Data(bytes: image.hash[0...16]).hexEncodedString(options: .upperCase))...\n" +
-                    "• Flags: "
+                        "• Hash: \(Data(bytes: image.hash).hexEncodedString(options: .upperCase))\n" +
+                        "• Flags: "
                     if image.bootable {
                         info += "Bootable, "
                     }
@@ -86,15 +90,19 @@ class ImagesViewController: UIViewController , McuMgrViewController{
                         imageHash = image.hash
                     }
                 }
-                self.testAction.isEnabled = images.count > 1 && !images[1].pending
-                self.confirmAction.isEnabled = images.count > 1 && !images[1].permanent
-                self.eraseAction.isEnabled = images.count > 1
+                testAction.isEnabled = images.count > 1 && !images[1].pending
+                confirmAction.isEnabled = images.count > 1 && !images[1].permanent
+                eraseAction.isEnabled = images.count > 1
             }
-            self.message.text = info
-            self.message.textColor = UIColor.darkGray
+            message.text = info
+            message.textColor = UIColor.darkGray
         } else {
-            self.message.textColor = UIColor.red
-            self.message.text = "\(error!)"
+            message.textColor = UIColor.red
+            message.text = "\(error!)"
         }
+        let newRect = message.sizeThatFits(bounds)
+        let diff = newRect.height - oldRect.height
+        height += diff
+        tableView.reloadData()
     }
 }

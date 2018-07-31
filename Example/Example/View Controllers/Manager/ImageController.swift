@@ -10,6 +10,10 @@ import McuManager
 class ImageController: UITableViewController {
     @IBOutlet weak var connectionStatus: ConnectionStateLabel!
     
+    /// Instance if Images View Controller, required to get its
+    /// height when data are obtained and height changes.
+    private var imagesViewController: ImagesViewController!
+    
     override func viewDidAppear(_ animated: Bool) {
         showModeSwitch()
         
@@ -29,6 +33,18 @@ class ImageController: UITableViewController {
         
         var destination = segue.destination as? McuMgrViewController
         destination?.transporter = transporter!
+        
+        if let imagesViewController = segue.destination as? ImagesViewController {
+            self.imagesViewController = imagesViewController
+            imagesViewController.tableView = tableView
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 3 /* Images */ {
+            return imagesViewController.height
+        }
+        return super.tableView(tableView, heightForRowAt: indexPath)
     }
     
     // MARK: - Handling Basic / Advanced mode
