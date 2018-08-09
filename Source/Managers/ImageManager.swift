@@ -8,8 +8,9 @@ import Foundation
 import CoreBluetooth
 
 public class ImageManager: McuManager {
-    
     private static let TAG = "ImageManager"
+    
+    private static let truncatedHashLen = 3
     
     //**************************************************************************
     // MARK: Constants
@@ -65,10 +66,11 @@ public class ImageManager: McuManager {
         var payload: [String:CBOR] = ["data": CBOR.byteString([UInt8](data[offset..<(offset+dataLength)])),
                                       "off": CBOR.unsignedInt(offset)]
         
-        // If this is the initial packet, send the image data length in the
-        // payload.
+        // If this is the initial packet, send the image data length and
+        // SHA 256 in the payload.
         if offset == 0 {
             payload.updateValue(CBOR.unsignedInt(UInt(data.count)), forKey: "len")
+            payload.updateValue(CBOR.byteString([UInt8](data.sha256()[0..<ImageManager.truncatedHashLen])), forKey: "sha")
         }
         // Build request and send.
         send(op: .write, commandId: ID_UPLOAD, payload: payload, callback: callback)
@@ -366,6 +368,7 @@ public class ImageManager: McuManager {
         // entire image.
         if offset == 0 {
             payload.updateValue(CBOR.unsignedInt(UInt(data.count)), forKey: "len")
+            payload.updateValue(CBOR.byteString([UInt8](repeating: 0, count: ImageManager.truncatedHashLen)), forKey: "sha")
         }
         // Build the packet and return the size.
         let packet = buildPacket(op: .write, flags: 0, group: group, sequenceNumber: 0, commandId: ID_UPLOAD, payload: payload)
