@@ -165,8 +165,8 @@
 				524DCFD7210B421E000E110D /* Util */,
 				BD5A285720CB44AF0061F0EE /* AppDelegate.swift */,
 				BD5A285B20CB44AF0061F0EE /* Main.storyboard */,
-				BD5A285E20CB44B00061F0EE /* Assets.xcassets */,
 				BD5A286020CB44B00061F0EE /* LaunchScreen.storyboard */,
+				BD5A285E20CB44B00061F0EE /* Assets.xcassets */,
 				BD5A286320CB44B00061F0EE /* Info.plist */,
 			);
 			path = Example;
