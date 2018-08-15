@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5215762D212320F300C21B0C /* LogsStatsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5215762C212320F300C21B0C /* LogsStatsController.swift */; };
 		5246368A2108DE77008B3D5B /* ScannerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524636892108DE77008B3D5B /* ScannerTableViewCell.swift */; };
 		5246368E2108DF23008B3D5B /* DiscoveredPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246368D2108DF23008B3D5B /* DiscoveredPeripheral.swift */; };
 		524636962109D0D7008B3D5B /* ScannerFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524636952109D0D7008B3D5B /* ScannerFilterViewController.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5215762C212320F300C21B0C /* LogsStatsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsStatsController.swift; sourceTree = "<group>"; };
 		524636892108DE77008B3D5B /* ScannerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerTableViewCell.swift; sourceTree = "<group>"; };
 		5246368D2108DF23008B3D5B /* DiscoveredPeripheral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredPeripheral.swift; sourceTree = "<group>"; };
 		524636952109D0D7008B3D5B /* ScannerFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerFilterViewController.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				524DCFCF210B0EB6000E110D /* BaseViewController.swift */,
 				524DCFD3210B1C17000E110D /* DeviceController.swift */,
 				526270A3210B8E8000FC17D4 /* ImageController.swift */,
+				5215762C212320F300C21B0C /* LogsStatsController.swift */,
 				5264C1D5210E26C20044FBBA /* FirmwareUpgradeViewController.swift */,
 				5264C1D7210F32A60044FBBA /* FirmwareUploadViewController.swift */,
 				5264C1DB210F63850044FBBA /* ImagesViewController.swift */,
@@ -269,6 +272,7 @@
 				526270A4210B8E8000FC17D4 /* ImageController.swift in Sources */,
 				5264C1DE210F640F0044FBBA /* McuMgrViewController.swift in Sources */,
 				524DCFD4210B1C17000E110D /* DeviceController.swift in Sources */,
+				5215762D212320F300C21B0C /* LogsStatsController.swift in Sources */,
 				BD5A285820CB44AF0061F0EE /* AppDelegate.swift in Sources */,
 				524DCFD6210B21D6000E110D /* ConnectionStateLabel.swift in Sources */,
 				524DCFD0210B0EB6000E110D /* BaseViewController.swift in Sources */,

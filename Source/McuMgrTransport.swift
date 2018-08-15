@@ -56,15 +56,15 @@ extension McuMgrTransportError: CustomStringConvertible {
     public var description: String {
         switch self {
         case .connectionTimeout:
-            return "Connection to the remote device has timed out."
+            return "Connection timed out."
         case .connectionFailed:
-            return "Connection to the remote device has failed."
+            return "Connection failed."
         case .disconnected:
-            return "Device has disconnected unexpectedly."
+            return "Device disconnected unexpectedly."
         case .sendTimeout:
-            return "Sending the request to the device has timed out."
+            return "Sending the request timed out."
         case .sendFailed:
-            return "Sending the request to the device has failed."
+            return "Sending the request failed."
         case .insufficientMtu(mtu: let mtu):
             return "Insufficient MTU: \(mtu)."
         case .badResponse:

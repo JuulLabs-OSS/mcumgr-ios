@@ -15,13 +15,13 @@ class ConnectionStateLabel: UILabel, PeripheralDelegate {
         case .connected:
             self.text = "CONNECTED"
         case .connecting:
-            self.text = "CONNECTING"
+            self.text = "CONNECTING..."
         case .initializing:
-            self.text = "INITIALIZING"
+            self.text = "INITIALIZING..."
         case .disconnected:
             self.text = "DISCONNECTED"
         case .disconnecting:
-            self.text = "DISCONNECTING"
+            self.text = "DISCONNECTING..."
         }
     }
 

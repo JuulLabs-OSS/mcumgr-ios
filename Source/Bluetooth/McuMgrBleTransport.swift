@@ -49,11 +49,13 @@ public class McuMgrBleTransport: NSObject {
     /// This is used to connect and cancel connection.
     private let centralManager: CBCentralManager
     /// Dispatch queue for queuing requests.
-    private var dispatchQueue: DispatchQueue
+    private let dispatchQueue: DispatchQueue
+    /// The queue used to buffer reqeusts when another one is in progress.
+    private let operationQueue: OperationQueue
     /// Lock used to wait for callbacks before continuing the request. This lock
     /// is used to wait for the device to setup (i.e. connection, descriptor
     /// writes) and the device to be received.
-    private var lock: ResultLock
+    private let lock: ResultLock
     
     /// SMP Characteristic object. Used to write requests and receive
     /// notificaitons.
@@ -103,6 +105,8 @@ public class McuMgrBleTransport: NSObject {
         self.dispatchQueue = DispatchQueue(label: "McuMgrBleTransport")
         self.lock = ResultLock(isOpen: false)
         self.observers = []
+        self.operationQueue = OperationQueue()
+        self.operationQueue.maxConcurrentOperationCount = 1
         super.init()
     }
     
@@ -127,16 +131,16 @@ extension McuMgrBleTransport: McuMgrTransport {
     
     public func send<T: McuMgrResponse>(data: Data, callback: @escaping McuMgrCallback<T>) {
         dispatchQueue.async {
-            var sendSuccess: Bool = false
-            for _ in 0..<McuMgrBleTransport.MAX_RETRIES {
-                let retry = self._send(data: data, callback: callback)
-                if !retry {
-                    sendSuccess = true
-                    break
+            // Max concurrent opertaion count is set to 1, so operations are
+            // executed one after another. A new one will be started when the
+            // queue is empty, or the when the last operation finishes.
+            self.operationQueue.addOperation {
+                for _ in 0..<McuMgrBleTransport.MAX_RETRIES {
+                    let retry = self._send(data: data, callback: callback)
+                    if !retry {
+                        break
+                    }
                 }
-            }
-            if !sendSuccess {
-                self.fail(error: McuMgrTransportError.connectionTimeout, callback: callback)
             }
         }
     }
@@ -252,10 +256,12 @@ extension McuMgrBleTransport: McuMgrTransport {
             // Check for timeout, failure, or success.
             switch result {
             case .timeout:
+                state = .disconnected
                 Log.w(TAG, msg: "Connection timed out")
                 fail(error: McuMgrTransportError.connectionTimeout, callback: callback)
                 return false
             case let .error(error):
+                state = .disconnected
                 Log.w(TAG, msg: "Connection failed: \(error)")
                 fail(error: error, callback: callback)
                 return false
