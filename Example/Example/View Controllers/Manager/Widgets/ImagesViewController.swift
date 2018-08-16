@@ -16,25 +16,30 @@ class ImagesViewController: UIViewController , McuMgrViewController{
     @IBOutlet weak var eraseAction: UIButton!
     
     @IBAction func read(_ sender: UIButton) {
+        busy()
         imageManager.list { (response, error) in
             self.handle(response, error)
         }
     }
     @IBAction func test(_ sender: UIButton) {
+        busy()
         imageManager.test(hash: imageHash!) { (response, error) in
             self.handle(response, error)
         }
     }
     @IBAction func confirm(_ sender: UIButton) {
+        busy()
         imageManager.confirm(hash: imageHash!) { (response, error) in
             self.handle(response, error)
         }
     }
     @IBAction func erase(_ sender: UIButton) {
+        busy()
         imageManager.erase { (response, error) in
             if let _ = response {
                 self.read(sender)
             } else {
+                self.readAction.isEnabled = true
                 self.message.textColor = UIColor.red
                 self.message.text = "\(error!)"
             }
@@ -90,6 +95,7 @@ class ImagesViewController: UIViewController , McuMgrViewController{
                         imageHash = image.hash
                     }
                 }
+                readAction.isEnabled = true
                 testAction.isEnabled = images.count > 1 && !images[1].pending
                 confirmAction.isEnabled = images.count > 1 && !images[1].permanent
                 eraseAction.isEnabled = images.count > 1
@@ -97,6 +103,7 @@ class ImagesViewController: UIViewController , McuMgrViewController{
             message.text = info
             message.textColor = UIColor.darkGray
         } else {
+            readAction.isEnabled = true
             message.textColor = UIColor.red
             message.text = "\(error!)"
         }
@@ -104,5 +111,12 @@ class ImagesViewController: UIViewController , McuMgrViewController{
         let diff = newRect.height - oldRect.height
         height += diff
         tableView.reloadData()
+    }
+    
+    private func busy() {
+        readAction.isEnabled = false
+        testAction.isEnabled = false
+        confirmAction.isEnabled = false
+        eraseAction.isEnabled = false
     }
 }
