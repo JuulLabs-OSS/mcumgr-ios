@@ -41,7 +41,7 @@ public class McuMgrBleTransport: NSObject {
     /// Connection timeout in seconds.
     private static let CONNECTION_TIMEOUT = 20
     /// Transaction timout in seconds.
-    private static let TRANSACTION_TIMEOUT = 10
+    private static let TRANSACTION_TIMEOUT = 30
     
     /// The CBPeripheral for this transport to communicate with.
     private let peripheral: CBPeripheral
