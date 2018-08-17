@@ -1,10 +1,8 @@
-//
-//  LogsStatsController.swift
-//  Example
-//
-//  Created by Aleksander Nowakowski on 14/08/2018.
-//  Copyright © 2018 Nordic Semiconductor ASA. All rights reserved.
-//
+/*
+ * Copyright (c) 2018 Nordic Semiconductor ASA.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
 
 import UIKit
 import McuManager
