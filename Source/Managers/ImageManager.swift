@@ -113,8 +113,7 @@ public class ImageManager: McuManager {
     /// Upload progress is reported asynchronously to the delegate provided in
     /// this method.
     ///
-    /// - parameter data: The entire image data in bytes to upload to the
-    ///   peripheral.
+    /// - parameter data: The entire image data to be uploaded to the peripheral.
     /// - parameter peripheral: The BLE periheral to send the data to. The
     ///   peripneral must be supplied so ImageManager can determine the MTU and
     ///   thus the number of bytes of image data that it can send per packet.
@@ -137,7 +136,7 @@ public class ImageManager: McuManager {
         // Set upload delegate.
         uploadDelegate = delegate
         
-        // Set inage data.
+        // Set image data.
         imageData = data
         
         upload(data: imageData!, offset: 0, callback: uploadCallback)

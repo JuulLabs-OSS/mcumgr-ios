@@ -29,10 +29,10 @@ class ImageController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let baseController = parent as! BaseViewController
-        let transporter = baseController.transporter
+        let transporter = baseController.transporter!
         
         var destination = segue.destination as? McuMgrViewController
-        destination?.transporter = transporter!
+        destination?.transporter = transporter
         
         if let imagesViewController = segue.destination as? ImagesViewController {
             self.imagesViewController = imagesViewController
