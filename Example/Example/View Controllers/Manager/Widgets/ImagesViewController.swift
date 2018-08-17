@@ -98,7 +98,7 @@ class ImagesViewController: UIViewController , McuMgrViewController{
                 readAction.isEnabled = true
                 testAction.isEnabled = images.count > 1 && !images[1].pending
                 confirmAction.isEnabled = images.count > 1 && !images[1].permanent
-                eraseAction.isEnabled = images.count > 1
+                eraseAction.isEnabled = images.count > 1 && !images[1].confirmed
             }
             message.text = info
             message.textColor = UIColor.darkGray
