@@ -216,20 +216,26 @@ public class ImageManager: McuManager {
     ///   delegate's didFailUpload method.
     public func cancelUpload(error: Error? = nil) {
         objc_sync_enter(self)
-        let state = uploadState
-        resetUploadVariables()
-        if error != nil {
-            Log.d(ImageManager.TAG, msg: "Upload cancelled due to error: \(error!)")
-            uploadDelegate?.uploadDidFail(with: error!)
+        if uploadState == .none {
+            Log.d(ImageManager.TAG, msg: "Image upload is not in progress")
         } else {
-            Log.d(ImageManager.TAG, msg: "Upload cancelled!")
-            if state == .none {
-                print("There is no image upload currently in progress.")
-            } else if state == .paused {
-                uploadDelegate?.uploadDidCancel()
+            if error != nil {
+                Log.d(ImageManager.TAG, msg: "Upload cancelled due to error: \(error!)")
+                resetUploadVariables()
+                uploadDelegate?.uploadDidFail(with: error!)
+                uploadDelegate = nil
+            } else {
+                if uploadState == .paused {
+                    Log.d(ImageManager.TAG, msg: "Upload cancelled!")
+                    resetUploadVariables()
+                    uploadDelegate?.uploadDidCancel()
+                    uploadDelegate = nil
+                }
+                // else
+                // Transfer will be cancelled after the next notification is received.
             }
+            uploadState = .none
         }
-        uploadDelegate = nil
         objc_sync_exit(self)
     }
     
@@ -305,6 +311,7 @@ public class ImageManager: McuManager {
             self.uploadDelegate?.uploadProgressDidChange(bytesSent: Int(offset), imageSize: imageData.count, timestamp: Date())
             
             if self.uploadState == .none {
+                Log.d(ImageManager.TAG, msg: "Upload cancelled!")
                 self.resetUploadVariables()
                 self.uploadDelegate?.uploadDidCancel()
                 self.uploadDelegate = nil
@@ -313,6 +320,7 @@ public class ImageManager: McuManager {
             
             // Check if the upload has completed.
             if offset == imageData.count {
+                Log.d(ImageManager.TAG, msg: "Upload finished!")
                 self.resetUploadVariables()
                 self.uploadDelegate?.uploadDidFinish()
                 self.uploadDelegate = nil

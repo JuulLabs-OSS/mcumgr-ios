@@ -28,7 +28,6 @@ class DeviceController: UITableViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         message.delegate = self
-        actionSend.tintColor = UIColor.accent
         
         let sentBackground = #imageLiteral(resourceName: "bubble_sent")
             .resizableImage(withCapInsets: UIEdgeInsets(top: 17, left: 21, bottom: 17, right: 21), resizingMode: .stretch)

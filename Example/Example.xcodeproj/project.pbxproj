@@ -10,6 +10,7 @@
 		5215762D212320F300C21B0C /* LogsStatsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5215762C212320F300C21B0C /* LogsStatsController.swift */; };
 		5215762F2125B59400C21B0C /* FilesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5215762E2125B59400C21B0C /* FilesController.swift */; };
 		521576312126CC8F00C21B0C /* FileUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521576302126CC8F00C21B0C /* FileUploadViewController.swift */; };
+		521576332126FFBE00C21B0C /* FileDownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521576322126FFBE00C21B0C /* FileDownloadViewController.swift */; };
 		5246368A2108DE77008B3D5B /* ScannerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524636892108DE77008B3D5B /* ScannerTableViewCell.swift */; };
 		5246368E2108DF23008B3D5B /* DiscoveredPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246368D2108DF23008B3D5B /* DiscoveredPeripheral.swift */; };
 		524636962109D0D7008B3D5B /* ScannerFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524636952109D0D7008B3D5B /* ScannerFilterViewController.swift */; };
@@ -50,6 +51,7 @@
 		5215762C212320F300C21B0C /* LogsStatsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsStatsController.swift; sourceTree = "<group>"; };
 		5215762E2125B59400C21B0C /* FilesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesController.swift; sourceTree = "<group>"; };
 		521576302126CC8F00C21B0C /* FileUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUploadViewController.swift; sourceTree = "<group>"; };
+		521576322126FFBE00C21B0C /* FileDownloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloadViewController.swift; sourceTree = "<group>"; };
 		524636892108DE77008B3D5B /* ScannerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerTableViewCell.swift; sourceTree = "<group>"; };
 		5246368D2108DF23008B3D5B /* DiscoveredPeripheral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredPeripheral.swift; sourceTree = "<group>"; };
 		524636952109D0D7008B3D5B /* ScannerFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerFilterViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				5264C1DB210F63850044FBBA /* ImagesViewController.swift */,
 				5264C1D9210F43B40044FBBA /* ResetViewController.swift */,
 				521576302126CC8F00C21B0C /* FileUploadViewController.swift */,
+				521576322126FFBE00C21B0C /* FileDownloadViewController.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				5215762D212320F300C21B0C /* LogsStatsController.swift in Sources */,
 				BD5A285820CB44AF0061F0EE /* AppDelegate.swift in Sources */,
 				5215762F2125B59400C21B0C /* FilesController.swift in Sources */,
+				521576332126FFBE00C21B0C /* FileDownloadViewController.swift in Sources */,
 				524DCFD6210B21D6000E110D /* ConnectionStateLabel.swift in Sources */,
 				524DCFD0210B0EB6000E110D /* BaseViewController.swift in Sources */,
 				521576312126CC8F00C21B0C /* FileUploadViewController.swift in Sources */,

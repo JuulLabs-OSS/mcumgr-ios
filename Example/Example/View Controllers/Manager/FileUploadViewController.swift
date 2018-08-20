@@ -28,6 +28,9 @@ class FileUploadViewController: UIViewController, McuMgrViewController {
         present(importMenu, animated: true, completion: nil)
     }
     @IBAction func start(_ sender: UIButton) {
+        let downloadViewController = (parent as? FilesController)?.fileDownloadViewController
+        downloadViewController?.addRecent(fileName.text!)
+        
         actionStart.isHidden = true
         actionPause.isHidden = false
         actionCancel.isHidden = false
@@ -39,16 +42,16 @@ class FileUploadViewController: UIViewController, McuMgrViewController {
         status.text = "PAUSED"
         actionPause.isHidden = true
         actionResume.isHidden = false
-        fsManager.pauseUpload()
+        fsManager.pauseTransfer()
     }
     @IBAction func resume(_ sender: UIButton) {
         status.text = "UPLOADING..."
         actionPause.isHidden = false
         actionResume.isHidden = true
-        fsManager.continueUpload()
+        fsManager.continueTransfer()
     }
     @IBAction func cancel(_ sender: UIButton) {
-        fsManager.cancelUpload()
+        fsManager.cancelTransfer()
     }
     
     private var fsManager: FileSystemManager!
@@ -59,6 +62,15 @@ class FileUploadViewController: UIViewController, McuMgrViewController {
     }
     
     private var fileData: Data?
+    var partition: String = "nffs" {
+        didSet {
+            refreshDestination()
+        }
+    }
+    
+    private func refreshDestination() {
+        destination.text = "/\(partition)/\(fileName.text!)"
+    }
 }
 
 extension FileUploadViewController: FileUploadDelegate {
@@ -116,8 +128,8 @@ extension FileUploadViewController: UIDocumentMenuDelegate, UIDocumentPickerDele
             self.fileData = data
             
             fileName.text = url.lastPathComponent
-            destination.text = "/nffs/\(url.lastPathComponent)"
             fileSize.text = "\(data.count) bytes"
+            refreshDestination()
             
             status.textColor = UIColor.darkGray
             status.text = "READY"
