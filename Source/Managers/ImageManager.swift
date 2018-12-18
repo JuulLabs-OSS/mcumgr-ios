@@ -275,7 +275,11 @@ public class ImageManager: McuManager {
     // MARK: - Image Upload Private Methods
     
     private lazy var uploadCallback: McuMgrCallback<McuMgrUploadResponse> = {
-        [unowned self] (response: McuMgrUploadResponse?, error: Error?) in
+        [weak self] (response: McuMgrUploadResponse?, error: Error?) in
+        // Ensure the manager is not released.
+        guard let self = self else {
+            return
+        }
         // Check for an error.
         if let error = error {
             if case let McuMgrTransportError.insufficientMtu(newMtu) = error {

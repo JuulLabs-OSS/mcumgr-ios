@@ -252,7 +252,11 @@ public class FileSystemManager: McuManager {
     //**************************************************************************
     
     private lazy var uploadCallback: McuMgrCallback<McuMgrFsUploadResponse> = {
-        [unowned self] (response: McuMgrFsUploadResponse?, error: Error?) in
+        [weak self] (response: McuMgrFsUploadResponse?, error: Error?) in
+        // Ensure the manager is not released.
+        guard let self = self else {
+            return
+        }
         // Check for an error.
         if let error = error {
             if case let McuMgrTransportError.insufficientMtu(newMtu) = error {
@@ -312,7 +316,11 @@ public class FileSystemManager: McuManager {
     }
     
     private lazy var downloadCallback: McuMgrCallback<McuMgrFsDownloadResponse> = {
-        [unowned self] (response: McuMgrFsDownloadResponse?, error: Error?) in
+        [weak self] (response: McuMgrFsDownloadResponse?, error: Error?) in
+        // Ensure the manager is not released.
+        guard let self = self else {
+            return
+        }
         // Check for an error.
         if let error = error {
             if case let McuMgrTransportError.insufficientMtu(newMtu) = error {

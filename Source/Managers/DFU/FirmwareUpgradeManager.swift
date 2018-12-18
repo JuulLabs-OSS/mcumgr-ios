@@ -209,9 +209,14 @@ public class FirmwareUpgradeManager : FirmwareUpgradeController, ConnectionObser
     /// This callback will fail the upgrade on error and continue to the next
     /// state on success.
     private lazy var validateCallback: McuMgrCallback<McuMgrImageStateResponse> =
-    { [unowned self] (response: McuMgrImageStateResponse?, error: Error?) in
+    { [weak self] (response: McuMgrImageStateResponse?, error: Error?) in
+        // Ensure the manager is not released.
+        guard let self = self else {
+            return
+        }
+        // Check for an error.
         if let error = error {
-            print(error)
+            self.fail(error: error)
             return
         }
         guard let response = response else {
@@ -304,7 +309,12 @@ public class FirmwareUpgradeManager : FirmwareUpgradeController, ConnectionObser
     /// This callback will fail the upgrade on error and continue to the next
     /// state on success.
     private lazy var testCallback: McuMgrCallback<McuMgrImageStateResponse> =
-    { [unowned self] (response: McuMgrImageStateResponse?, error: Error?) in
+    { [weak self] (response: McuMgrImageStateResponse?, error: Error?) in
+        // Ensure the manager is not released.
+        guard let self = self else {
+            return
+        }
+        // Check for an error.
         if let error = error {
             self.fail(error: error)
             return
@@ -361,7 +371,12 @@ public class FirmwareUpgradeManager : FirmwareUpgradeController, ConnectionObser
     /// This callback will fail the upgrade on error. On success, the reset
     /// poller will be started after a 3 second delay.
     private lazy var resetCallback: McuMgrCallback<McuMgrResponse> =
-    { [unowned self] (response: McuMgrResponse?, error: Error?) in
+    { [weak self] (response: McuMgrResponse?, error: Error?) in
+        // Ensure the manager is not released.
+        guard let self = self else {
+            return
+        }
+        // Check for an error.
         if let error = error {
             self.fail(error: error)
             return
@@ -383,7 +398,12 @@ public class FirmwareUpgradeManager : FirmwareUpgradeController, ConnectionObser
     /// This callback will fail the upload on error or move to the next state on
     /// success.
     private lazy var confirmCallback: McuMgrCallback<McuMgrImageStateResponse> =
-    { [unowned self] (response: McuMgrImageStateResponse?, error: Error?) in
+    { [weak self] (response: McuMgrImageStateResponse?, error: Error?) in
+        // Ensure the manager is not released.
+        guard let self = self else {
+            return
+        }
+        // Check for an error.
         if let error = error {
             self.fail(error: error)
             return
