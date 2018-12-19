@@ -15,6 +15,11 @@ public class FirmwareUpgradeManager : FirmwareUpgradeController, ConnectionObser
     private let defaultManager: DefaultManager
     private weak var delegate: FirmwareUpgradeDelegate?
     
+    /// Cyclic reference is used to prevent from releasing the manager
+    /// in the middle of an update. The reference cycle will be set
+    /// when upgrade was started and released on success, error or cancel.
+    private var cyclicReferenceHolder: (() -> FirmwareUpgradeManager)?
+    
     public var mode: FirmwareUpgradeMode = .testAndConfirm
     private var imageData: Data!
     private var hash: Data!
@@ -46,6 +51,9 @@ public class FirmwareUpgradeManager : FirmwareUpgradeController, ConnectionObser
         }
         imageData = data
         hash = try McuMgrImage(data: imageData).hash
+        
+        // Grab a strong reference to something holding a strong reference to self.
+        cyclicReferenceHolder = { return self }
         
         delegate?.upgradeDidStart(controller: self)
         validate()
@@ -166,6 +174,8 @@ public class FirmwareUpgradeManager : FirmwareUpgradeController, ConnectionObser
         state = .none
         paused = false
         delegate?.upgradeDidComplete()
+        // Release cyclic reference.
+        cyclicReferenceHolder = nil
         objc_sync_exit(self)
     }
     
@@ -176,6 +186,8 @@ public class FirmwareUpgradeManager : FirmwareUpgradeController, ConnectionObser
         state = .none
         paused = false
         delegate?.upgradeDidFail(inState: tmp, with: error)
+        // Release cyclic reference.
+        cyclicReferenceHolder = nil
         objc_sync_exit(self)
     }
     
@@ -476,6 +488,8 @@ extension FirmwareUpgradeManager: ImageUploadDelegate {
     public func uploadDidCancel() {
         delegate?.upgradeDidCancel(state: state)
         state = .none
+        // Release cyclic reference.
+        cyclicReferenceHolder = nil
     }
     
     public func uploadDidFinish() {
