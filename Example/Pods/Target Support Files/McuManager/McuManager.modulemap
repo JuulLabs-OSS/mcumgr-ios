@@ -1,6 +1,0 @@
-framework module McuManager {
-  umbrella header "McuManager-umbrella.h"
-
-  export *
-  module * { export * }
-}
