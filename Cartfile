@@ -1,1 +1,1 @@
-gthub "bgiori/SwiftCBOR" == 0.3.2
+github "bgiori/SwiftCBOR" "v0.3.2"
