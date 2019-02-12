@@ -7,363 +7,363 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0146EBEBDFD50B07EB22BA81E59509C3 /* FileSystemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77DBA82D18950EE50A7B4FF0377D3C3 /* FileSystemManager.swift */; };
-		021A064E55A9BA551A916793752BECC1 /* CBOREncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD1CC21E1AD95ABD2BBFC6645FA6D7C /* CBOREncoder.swift */; };
-		037CD8C390377CE849744A64B684AE58 /* String+McuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B2309F4440167BD3B7F933CDE19474 /* String+McuManager.swift */; };
-		259108A0776861CA66221FC878894CCD /* McuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADB6041716DB5C95A45800DB2BB97DD /* McuManager.swift */; };
-		2D18E193E52505CE4A3ADA0BA9F7CBF1 /* CBORInputStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7113DE052F350185EF86EEBE9A3BF76D /* CBORInputStream.swift */; };
-		2E92466E7F8570368DB026D0623EF33D /* ResultLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A58E4D85A5782F0BD3EF1FB9BF95CC /* ResultLock.swift */; };
-		39E1B6A3DEB1F122FEA50193EBCE976D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 710C02C581ED5A737C30033B5C72BD19 /* Foundation.framework */; };
-		4AFE0B330CA90ECA972A1D3A40A02C5A /* McuMgrBleTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC5360A237CD25C42FCD84FD61FA6CC /* McuMgrBleTransport.swift */; };
-		4CDDF6F7C1E39E06EB74C898A4F5D45F /* McuMgrHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FCAAAE21339D2C98F1B07D4CE4AC84 /* McuMgrHeader.swift */; };
-		511B4E7D66D254BC7B9BE44937CE84D8 /* CBORDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A41BEC327C353F7B4DA4FD2A236BCEB /* CBORDecoder.swift */; };
-		59DB49FD9C781353E6566925282D13EB /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4398BA4BC723F175A5BB770F84D8AB5C /* Log.swift */; };
-		5C3586F3B83483A02FB87F1CFEE9280C /* CBOR+McuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5C0C79651D7A723993F59D78943182 /* CBOR+McuManager.swift */; };
-		629CBC78B7097DD456420E9229F7FA3F /* CrashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3285EC9BB309145DCF4C576A72A20D /* CrashManager.swift */; };
-		68E8B3B8306DF30336C1B5D1451A94D2 /* RunTestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C5955B3AE1BC74F4893834132EBC65 /* RunTestManager.swift */; };
-		734505DB923C6C60BCA5F692422A9FE9 /* SwiftCBOR-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C34AA24FDEC8E0D770806BD20479790C /* SwiftCBOR-dummy.m */; };
-		746CEF90310A536D6B1656C85D8260F8 /* FirmwareUpgradeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF8FFB9766F6242C451BC20E89BD643 /* FirmwareUpgradeManager.swift */; };
-		7A78E246C3BD35453B81AD46933CB669 /* McuMgrResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1C2109B1FED405F0CBCF6FF3567B39 /* McuMgrResponse.swift */; };
-		82484CD9C792F593BA75390B8989A67C /* McuMgrTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465A8647F6A1B3224546C997C5275B44 /* McuMgrTransport.swift */; };
-		845901BF16012DAA6F3BA91FF2D923BA /* Pods-Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5272241D4675EBF4B77A6B77E33CF611 /* Pods-Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		869DCE040CB3FF976F37D36DF4D3F411 /* Data+McuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCDBF65E1F8A116534800E0C0E10FC9 /* Data+McuManager.swift */; };
-		8A0FF67A54402EDCB21E118DF1C74DCD /* McuManager-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 95132D193E78835117B77ECB1161D3D4 /* McuManager-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8A431B9F9338F0C6EBAD5634D7D6DAFD /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238BE3073F509801A07BDC0F0E3FFD59 /* ImageManager.swift */; };
-		8F18AFA4ADE4D0FC8969D42AF61C6D5A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 710C02C581ED5A737C30033B5C72BD19 /* Foundation.framework */; };
-		97B4A83AD6CDB71403FA1A35B5B1A647 /* FirmwareUpgradeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE5CCF30E923C76F113B0713A6B991A /* FirmwareUpgradeController.swift */; };
-		9FD5D4A0AEBA540D3E2F41BBC0084E07 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6988D11FF3E4F6FEFBD968F6993B6B0 /* Util.swift */; };
-		B13E2C5182BDCB86F9328451FEB9B97B /* McuMgrImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88060C90D3079FF3EB01C82908E6C6EE /* McuMgrImage.swift */; };
-		B55BAD85FA6920A6A35247FAD21AFF53 /* DefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9BF94351BD4CE00FD500A08D6D276B /* DefaultManager.swift */; };
-		B793DCA03D8E9C377E6DADB357DD8329 /* StatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC73A397EBB08C9D65C6A2BA93B78691 /* StatsManager.swift */; };
-		BAB2913342F58331A18366162B47B36D /* CBOR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4053409BAFD87E9A1BB9707E31FA5C3F /* CBOR.swift */; };
-		BD4506DCA3E093C894F9ACE574757CD5 /* Pods-Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F47266550AC865B9D4E1AD83140218 /* Pods-Example-dummy.m */; };
-		C2E586C13A7AFA0A01C96A9F01551805 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9EFCA6272E1684A5AB84435F0D4109 /* ConfigManager.swift */; };
-		C7750185DF8E051C55E9F06B9FDEF74B /* SwiftCBOR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35D66803655B68A9FF6CD219CB0AE0EB /* SwiftCBOR.framework */; };
-		D67F4BB837DC12DC62EFE829D978F6EB /* SwiftCBOR-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E73EFFE5CD73C2D9F66F533995AD38C /* SwiftCBOR-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DCB7E9390B21192FD371038762EACBE4 /* McuManager-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C72F555143B6D73B917C3636D9A0EBB1 /* McuManager-dummy.m */; };
-		E089788A72EA41E13636FF73EDDB507A /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0106CD8270461C035033AE9B862D9B /* LogManager.swift */; };
-		EAB82F707043669138FD4ADD0052F03F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 710C02C581ED5A737C30033B5C72BD19 /* Foundation.framework */; };
-		FE6D117C6748D6A3E83EFCDDB9270CD7 /* CBOREncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB23ED61D1699F0833BCD72FC6E48710 /* CBOREncodable.swift */; };
+		09B34D65E1A5B00043AE299A4A5F5D4E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5A2C85E8E5CE0E649BA526D478136EF /* Foundation.framework */; };
+		1226EA4002F19B574375F07DC6A7B40D /* CBORDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F7833A22E689E3B3E341D6B019679B /* CBORDecoder.swift */; };
+		1272EB5DC14EFD6B85F6FFF80364AD8F /* Data+McuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D80B08B03B3A71206D0B060FC6EDB5 /* Data+McuManager.swift */; };
+		129ACCAE8848A952891AEB673493FFAA /* McuMgrImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631CB6D589B839E438DB7E82C975FACE /* McuMgrImage.swift */; };
+		1AA2D018791B6C4FF168ED75AC520092 /* CBOR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2257EA31602D51C706C4223FA4802B /* CBOR.swift */; };
+		290F65DD689BAD1E97F81ECB440593FC /* CBORInputStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22E909F821207F45569832F08844BA2 /* CBORInputStream.swift */; };
+		36F1F0F0140478E0CDF47E4318EF93A7 /* McuManager-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 186C6D957BD6336699DFC85BC16D3639 /* McuManager-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3FEE1A7662BCE55A42C79D289D2B7FB9 /* McuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38199B4BC9A7E6373D06B9C480EB060D /* McuManager.swift */; };
+		405992D55FCA5604AD68A7501A55BA62 /* McuManager-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E45632345E0686FE758575172B43C3C /* McuManager-dummy.m */; };
+		45610B42806102F5C98789D7208AFD15 /* McuMgrBleTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC3CEEBB7C7D14450444D37003908E2 /* McuMgrBleTransport.swift */; };
+		47D5BD4B7D11FF491080EE13004C7A19 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5A2C85E8E5CE0E649BA526D478136EF /* Foundation.framework */; };
+		4A151BBD2FE66979B8320B4B38A2AE34 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190919EBAC10952AF2D04CAC84B4C847 /* Util.swift */; };
+		4AC1490DA740C307169E3B4816FCC6FD /* CBOREncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE0FA20486B17E08EE6CF2A3586A406 /* CBOREncodable.swift */; };
+		5F2566C71AAB9520B5C958CE4A40974C /* FirmwareUpgradeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CDE46631741B3FBBC7FE58A1C82E5F /* FirmwareUpgradeController.swift */; };
+		5F69AEE433641B434899C8EC7A4F6526 /* Pods-Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 96575DA5A33E3BA4F12184BFE42BAD90 /* Pods-Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6308E410E99BF15D18B535AA2AE7A848 /* FileSystemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891E60E5F4D7CA5FE777C2511C6AD7DF /* FileSystemManager.swift */; };
+		6B4ECC953DEB533C30B0C374ABF3843B /* McuMgrHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA87EB9CA46F15126D3ECB83E2C16E9 /* McuMgrHeader.swift */; };
+		91048E6CB41822AD435F553C6DB84C59 /* SwiftCBOR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE20548CABF0D69D615C8F0B2F390190 /* SwiftCBOR.framework */; };
+		977ADFA008354C1FB105B835E7DC1808 /* CBOR+McuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D627B36340456F6E4D34858BA8E0FF /* CBOR+McuManager.swift */; };
+		99A04B0619B6A925C53E115C9BC26F28 /* FirmwareUpgradeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6213EF98170DD5EAC25FA5F25315301D /* FirmwareUpgradeManager.swift */; };
+		9E3F7DA07035D7FC821B18A115F7BD0E /* SwiftCBOR-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 39310302944128E179EB7BDB79970E97 /* SwiftCBOR-dummy.m */; };
+		AC97952F3A4AC3454C40CC43D00089B3 /* McuMgrResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130F5A79AB1C309EDE31E693A34CEA81 /* McuMgrResponse.swift */; };
+		B5C41F35A8558EA25F94C9F05C8A20DA /* ResultLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C7635BE1F971A3C6494403DB074FE7 /* ResultLock.swift */; };
+		B76D323354D1A6085DA3AF7A9A83C7C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5A2C85E8E5CE0E649BA526D478136EF /* Foundation.framework */; };
+		BA31679C4AAFCBB24D272BBF6119D9C7 /* StatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6401EAE07817219C72F569AB7FC871 /* StatsManager.swift */; };
+		BE0115025C25ED4571C57FC50F7F7B7B /* CrashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA27DA97C53566906192818BD4B27B7E /* CrashManager.swift */; };
+		C3956373C32BCC9263FA65881CEF1005 /* Pods-Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 76ACFBF7097B199449E8749F7EE01465 /* Pods-Example-dummy.m */; };
+		C8602110B32B0B51075519C4A5780F8D /* McuMgrTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47906988F1C5B9A6E07F62B127F9C240 /* McuMgrTransport.swift */; };
+		D07A819F6599950F168258009D4D0E3F /* SwiftCBOR-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DEEB8FEEA1A18F6CADBB9032AB1BCE0C /* SwiftCBOR-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D257F3571EC807A783156001207BA660 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F4B7D974F3871AACF50C1D29D98382 /* ConfigManager.swift */; };
+		DCE56E5A542055B9BD5E26B063D92005 /* String+McuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699321ACAE0FDBB88E1BCC94360BB41 /* String+McuManager.swift */; };
+		E54B2507689DA7280D0984808048F9BF /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BA5126E224DBC9C644BA7043E3B1B8 /* LogManager.swift */; };
+		EB56E12559E081ED2A40D2F5DFCC8770 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05782EF6E57533C5842346975B62C759 /* Log.swift */; };
+		EE306AF90FE4F82B6BAE2CFC2D31AB3D /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C073420F6D86787185AA666552A667 /* ImageManager.swift */; };
+		F8CD6F6E7BDA6E9AD694E8F00C3DA038 /* RunTestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCFD1A039D42C4159DAC0EA47D6113D /* RunTestManager.swift */; };
+		F90EFD6CA4E19479E20A3BBF5AD487E4 /* DefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3318E052E30D2554B9CB9E6F20C5AE99 /* DefaultManager.swift */; };
+		FE4CA0D93C61F0FF7D9177B540ABA211 /* CBOREncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4626DC3529F4272FE8D83A4D5E7DBA1D /* CBOREncoder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5760CCB7E151521D4E6385186F4EACE7 /* PBXContainerItemProxy */ = {
+		39A930F4D967A7A4808034BA3CABF9A2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = CA1F0D5E8B7605F0A84DEEC15BB8E550;
+			remoteGlobalIDString = 0D9E071EB6F9D8EEADC6526FFD877CC3;
+			remoteInfo = SwiftCBOR;
+		};
+		96F14EA340DC2880E2C494ECCE64196E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0D9E071EB6F9D8EEADC6526FFD877CC3;
+			remoteInfo = SwiftCBOR;
+		};
+		FB18505CFC911E20C3FAA95FBBC4C49C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CCD15BCEA1E46BF5AC4D799E305321DB;
 			remoteInfo = McuManager;
-		};
-		6AE6CB5964547F898F4C5D49D4D04D23 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9DFF660A305C6699837B491F76ACA965;
-			remoteInfo = SwiftCBOR;
-		};
-		C9F224955983A7ACD62201F62ABF0A75 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9DFF660A305C6699837B491F76ACA965;
-			remoteInfo = SwiftCBOR;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		16A196AE5F481BB54801C0E12177C4CD /* SwiftCBOR-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftCBOR-Info.plist"; sourceTree = "<group>"; };
-		238BE3073F509801A07BDC0F0E3FFD59 /* ImageManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
-		2A41BEC327C353F7B4DA4FD2A236BCEB /* CBORDecoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CBORDecoder.swift; path = Sources/SwiftCBOR/CBORDecoder.swift; sourceTree = "<group>"; };
-		32C5955B3AE1BC74F4893834132EBC65 /* RunTestManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RunTestManager.swift; sourceTree = "<group>"; };
-		35D66803655B68A9FF6CD219CB0AE0EB /* SwiftCBOR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftCBOR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B3285EC9BB309145DCF4C576A72A20D /* CrashManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CrashManager.swift; sourceTree = "<group>"; };
-		4053409BAFD87E9A1BB9707E31FA5C3F /* CBOR.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CBOR.swift; path = Sources/SwiftCBOR/CBOR.swift; sourceTree = "<group>"; };
-		4398BA4BC723F175A5BB770F84D8AB5C /* Log.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
-		4557E68F97C47F356C56665AFE6BB3FD /* McuManager-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "McuManager-prefix.pch"; sourceTree = "<group>"; };
-		465A8647F6A1B3224546C997C5275B44 /* McuMgrTransport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = McuMgrTransport.swift; path = Source/McuMgrTransport.swift; sourceTree = "<group>"; };
-		4B1C2109B1FED405F0CBCF6FF3567B39 /* McuMgrResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = McuMgrResponse.swift; path = Source/McuMgrResponse.swift; sourceTree = "<group>"; };
-		4C64B10F97AB02EB59B9CBC9FC973479 /* Pods-Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Example-frameworks.sh"; sourceTree = "<group>"; };
-		50B2309F4440167BD3B7F933CDE19474 /* String+McuManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "String+McuManager.swift"; sourceTree = "<group>"; };
-		515C651099897C83996403DC88924974 /* Pods-Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Example.modulemap"; sourceTree = "<group>"; };
-		5272241D4675EBF4B77A6B77E33CF611 /* Pods-Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Example-umbrella.h"; sourceTree = "<group>"; };
-		52EB128553BCCD0A43A7713241401647 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
-		6782AFB60285C20328AD28F1D852D1ED /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
-		6B397BF54958A6A41E006314BE7E97C4 /* SwiftCBOR.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftCBOR.modulemap; sourceTree = "<group>"; };
-		6F798ACCE2195A4DACD6CC3F401B4C1A /* SwiftCBOR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftCBOR.framework; path = SwiftCBOR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		710C02C581ED5A737C30033B5C72BD19 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		7113DE052F350185EF86EEBE9A3BF76D /* CBORInputStream.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CBORInputStream.swift; path = Sources/SwiftCBOR/CBORInputStream.swift; sourceTree = "<group>"; };
-		73020BB8B417E2CFC72852064611E294 /* McuManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = McuManager.framework; path = McuManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7CE5CCF30E923C76F113B0713A6B991A /* FirmwareUpgradeController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirmwareUpgradeController.swift; sourceTree = "<group>"; };
-		84B2134AC6152E5ABA20A0170CE38396 /* McuManager.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = McuManager.modulemap; sourceTree = "<group>"; };
-		88060C90D3079FF3EB01C82908E6C6EE /* McuMgrImage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = McuMgrImage.swift; path = Source/McuMgrImage.swift; sourceTree = "<group>"; };
-		8B278378E8AE995FBE26E513BED2DB8E /* Pods-Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Example-Info.plist"; sourceTree = "<group>"; };
-		8BA1D2485B3DF5361F0F41865300C1F0 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Example.framework; path = "Pods-Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8DF8FFB9766F6242C451BC20E89BD643 /* FirmwareUpgradeManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirmwareUpgradeManager.swift; sourceTree = "<group>"; };
-		95132D193E78835117B77ECB1161D3D4 /* McuManager-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "McuManager-umbrella.h"; sourceTree = "<group>"; };
-		97A58E4D85A5782F0BD3EF1FB9BF95CC /* ResultLock.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ResultLock.swift; sourceTree = "<group>"; };
-		9C0106CD8270461C035033AE9B862D9B /* LogManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
-		9D5C0C79651D7A723993F59D78943182 /* CBOR+McuManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "CBOR+McuManager.swift"; sourceTree = "<group>"; };
-		9E73EFFE5CD73C2D9F66F533995AD38C /* SwiftCBOR-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftCBOR-umbrella.h"; sourceTree = "<group>"; };
-		A8C1899D6CA145F30389F973611562CD /* McuManager.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = McuManager.xcconfig; sourceTree = "<group>"; };
-		B049B4849AF3113C3580161606670F39 /* Pods-Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		B36AB396275697EEE1A5B13BA8A38FE3 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		B5A5215990CD9B9E302D772EF78A87E1 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
-		B7F47266550AC865B9D4E1AD83140218 /* Pods-Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Example-dummy.m"; sourceTree = "<group>"; };
-		BAE3011CAA1E87BE60472ABEA7B773E5 /* McuManager.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = McuManager.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		BB23ED61D1699F0833BCD72FC6E48710 /* CBOREncodable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CBOREncodable.swift; path = Sources/SwiftCBOR/CBOREncodable.swift; sourceTree = "<group>"; };
-		C34AA24FDEC8E0D770806BD20479790C /* SwiftCBOR-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftCBOR-dummy.m"; sourceTree = "<group>"; };
-		C72F555143B6D73B917C3636D9A0EBB1 /* McuManager-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "McuManager-dummy.m"; sourceTree = "<group>"; };
-		C77DBA82D18950EE50A7B4FF0377D3C3 /* FileSystemManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileSystemManager.swift; sourceTree = "<group>"; };
-		CA261082AFE599D995B91ADAA6F171A5 /* SwiftCBOR.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftCBOR.xcconfig; sourceTree = "<group>"; };
-		CD6573FBAD7A5E98AC3F2614872CB47E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
-		CD9BF94351BD4CE00FD500A08D6D276B /* DefaultManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DefaultManager.swift; sourceTree = "<group>"; };
-		D1F11F03A401FD6CB3AF42C16B21F0F7 /* SwiftCBOR-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftCBOR-prefix.pch"; sourceTree = "<group>"; };
-		D6988D11FF3E4F6FEFBD968F6993B6B0 /* Util.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Util.swift; path = Sources/SwiftCBOR/Util.swift; sourceTree = "<group>"; };
-		D7FCAAAE21339D2C98F1B07D4CE4AC84 /* McuMgrHeader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = McuMgrHeader.swift; path = Source/McuMgrHeader.swift; sourceTree = "<group>"; };
-		DADB6041716DB5C95A45800DB2BB97DD /* McuManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = McuManager.swift; path = Source/McuManager.swift; sourceTree = "<group>"; };
-		DDC5360A237CD25C42FCD84FD61FA6CC /* McuMgrBleTransport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = McuMgrBleTransport.swift; sourceTree = "<group>"; };
-		E9C78AEDAFB1981A424502CDCD498F70 /* McuManager-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "McuManager-Info.plist"; sourceTree = "<group>"; };
-		EAD1CC21E1AD95ABD2BBFC6645FA6D7C /* CBOREncoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CBOREncoder.swift; path = Sources/SwiftCBOR/CBOREncoder.swift; sourceTree = "<group>"; };
-		F34353F775E9E7D79176839735E2D482 /* Pods-Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		FC73A397EBB08C9D65C6A2BA93B78691 /* StatsManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StatsManager.swift; sourceTree = "<group>"; };
-		FCCDBF65E1F8A116534800E0C0E10FC9 /* Data+McuManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Data+McuManager.swift"; sourceTree = "<group>"; };
-		FF9EFCA6272E1684A5AB84435F0D4109 /* ConfigManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
+		05782EF6E57533C5842346975B62C759 /* Log.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		0BCFD1A039D42C4159DAC0EA47D6113D /* RunTestManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RunTestManager.swift; sourceTree = "<group>"; };
+		0D7670157C7D120B0D5E584600E00029 /* Pods-Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Example-Info.plist"; sourceTree = "<group>"; };
+		108B552FD32FC01584867FC090CECE12 /* McuManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = McuManager.framework; path = McuManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		130F5A79AB1C309EDE31E693A34CEA81 /* McuMgrResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = McuMgrResponse.swift; path = Source/McuMgrResponse.swift; sourceTree = "<group>"; };
+		14BA5126E224DBC9C644BA7043E3B1B8 /* LogManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
+		186C6D957BD6336699DFC85BC16D3639 /* McuManager-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "McuManager-umbrella.h"; sourceTree = "<group>"; };
+		190919EBAC10952AF2D04CAC84B4C847 /* Util.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Util.swift; path = Sources/SwiftCBOR/Util.swift; sourceTree = "<group>"; };
+		1B96D6D425D2F6FA4E4638A58E726AEE /* SwiftCBOR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftCBOR.framework; path = SwiftCBOR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		291DF0DF383696168D6F1286690A71B5 /* McuManager.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = McuManager.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		2AB6B4BB9F251B15FCCE0AE8533E2183 /* SwiftCBOR.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftCBOR.modulemap; sourceTree = "<group>"; };
+		2C162FC21D423A87FC143A0B632CFC08 /* Pods-Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Example-frameworks.sh"; sourceTree = "<group>"; };
+		3318E052E30D2554B9CB9E6F20C5AE99 /* DefaultManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DefaultManager.swift; sourceTree = "<group>"; };
+		35E2C288A180219D12F161F8F67849E8 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
+		38199B4BC9A7E6373D06B9C480EB060D /* McuManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = McuManager.swift; path = Source/McuManager.swift; sourceTree = "<group>"; };
+		382C73D52104A5AC1D22188ACDE89E82 /* McuManager.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = McuManager.modulemap; sourceTree = "<group>"; };
+		39310302944128E179EB7BDB79970E97 /* SwiftCBOR-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftCBOR-dummy.m"; sourceTree = "<group>"; };
+		3E45632345E0686FE758575172B43C3C /* McuManager-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "McuManager-dummy.m"; sourceTree = "<group>"; };
+		415F61F11BD564043CA80AC49145E3C2 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
+		4626DC3529F4272FE8D83A4D5E7DBA1D /* CBOREncoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CBOREncoder.swift; path = Sources/SwiftCBOR/CBOREncoder.swift; sourceTree = "<group>"; };
+		47906988F1C5B9A6E07F62B127F9C240 /* McuMgrTransport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = McuMgrTransport.swift; path = Source/McuMgrTransport.swift; sourceTree = "<group>"; };
+		4E2257EA31602D51C706C4223FA4802B /* CBOR.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CBOR.swift; path = Sources/SwiftCBOR/CBOR.swift; sourceTree = "<group>"; };
+		4FDCCEA49DEFC7042979B244B74B6198 /* McuManager-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "McuManager-prefix.pch"; sourceTree = "<group>"; };
+		55D3ADE233900B5C67CEBDDED9DCECCC /* Pods-Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		57D627B36340456F6E4D34858BA8E0FF /* CBOR+McuManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "CBOR+McuManager.swift"; sourceTree = "<group>"; };
+		6213EF98170DD5EAC25FA5F25315301D /* FirmwareUpgradeManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirmwareUpgradeManager.swift; sourceTree = "<group>"; };
+		631CB6D589B839E438DB7E82C975FACE /* McuMgrImage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = McuMgrImage.swift; path = Source/McuMgrImage.swift; sourceTree = "<group>"; };
+		72D80B08B03B3A71206D0B060FC6EDB5 /* Data+McuManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Data+McuManager.swift"; sourceTree = "<group>"; };
+		73C7635BE1F971A3C6494403DB074FE7 /* ResultLock.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ResultLock.swift; sourceTree = "<group>"; };
+		76ACFBF7097B199449E8749F7EE01465 /* Pods-Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Example-dummy.m"; sourceTree = "<group>"; };
+		76DE48315FCAC4E69EE4AE1A481F4A0B /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Example.framework; path = "Pods-Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		891E60E5F4D7CA5FE777C2511C6AD7DF /* FileSystemManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileSystemManager.swift; sourceTree = "<group>"; };
+		89B50E47DCC74A130F32D2FA2183D3F1 /* SwiftCBOR-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftCBOR-prefix.pch"; sourceTree = "<group>"; };
+		8B473EA0F72C631E7BCE2154DC67046B /* SwiftCBOR-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftCBOR-Info.plist"; sourceTree = "<group>"; };
+		96575DA5A33E3BA4F12184BFE42BAD90 /* Pods-Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Example-umbrella.h"; sourceTree = "<group>"; };
+		9699321ACAE0FDBB88E1BCC94360BB41 /* String+McuManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "String+McuManager.swift"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A4CDE46631741B3FBBC7FE58A1C82E5F /* FirmwareUpgradeController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirmwareUpgradeController.swift; sourceTree = "<group>"; };
+		AAE0FA20486B17E08EE6CF2A3586A406 /* CBOREncodable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CBOREncodable.swift; path = Sources/SwiftCBOR/CBOREncodable.swift; sourceTree = "<group>"; };
+		ADD0587B37B52C1E8ECBBA43CF7761CB /* Pods-Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		B2F7833A22E689E3B3E341D6B019679B /* CBORDecoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CBORDecoder.swift; path = Sources/SwiftCBOR/CBORDecoder.swift; sourceTree = "<group>"; };
+		B41A8B61A9A92D4C9C4D35781B288139 /* SwiftCBOR.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftCBOR.xcconfig; sourceTree = "<group>"; };
+		BAC3CEEBB7C7D14450444D37003908E2 /* McuMgrBleTransport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = McuMgrBleTransport.swift; sourceTree = "<group>"; };
+		C11123A424B9E62A3F31DBF5A6096DD0 /* McuManager-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "McuManager-Info.plist"; sourceTree = "<group>"; };
+		C57058B57D6C62EC1D9C378BD814039C /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		C5A2C85E8E5CE0E649BA526D478136EF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		C743D3A5AB93A727EA1A577CE93AF024 /* Pods-Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Example.modulemap"; sourceTree = "<group>"; };
+		CA27DA97C53566906192818BD4B27B7E /* CrashManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CrashManager.swift; sourceTree = "<group>"; };
+		CB312D64CD0B1809E6079CF6F3A56AF2 /* McuManager.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = McuManager.xcconfig; sourceTree = "<group>"; };
+		DEA87EB9CA46F15126D3ECB83E2C16E9 /* McuMgrHeader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = McuMgrHeader.swift; path = Source/McuMgrHeader.swift; sourceTree = "<group>"; };
+		DEEB8FEEA1A18F6CADBB9032AB1BCE0C /* SwiftCBOR-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftCBOR-umbrella.h"; sourceTree = "<group>"; };
+		E22E909F821207F45569832F08844BA2 /* CBORInputStream.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CBORInputStream.swift; path = Sources/SwiftCBOR/CBORInputStream.swift; sourceTree = "<group>"; };
+		E9C073420F6D86787185AA666552A667 /* ImageManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		EAF0464AD86614A2E0A5E9B4B811AE4A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		F3F4B7D974F3871AACF50C1D29D98382 /* ConfigManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
+		FD6401EAE07817219C72F569AB7FC871 /* StatsManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StatsManager.swift; sourceTree = "<group>"; };
+		FE20548CABF0D69D615C8F0B2F390190 /* SwiftCBOR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftCBOR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		592208342A7E630716C8D7CA28C2E4DB /* Frameworks */ = {
+		0A2093CC70A1A7DCB86607C70127A380 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EAB82F707043669138FD4ADD0052F03F /* Foundation.framework in Frameworks */,
+				B76D323354D1A6085DA3AF7A9A83C7C3 /* Foundation.framework in Frameworks */,
+				91048E6CB41822AD435F553C6DB84C59 /* SwiftCBOR.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9E5A868F8D3C2B443396F67AB89DDE19 /* Frameworks */ = {
+		8AF9EDCA3B5374FEC235B64E9775B96E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F18AFA4ADE4D0FC8969D42AF61C6D5A /* Foundation.framework in Frameworks */,
+				09B34D65E1A5B00043AE299A4A5F5D4E /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FDEEE916A65D15A88BE572D4A043E265 /* Frameworks */ = {
+		F67B970A63F37244F229F68B9B683EFF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39E1B6A3DEB1F122FEA50193EBCE976D /* Foundation.framework in Frameworks */,
-				C7750185DF8E051C55E9F06B9FDEF74B /* SwiftCBOR.framework in Frameworks */,
+				47D5BD4B7D11FF491080EE13004C7A19 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1D373341CEBB87349D59AEDD7D73C201 /* Pods */ = {
+		2E959F69728E9BCE3C1CC74E654D7713 /* SwiftCBOR */ = {
 			isa = PBXGroup;
 			children = (
-				8184DFF02F58ADAB9295CC18AC96B7D5 /* SwiftCBOR */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		3BFB1236E5F61C24E4383B2E5824E66B /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				7E254EED88672C0A42F3C39323E65024 /* Pods-Example */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		4A71812DA249042310A29281046C7AD5 /* Bluetooth */ = {
-			isa = PBXGroup;
-			children = (
-				DDC5360A237CD25C42FCD84FD61FA6CC /* McuMgrBleTransport.swift */,
-			);
-			name = Bluetooth;
-			path = Source/Bluetooth;
-			sourceTree = "<group>";
-		};
-		54BE217ED06AD29B9C3D78A460B324DC /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				4398BA4BC723F175A5BB770F84D8AB5C /* Log.swift */,
-				97A58E4D85A5782F0BD3EF1FB9BF95CC /* ResultLock.swift */,
-			);
-			name = Utils;
-			path = Source/Utils;
-			sourceTree = "<group>";
-		};
-		6653236AFF838CEE07FC7AD9D11ACA4F /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				710C02C581ED5A737C30033B5C72BD19 /* Foundation.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		69CEB068EE22015B7512DACE11C0C573 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				84B2134AC6152E5ABA20A0170CE38396 /* McuManager.modulemap */,
-				A8C1899D6CA145F30389F973611562CD /* McuManager.xcconfig */,
-				C72F555143B6D73B917C3636D9A0EBB1 /* McuManager-dummy.m */,
-				E9C78AEDAFB1981A424502CDCD498F70 /* McuManager-Info.plist */,
-				4557E68F97C47F356C56665AFE6BB3FD /* McuManager-prefix.pch */,
-				95132D193E78835117B77ECB1161D3D4 /* McuManager-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/McuManager";
-			sourceTree = "<group>";
-		};
-		6A8746B50458EA3BE261A2C649ADA7F4 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				35D66803655B68A9FF6CD219CB0AE0EB /* SwiftCBOR.framework */,
-				6653236AFF838CEE07FC7AD9D11ACA4F /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		73336B3DFA70C3AB60BBA800BD015F1F /* Development Pods */ = {
-			isa = PBXGroup;
-			children = (
-				CC11E856A2EDD6A65476B71343C63958 /* McuManager */,
-			);
-			name = "Development Pods";
-			sourceTree = "<group>";
-		};
-		7DB346D0F39D3F0E887471402A8071AB = {
-			isa = PBXGroup;
-			children = (
-				B36AB396275697EEE1A5B13BA8A38FE3 /* Podfile */,
-				73336B3DFA70C3AB60BBA800BD015F1F /* Development Pods */,
-				6A8746B50458EA3BE261A2C649ADA7F4 /* Frameworks */,
-				1D373341CEBB87349D59AEDD7D73C201 /* Pods */,
-				9FDDEF2548362BDDB6361D7EA8542A1D /* Products */,
-				3BFB1236E5F61C24E4383B2E5824E66B /* Targets Support Files */,
-			);
-			sourceTree = "<group>";
-		};
-		7E254EED88672C0A42F3C39323E65024 /* Pods-Example */ = {
-			isa = PBXGroup;
-			children = (
-				515C651099897C83996403DC88924974 /* Pods-Example.modulemap */,
-				F34353F775E9E7D79176839735E2D482 /* Pods-Example-acknowledgements.markdown */,
-				B049B4849AF3113C3580161606670F39 /* Pods-Example-acknowledgements.plist */,
-				B7F47266550AC865B9D4E1AD83140218 /* Pods-Example-dummy.m */,
-				4C64B10F97AB02EB59B9CBC9FC973479 /* Pods-Example-frameworks.sh */,
-				8B278378E8AE995FBE26E513BED2DB8E /* Pods-Example-Info.plist */,
-				5272241D4675EBF4B77A6B77E33CF611 /* Pods-Example-umbrella.h */,
-				52EB128553BCCD0A43A7713241401647 /* Pods-Example.debug.xcconfig */,
-				B5A5215990CD9B9E302D772EF78A87E1 /* Pods-Example.release.xcconfig */,
-			);
-			name = "Pods-Example";
-			path = "Target Support Files/Pods-Example";
-			sourceTree = "<group>";
-		};
-		8115B5AA5F1F86D220EFE15105DA8B53 /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				FF9EFCA6272E1684A5AB84435F0D4109 /* ConfigManager.swift */,
-				3B3285EC9BB309145DCF4C576A72A20D /* CrashManager.swift */,
-				CD9BF94351BD4CE00FD500A08D6D276B /* DefaultManager.swift */,
-				C77DBA82D18950EE50A7B4FF0377D3C3 /* FileSystemManager.swift */,
-				238BE3073F509801A07BDC0F0E3FFD59 /* ImageManager.swift */,
-				9C0106CD8270461C035033AE9B862D9B /* LogManager.swift */,
-				32C5955B3AE1BC74F4893834132EBC65 /* RunTestManager.swift */,
-				FC73A397EBB08C9D65C6A2BA93B78691 /* StatsManager.swift */,
-				AEE59F72353463F6D0AC60C9731F5364 /* DFU */,
-			);
-			name = Managers;
-			path = Source/Managers;
-			sourceTree = "<group>";
-		};
-		8184DFF02F58ADAB9295CC18AC96B7D5 /* SwiftCBOR */ = {
-			isa = PBXGroup;
-			children = (
-				4053409BAFD87E9A1BB9707E31FA5C3F /* CBOR.swift */,
-				2A41BEC327C353F7B4DA4FD2A236BCEB /* CBORDecoder.swift */,
-				BB23ED61D1699F0833BCD72FC6E48710 /* CBOREncodable.swift */,
-				EAD1CC21E1AD95ABD2BBFC6645FA6D7C /* CBOREncoder.swift */,
-				7113DE052F350185EF86EEBE9A3BF76D /* CBORInputStream.swift */,
-				D6988D11FF3E4F6FEFBD968F6993B6B0 /* Util.swift */,
-				BDB7CB468A9C5534CA06F629B3A829EE /* Support Files */,
+				4E2257EA31602D51C706C4223FA4802B /* CBOR.swift */,
+				B2F7833A22E689E3B3E341D6B019679B /* CBORDecoder.swift */,
+				AAE0FA20486B17E08EE6CF2A3586A406 /* CBOREncodable.swift */,
+				4626DC3529F4272FE8D83A4D5E7DBA1D /* CBOREncoder.swift */,
+				E22E909F821207F45569832F08844BA2 /* CBORInputStream.swift */,
+				190919EBAC10952AF2D04CAC84B4C847 /* Util.swift */,
+				544486B4F8A7979EB02886334EA8A59B /* Support Files */,
 			);
 			name = SwiftCBOR;
 			path = SwiftCBOR;
 			sourceTree = "<group>";
 		};
-		8BD7F7E0875F33FF077C13F9288D7A44 /* Extensions */ = {
+		5071BB908B5168449BC0DB608282EFB0 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				9D5C0C79651D7A723993F59D78943182 /* CBOR+McuManager.swift */,
-				FCCDBF65E1F8A116534800E0C0E10FC9 /* Data+McuManager.swift */,
-				50B2309F4440167BD3B7F933CDE19474 /* String+McuManager.swift */,
+				C5A2C85E8E5CE0E649BA526D478136EF /* Foundation.framework */,
 			);
-			name = Extensions;
-			path = Source/Extensions;
+			name = iOS;
 			sourceTree = "<group>";
 		};
-		9FDDEF2548362BDDB6361D7EA8542A1D /* Products */ = {
+		5199F85D63A1D7303E765F4EE0716D00 /* McuManager */ = {
 			isa = PBXGroup;
 			children = (
-				73020BB8B417E2CFC72852064611E294 /* McuManager.framework */,
-				8BA1D2485B3DF5361F0F41865300C1F0 /* Pods_Example.framework */,
-				6F798ACCE2195A4DACD6CC3F401B4C1A /* SwiftCBOR.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		AEE59F72353463F6D0AC60C9731F5364 /* DFU */ = {
-			isa = PBXGroup;
-			children = (
-				7CE5CCF30E923C76F113B0713A6B991A /* FirmwareUpgradeController.swift */,
-				8DF8FFB9766F6242C451BC20E89BD643 /* FirmwareUpgradeManager.swift */,
-			);
-			name = DFU;
-			path = DFU;
-			sourceTree = "<group>";
-		};
-		BDB7CB468A9C5534CA06F629B3A829EE /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				6B397BF54958A6A41E006314BE7E97C4 /* SwiftCBOR.modulemap */,
-				CA261082AFE599D995B91ADAA6F171A5 /* SwiftCBOR.xcconfig */,
-				C34AA24FDEC8E0D770806BD20479790C /* SwiftCBOR-dummy.m */,
-				16A196AE5F481BB54801C0E12177C4CD /* SwiftCBOR-Info.plist */,
-				D1F11F03A401FD6CB3AF42C16B21F0F7 /* SwiftCBOR-prefix.pch */,
-				9E73EFFE5CD73C2D9F66F533995AD38C /* SwiftCBOR-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/SwiftCBOR";
-			sourceTree = "<group>";
-		};
-		CC11E856A2EDD6A65476B71343C63958 /* McuManager */ = {
-			isa = PBXGroup;
-			children = (
-				DADB6041716DB5C95A45800DB2BB97DD /* McuManager.swift */,
-				D7FCAAAE21339D2C98F1B07D4CE4AC84 /* McuMgrHeader.swift */,
-				88060C90D3079FF3EB01C82908E6C6EE /* McuMgrImage.swift */,
-				4B1C2109B1FED405F0CBCF6FF3567B39 /* McuMgrResponse.swift */,
-				465A8647F6A1B3224546C997C5275B44 /* McuMgrTransport.swift */,
-				4A71812DA249042310A29281046C7AD5 /* Bluetooth */,
-				8BD7F7E0875F33FF077C13F9288D7A44 /* Extensions */,
-				8115B5AA5F1F86D220EFE15105DA8B53 /* Managers */,
-				D90FF6FB175FB424630833C90E5A9C10 /* Pod */,
-				69CEB068EE22015B7512DACE11C0C573 /* Support Files */,
-				54BE217ED06AD29B9C3D78A460B324DC /* Utils */,
+				38199B4BC9A7E6373D06B9C480EB060D /* McuManager.swift */,
+				DEA87EB9CA46F15126D3ECB83E2C16E9 /* McuMgrHeader.swift */,
+				631CB6D589B839E438DB7E82C975FACE /* McuMgrImage.swift */,
+				130F5A79AB1C309EDE31E693A34CEA81 /* McuMgrResponse.swift */,
+				47906988F1C5B9A6E07F62B127F9C240 /* McuMgrTransport.swift */,
+				8325C750CCE6C246BC9C73105048AEC3 /* Bluetooth */,
+				A6F780D0EDE32835C72CA2A3F75EFBA0 /* Extensions */,
+				EB8D392C36C1377287845D62992B8802 /* Managers */,
+				FED45C15186A93A103E29AB591A1976F /* Pod */,
+				51D89D963F883338BBE1FEF8A38B5CCF /* Support Files */,
+				CFF2C2AE2D766C640B134DB4C8F43E14 /* Utils */,
 			);
 			name = McuManager;
 			path = ../..;
 			sourceTree = "<group>";
 		};
-		D90FF6FB175FB424630833C90E5A9C10 /* Pod */ = {
+		51D89D963F883338BBE1FEF8A38B5CCF /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				CD6573FBAD7A5E98AC3F2614872CB47E /* LICENSE */,
-				BAE3011CAA1E87BE60472ABEA7B773E5 /* McuManager.podspec */,
-				6782AFB60285C20328AD28F1D852D1ED /* README.md */,
+				382C73D52104A5AC1D22188ACDE89E82 /* McuManager.modulemap */,
+				CB312D64CD0B1809E6079CF6F3A56AF2 /* McuManager.xcconfig */,
+				3E45632345E0686FE758575172B43C3C /* McuManager-dummy.m */,
+				C11123A424B9E62A3F31DBF5A6096DD0 /* McuManager-Info.plist */,
+				4FDCCEA49DEFC7042979B244B74B6198 /* McuManager-prefix.pch */,
+				186C6D957BD6336699DFC85BC16D3639 /* McuManager-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/McuManager";
+			sourceTree = "<group>";
+		};
+		544486B4F8A7979EB02886334EA8A59B /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				2AB6B4BB9F251B15FCCE0AE8533E2183 /* SwiftCBOR.modulemap */,
+				B41A8B61A9A92D4C9C4D35781B288139 /* SwiftCBOR.xcconfig */,
+				39310302944128E179EB7BDB79970E97 /* SwiftCBOR-dummy.m */,
+				8B473EA0F72C631E7BCE2154DC67046B /* SwiftCBOR-Info.plist */,
+				89B50E47DCC74A130F32D2FA2183D3F1 /* SwiftCBOR-prefix.pch */,
+				DEEB8FEEA1A18F6CADBB9032AB1BCE0C /* SwiftCBOR-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SwiftCBOR";
+			sourceTree = "<group>";
+		};
+		7B73019436E500752BCF3DC95824E86F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				108B552FD32FC01584867FC090CECE12 /* McuManager.framework */,
+				76DE48315FCAC4E69EE4AE1A481F4A0B /* Pods_Example.framework */,
+				1B96D6D425D2F6FA4E4638A58E726AEE /* SwiftCBOR.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8325C750CCE6C246BC9C73105048AEC3 /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				BAC3CEEBB7C7D14450444D37003908E2 /* McuMgrBleTransport.swift */,
+			);
+			name = Bluetooth;
+			path = Source/Bluetooth;
+			sourceTree = "<group>";
+		};
+		95FF658F5BAA93A66931E9DD352FC1B5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FE20548CABF0D69D615C8F0B2F390190 /* SwiftCBOR.framework */,
+				5071BB908B5168449BC0DB608282EFB0 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A6F780D0EDE32835C72CA2A3F75EFBA0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				57D627B36340456F6E4D34858BA8E0FF /* CBOR+McuManager.swift */,
+				72D80B08B03B3A71206D0B060FC6EDB5 /* Data+McuManager.swift */,
+				9699321ACAE0FDBB88E1BCC94360BB41 /* String+McuManager.swift */,
+			);
+			name = Extensions;
+			path = Source/Extensions;
+			sourceTree = "<group>";
+		};
+		CE2E825F08D3AD0FD76E6D78D7512ED0 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				F9A708936E99FD7F473C57BA21F7279D /* Pods-Example */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				F555F73483B0BB1996A9D4BE302AF23A /* Development Pods */,
+				95FF658F5BAA93A66931E9DD352FC1B5 /* Frameworks */,
+				D81349EFE5BFA307A7D4193F591C6DA7 /* Pods */,
+				7B73019436E500752BCF3DC95824E86F /* Products */,
+				CE2E825F08D3AD0FD76E6D78D7512ED0 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		CFF2C2AE2D766C640B134DB4C8F43E14 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				05782EF6E57533C5842346975B62C759 /* Log.swift */,
+				73C7635BE1F971A3C6494403DB074FE7 /* ResultLock.swift */,
+			);
+			name = Utils;
+			path = Source/Utils;
+			sourceTree = "<group>";
+		};
+		D81349EFE5BFA307A7D4193F591C6DA7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2E959F69728E9BCE3C1CC74E654D7713 /* SwiftCBOR */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		EB8D392C36C1377287845D62992B8802 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				F3F4B7D974F3871AACF50C1D29D98382 /* ConfigManager.swift */,
+				CA27DA97C53566906192818BD4B27B7E /* CrashManager.swift */,
+				3318E052E30D2554B9CB9E6F20C5AE99 /* DefaultManager.swift */,
+				891E60E5F4D7CA5FE777C2511C6AD7DF /* FileSystemManager.swift */,
+				E9C073420F6D86787185AA666552A667 /* ImageManager.swift */,
+				14BA5126E224DBC9C644BA7043E3B1B8 /* LogManager.swift */,
+				0BCFD1A039D42C4159DAC0EA47D6113D /* RunTestManager.swift */,
+				FD6401EAE07817219C72F569AB7FC871 /* StatsManager.swift */,
+				F2B96EE81A5303115DCE021AFCCB6923 /* DFU */,
+			);
+			name = Managers;
+			path = Source/Managers;
+			sourceTree = "<group>";
+		};
+		F2B96EE81A5303115DCE021AFCCB6923 /* DFU */ = {
+			isa = PBXGroup;
+			children = (
+				A4CDE46631741B3FBBC7FE58A1C82E5F /* FirmwareUpgradeController.swift */,
+				6213EF98170DD5EAC25FA5F25315301D /* FirmwareUpgradeManager.swift */,
+			);
+			name = DFU;
+			path = DFU;
+			sourceTree = "<group>";
+		};
+		F555F73483B0BB1996A9D4BE302AF23A /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5199F85D63A1D7303E765F4EE0716D00 /* McuManager */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		F9A708936E99FD7F473C57BA21F7279D /* Pods-Example */ = {
+			isa = PBXGroup;
+			children = (
+				C743D3A5AB93A727EA1A577CE93AF024 /* Pods-Example.modulemap */,
+				ADD0587B37B52C1E8ECBBA43CF7761CB /* Pods-Example-acknowledgements.markdown */,
+				55D3ADE233900B5C67CEBDDED9DCECCC /* Pods-Example-acknowledgements.plist */,
+				76ACFBF7097B199449E8749F7EE01465 /* Pods-Example-dummy.m */,
+				2C162FC21D423A87FC143A0B632CFC08 /* Pods-Example-frameworks.sh */,
+				0D7670157C7D120B0D5E584600E00029 /* Pods-Example-Info.plist */,
+				96575DA5A33E3BA4F12184BFE42BAD90 /* Pods-Example-umbrella.h */,
+				35E2C288A180219D12F161F8F67849E8 /* Pods-Example.debug.xcconfig */,
+				415F61F11BD564043CA80AC49145E3C2 /* Pods-Example.release.xcconfig */,
+			);
+			name = "Pods-Example";
+			path = "Target Support Files/Pods-Example";
+			sourceTree = "<group>";
+		};
+		FED45C15186A93A103E29AB591A1976F /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				C57058B57D6C62EC1D9C378BD814039C /* LICENSE */,
+				291DF0DF383696168D6F1286690A71B5 /* McuManager.podspec */,
+				EAF0464AD86614A2E0A5E9B4B811AE4A /* README.md */,
 			);
 			name = Pod;
 			sourceTree = "<group>";
@@ -371,61 +371,61 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		15101F15DCD08DB0989EEB639ED87EAB /* Headers */ = {
+		048A2AB3B5B1E0F7398F73D5B5F8FC2F /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				845901BF16012DAA6F3BA91FF2D923BA /* Pods-Example-umbrella.h in Headers */,
+				36F1F0F0140478E0CDF47E4318EF93A7 /* McuManager-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		339271C8FF335D8C142628B84CC97D7E /* Headers */ = {
+		20E8EE2C512AAF3255E712DAB17B712C /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A0FF67A54402EDCB21E118DF1C74DCD /* McuManager-umbrella.h in Headers */,
+				5F69AEE433641B434899C8EC7A4F6526 /* Pods-Example-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C95BA5B3293BA883D379FE7551331360 /* Headers */ = {
+		66791505A81973AD8B624F3E43F4360D /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D67F4BB837DC12DC62EFE829D978F6EB /* SwiftCBOR-umbrella.h in Headers */,
+				D07A819F6599950F168258009D4D0E3F /* SwiftCBOR-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		30AEE4818CE95449035EF4E9920DBF7E /* Pods-Example */ = {
+		00E051D538DE5D81083C5A6BD761D3A8 /* Pods-Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 14F628DE01B5E57A48AB4544F91BFCA4 /* Build configuration list for PBXNativeTarget "Pods-Example" */;
+			buildConfigurationList = 633FCB2E4F9B334F2D5A3C7CDE56466F /* Build configuration list for PBXNativeTarget "Pods-Example" */;
 			buildPhases = (
-				15101F15DCD08DB0989EEB639ED87EAB /* Headers */,
-				4281CBE601C51108D61A94514651B487 /* Sources */,
-				592208342A7E630716C8D7CA28C2E4DB /* Frameworks */,
-				FD2D2939A1376CDCA7BC51E7B961B199 /* Resources */,
+				20E8EE2C512AAF3255E712DAB17B712C /* Headers */,
+				72E1DD0ED198A57B41DC60918E771451 /* Sources */,
+				8AF9EDCA3B5374FEC235B64E9775B96E /* Frameworks */,
+				FF10FB184BE80044026605194450AEF0 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4E0D70A65ED3687F01EEF6963F631F0B /* PBXTargetDependency */,
-				161A167E074DF2F5F47FCAFC57C7125A /* PBXTargetDependency */,
+				7381740422C1835144322ACF69827463 /* PBXTargetDependency */,
+				CA2A1FCA75C4F991F1E8147B3D6D5C9D /* PBXTargetDependency */,
 			);
 			name = "Pods-Example";
 			productName = "Pods-Example";
-			productReference = 8BA1D2485B3DF5361F0F41865300C1F0 /* Pods_Example.framework */;
+			productReference = 76DE48315FCAC4E69EE4AE1A481F4A0B /* Pods_Example.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		9DFF660A305C6699837B491F76ACA965 /* SwiftCBOR */ = {
+		0D9E071EB6F9D8EEADC6526FFD877CC3 /* SwiftCBOR */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 465414845EDC4B6DF2B36719ECBA562E /* Build configuration list for PBXNativeTarget "SwiftCBOR" */;
+			buildConfigurationList = 2938ADED2DAC44108412F643156E54AC /* Build configuration list for PBXNativeTarget "SwiftCBOR" */;
 			buildPhases = (
-				C95BA5B3293BA883D379FE7551331360 /* Headers */,
-				8349E408E27DEE9AB380CE9084195089 /* Sources */,
-				9E5A868F8D3C2B443396F67AB89DDE19 /* Frameworks */,
-				E7509455080EB3794CB3E4BCD4F69AFD /* Resources */,
+				66791505A81973AD8B624F3E43F4360D /* Headers */,
+				0460F23539D8612C5303334B2F8ED036 /* Sources */,
+				F67B970A63F37244F229F68B9B683EFF /* Frameworks */,
+				3D244174F6F373B6E2215B650FB98213 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -433,72 +433,72 @@
 			);
 			name = SwiftCBOR;
 			productName = SwiftCBOR;
-			productReference = 6F798ACCE2195A4DACD6CC3F401B4C1A /* SwiftCBOR.framework */;
+			productReference = 1B96D6D425D2F6FA4E4638A58E726AEE /* SwiftCBOR.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		CA1F0D5E8B7605F0A84DEEC15BB8E550 /* McuManager */ = {
+		CCD15BCEA1E46BF5AC4D799E305321DB /* McuManager */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E3BD6A8087808A35833DD5902698B6EC /* Build configuration list for PBXNativeTarget "McuManager" */;
+			buildConfigurationList = 3BA98E0AB824F92A4F11E09249D38BF1 /* Build configuration list for PBXNativeTarget "McuManager" */;
 			buildPhases = (
-				339271C8FF335D8C142628B84CC97D7E /* Headers */,
-				E8B62BEDDFE444A7E5DA8F295E10C03B /* Sources */,
-				FDEEE916A65D15A88BE572D4A043E265 /* Frameworks */,
-				495DEED1AE3B4301AF8D238B3CDC1E1A /* Resources */,
+				048A2AB3B5B1E0F7398F73D5B5F8FC2F /* Headers */,
+				E6150D3B7B80FFCF9718C689C2C94E07 /* Sources */,
+				0A2093CC70A1A7DCB86607C70127A380 /* Frameworks */,
+				79BB251CB7F946D14283D112A7AB1FA8 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				1DFAE35D0A000CDDA03712EF795EEA9A /* PBXTargetDependency */,
+				A7B2A697A16E60116F62C3B2689121F9 /* PBXTargetDependency */,
 			);
 			name = McuManager;
 			productName = McuManager;
-			productReference = 73020BB8B417E2CFC72852064611E294 /* McuManager.framework */;
+			productReference = 108B552FD32FC01584867FC090CECE12 /* McuManager.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
 				LastUpgradeCheck = 0930;
 			};
-			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 9FDDEF2548362BDDB6361D7EA8542A1D /* Products */;
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = 7B73019436E500752BCF3DC95824E86F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CA1F0D5E8B7605F0A84DEEC15BB8E550 /* McuManager */,
-				30AEE4818CE95449035EF4E9920DBF7E /* Pods-Example */,
-				9DFF660A305C6699837B491F76ACA965 /* SwiftCBOR */,
+				CCD15BCEA1E46BF5AC4D799E305321DB /* McuManager */,
+				00E051D538DE5D81083C5A6BD761D3A8 /* Pods-Example */,
+				0D9E071EB6F9D8EEADC6526FFD877CC3 /* SwiftCBOR */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		495DEED1AE3B4301AF8D238B3CDC1E1A /* Resources */ = {
+		3D244174F6F373B6E2215B650FB98213 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E7509455080EB3794CB3E4BCD4F69AFD /* Resources */ = {
+		79BB251CB7F946D14283D112A7AB1FA8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FD2D2939A1376CDCA7BC51E7B961B199 /* Resources */ = {
+		FF10FB184BE80044026605194450AEF0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -508,82 +508,118 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		4281CBE601C51108D61A94514651B487 /* Sources */ = {
+		0460F23539D8612C5303334B2F8ED036 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD4506DCA3E093C894F9ACE574757CD5 /* Pods-Example-dummy.m in Sources */,
+				1AA2D018791B6C4FF168ED75AC520092 /* CBOR.swift in Sources */,
+				1226EA4002F19B574375F07DC6A7B40D /* CBORDecoder.swift in Sources */,
+				4AC1490DA740C307169E3B4816FCC6FD /* CBOREncodable.swift in Sources */,
+				FE4CA0D93C61F0FF7D9177B540ABA211 /* CBOREncoder.swift in Sources */,
+				290F65DD689BAD1E97F81ECB440593FC /* CBORInputStream.swift in Sources */,
+				9E3F7DA07035D7FC821B18A115F7BD0E /* SwiftCBOR-dummy.m in Sources */,
+				4A151BBD2FE66979B8320B4B38A2AE34 /* Util.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8349E408E27DEE9AB380CE9084195089 /* Sources */ = {
+		72E1DD0ED198A57B41DC60918E771451 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAB2913342F58331A18366162B47B36D /* CBOR.swift in Sources */,
-				511B4E7D66D254BC7B9BE44937CE84D8 /* CBORDecoder.swift in Sources */,
-				FE6D117C6748D6A3E83EFCDDB9270CD7 /* CBOREncodable.swift in Sources */,
-				021A064E55A9BA551A916793752BECC1 /* CBOREncoder.swift in Sources */,
-				2D18E193E52505CE4A3ADA0BA9F7CBF1 /* CBORInputStream.swift in Sources */,
-				734505DB923C6C60BCA5F692422A9FE9 /* SwiftCBOR-dummy.m in Sources */,
-				9FD5D4A0AEBA540D3E2F41BBC0084E07 /* Util.swift in Sources */,
+				C3956373C32BCC9263FA65881CEF1005 /* Pods-Example-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E8B62BEDDFE444A7E5DA8F295E10C03B /* Sources */ = {
+		E6150D3B7B80FFCF9718C689C2C94E07 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C3586F3B83483A02FB87F1CFEE9280C /* CBOR+McuManager.swift in Sources */,
-				C2E586C13A7AFA0A01C96A9F01551805 /* ConfigManager.swift in Sources */,
-				629CBC78B7097DD456420E9229F7FA3F /* CrashManager.swift in Sources */,
-				869DCE040CB3FF976F37D36DF4D3F411 /* Data+McuManager.swift in Sources */,
-				B55BAD85FA6920A6A35247FAD21AFF53 /* DefaultManager.swift in Sources */,
-				0146EBEBDFD50B07EB22BA81E59509C3 /* FileSystemManager.swift in Sources */,
-				97B4A83AD6CDB71403FA1A35B5B1A647 /* FirmwareUpgradeController.swift in Sources */,
-				746CEF90310A536D6B1656C85D8260F8 /* FirmwareUpgradeManager.swift in Sources */,
-				8A431B9F9338F0C6EBAD5634D7D6DAFD /* ImageManager.swift in Sources */,
-				59DB49FD9C781353E6566925282D13EB /* Log.swift in Sources */,
-				E089788A72EA41E13636FF73EDDB507A /* LogManager.swift in Sources */,
-				DCB7E9390B21192FD371038762EACBE4 /* McuManager-dummy.m in Sources */,
-				259108A0776861CA66221FC878894CCD /* McuManager.swift in Sources */,
-				4AFE0B330CA90ECA972A1D3A40A02C5A /* McuMgrBleTransport.swift in Sources */,
-				4CDDF6F7C1E39E06EB74C898A4F5D45F /* McuMgrHeader.swift in Sources */,
-				B13E2C5182BDCB86F9328451FEB9B97B /* McuMgrImage.swift in Sources */,
-				7A78E246C3BD35453B81AD46933CB669 /* McuMgrResponse.swift in Sources */,
-				82484CD9C792F593BA75390B8989A67C /* McuMgrTransport.swift in Sources */,
-				2E92466E7F8570368DB026D0623EF33D /* ResultLock.swift in Sources */,
-				68E8B3B8306DF30336C1B5D1451A94D2 /* RunTestManager.swift in Sources */,
-				B793DCA03D8E9C377E6DADB357DD8329 /* StatsManager.swift in Sources */,
-				037CD8C390377CE849744A64B684AE58 /* String+McuManager.swift in Sources */,
+				977ADFA008354C1FB105B835E7DC1808 /* CBOR+McuManager.swift in Sources */,
+				D257F3571EC807A783156001207BA660 /* ConfigManager.swift in Sources */,
+				BE0115025C25ED4571C57FC50F7F7B7B /* CrashManager.swift in Sources */,
+				1272EB5DC14EFD6B85F6FFF80364AD8F /* Data+McuManager.swift in Sources */,
+				F90EFD6CA4E19479E20A3BBF5AD487E4 /* DefaultManager.swift in Sources */,
+				6308E410E99BF15D18B535AA2AE7A848 /* FileSystemManager.swift in Sources */,
+				5F2566C71AAB9520B5C958CE4A40974C /* FirmwareUpgradeController.swift in Sources */,
+				99A04B0619B6A925C53E115C9BC26F28 /* FirmwareUpgradeManager.swift in Sources */,
+				EE306AF90FE4F82B6BAE2CFC2D31AB3D /* ImageManager.swift in Sources */,
+				EB56E12559E081ED2A40D2F5DFCC8770 /* Log.swift in Sources */,
+				E54B2507689DA7280D0984808048F9BF /* LogManager.swift in Sources */,
+				405992D55FCA5604AD68A7501A55BA62 /* McuManager-dummy.m in Sources */,
+				3FEE1A7662BCE55A42C79D289D2B7FB9 /* McuManager.swift in Sources */,
+				45610B42806102F5C98789D7208AFD15 /* McuMgrBleTransport.swift in Sources */,
+				6B4ECC953DEB533C30B0C374ABF3843B /* McuMgrHeader.swift in Sources */,
+				129ACCAE8848A952891AEB673493FFAA /* McuMgrImage.swift in Sources */,
+				AC97952F3A4AC3454C40CC43D00089B3 /* McuMgrResponse.swift in Sources */,
+				C8602110B32B0B51075519C4A5780F8D /* McuMgrTransport.swift in Sources */,
+				B5C41F35A8558EA25F94C9F05C8A20DA /* ResultLock.swift in Sources */,
+				F8CD6F6E7BDA6E9AD694E8F00C3DA038 /* RunTestManager.swift in Sources */,
+				BA31679C4AAFCBB24D272BBF6119D9C7 /* StatsManager.swift in Sources */,
+				DCE56E5A542055B9BD5E26B063D92005 /* String+McuManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		161A167E074DF2F5F47FCAFC57C7125A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SwiftCBOR;
-			target = 9DFF660A305C6699837B491F76ACA965 /* SwiftCBOR */;
-			targetProxy = 6AE6CB5964547F898F4C5D49D4D04D23 /* PBXContainerItemProxy */;
-		};
-		1DFAE35D0A000CDDA03712EF795EEA9A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SwiftCBOR;
-			target = 9DFF660A305C6699837B491F76ACA965 /* SwiftCBOR */;
-			targetProxy = C9F224955983A7ACD62201F62ABF0A75 /* PBXContainerItemProxy */;
-		};
-		4E0D70A65ED3687F01EEF6963F631F0B /* PBXTargetDependency */ = {
+		7381740422C1835144322ACF69827463 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = McuManager;
-			target = CA1F0D5E8B7605F0A84DEEC15BB8E550 /* McuManager */;
-			targetProxy = 5760CCB7E151521D4E6385186F4EACE7 /* PBXContainerItemProxy */;
+			target = CCD15BCEA1E46BF5AC4D799E305321DB /* McuManager */;
+			targetProxy = FB18505CFC911E20C3FAA95FBBC4C49C /* PBXContainerItemProxy */;
+		};
+		A7B2A697A16E60116F62C3B2689121F9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftCBOR;
+			target = 0D9E071EB6F9D8EEADC6526FFD877CC3 /* SwiftCBOR */;
+			targetProxy = 96F14EA340DC2880E2C494ECCE64196E /* PBXContainerItemProxy */;
+		};
+		CA2A1FCA75C4F991F1E8147B3D6D5C9D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftCBOR;
+			target = 0D9E071EB6F9D8EEADC6526FFD877CC3 /* SwiftCBOR */;
+			targetProxy = 39A930F4D967A7A4808034BA3CABF9A2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		08B0394D5F17A9F046DC0719C25BA452 /* Debug */ = {
+		019B445058557170E1CC8F98C82B4686 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B41A8B61A9A92D4C9C4D35781B288139 /* SwiftCBOR.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftCBOR/SwiftCBOR-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftCBOR/SwiftCBOR-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/SwiftCBOR/SwiftCBOR.modulemap";
+				PRODUCT_MODULE_NAME = SwiftCBOR;
+				PRODUCT_NAME = SwiftCBOR;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		07488D4657FB0A78086563621D425F8A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -647,80 +683,9 @@
 			};
 			name = Debug;
 		};
-		1CAD5466265D0DAEFC687888579FE10D /* Release */ = {
+		0E410CEA55D7F254EF268A5CA67F49C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CA261082AFE599D995B91ADAA6F171A5 /* SwiftCBOR.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/SwiftCBOR/SwiftCBOR-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SwiftCBOR/SwiftCBOR-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/SwiftCBOR/SwiftCBOR.modulemap";
-				PRODUCT_MODULE_NAME = SwiftCBOR;
-				PRODUCT_NAME = SwiftCBOR;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		3A5BA30B100695C1689311C521B82460 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CA261082AFE599D995B91ADAA6F171A5 /* SwiftCBOR.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/SwiftCBOR/SwiftCBOR-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SwiftCBOR/SwiftCBOR-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/SwiftCBOR/SwiftCBOR.modulemap";
-				PRODUCT_MODULE_NAME = SwiftCBOR;
-				PRODUCT_NAME = SwiftCBOR;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		8A4D5AA41C827A8534C7C1846893E26B /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B5A5215990CD9B9E302D772EF78A87E1 /* Pods-Example.release.xcconfig */;
+			baseConfigurationReference = 415F61F11BD564043CA80AC49145E3C2 /* Pods-Example.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -756,46 +721,9 @@
 			};
 			name = Release;
 		};
-		954AA9A400692349753AF0169EDFA423 /* Debug */ = {
+		0EED2018063A9B581F6BD403B588A45F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 52EB128553BCCD0A43A7713241401647 /* Pods-Example.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Example/Pods-Example-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Example/Pods-Example.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		C4AE4BF877E777EA84BEA6E722A78AB2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A8C1899D6CA145F30389F973611562CD /* McuManager.xcconfig */;
+			baseConfigurationReference = CB312D64CD0B1809E6079CF6F3A56AF2 /* McuManager.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -829,7 +757,42 @@
 			};
 			name = Release;
 		};
-		E82C56363775B4EF468FF2AD9A2F5414 /* Release */ = {
+		44123FF1FDD27E1163559C24D5668733 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B41A8B61A9A92D4C9C4D35781B288139 /* SwiftCBOR.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftCBOR/SwiftCBOR-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftCBOR/SwiftCBOR-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/SwiftCBOR/SwiftCBOR.modulemap";
+				PRODUCT_MODULE_NAME = SwiftCBOR;
+				PRODUCT_NAME = SwiftCBOR;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A1962E6FF39BBAC201A2E5DDF99557DF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -889,9 +852,46 @@
 			};
 			name = Release;
 		};
-		F66AEE13CA619AE46EDDE3AE3367A924 /* Debug */ = {
+		C07BB370DBE4E2EFB68E538C8471420A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A8C1899D6CA145F30389F973611562CD /* McuManager.xcconfig */;
+			baseConfigurationReference = 35E2C288A180219D12F161F8F67849E8 /* Pods-Example.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Example/Pods-Example-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Example/Pods-Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F902FCA2093E6D9BCF9C3044834BF4D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CB312D64CD0B1809E6079CF6F3A56AF2 /* McuManager.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -927,43 +927,43 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		14F628DE01B5E57A48AB4544F91BFCA4 /* Build configuration list for PBXNativeTarget "Pods-Example" */ = {
+		2938ADED2DAC44108412F643156E54AC /* Build configuration list for PBXNativeTarget "SwiftCBOR" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				954AA9A400692349753AF0169EDFA423 /* Debug */,
-				8A4D5AA41C827A8534C7C1846893E26B /* Release */,
+				44123FF1FDD27E1163559C24D5668733 /* Debug */,
+				019B445058557170E1CC8F98C82B4686 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+		3BA98E0AB824F92A4F11E09249D38BF1 /* Build configuration list for PBXNativeTarget "McuManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				08B0394D5F17A9F046DC0719C25BA452 /* Debug */,
-				E82C56363775B4EF468FF2AD9A2F5414 /* Release */,
+				F902FCA2093E6D9BCF9C3044834BF4D9 /* Debug */,
+				0EED2018063A9B581F6BD403B588A45F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		465414845EDC4B6DF2B36719ECBA562E /* Build configuration list for PBXNativeTarget "SwiftCBOR" */ = {
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3A5BA30B100695C1689311C521B82460 /* Debug */,
-				1CAD5466265D0DAEFC687888579FE10D /* Release */,
+				07488D4657FB0A78086563621D425F8A /* Debug */,
+				A1962E6FF39BBAC201A2E5DDF99557DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E3BD6A8087808A35833DD5902698B6EC /* Build configuration list for PBXNativeTarget "McuManager" */ = {
+		633FCB2E4F9B334F2D5A3C7CDE56466F /* Build configuration list for PBXNativeTarget "Pods-Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F66AEE13CA619AE46EDDE3AE3367A924 /* Debug */,
-				C4AE4BF877E777EA84BEA6E722A78AB2 /* Release */,
+				C07BB370DBE4E2EFB68E538C8471420A /* Debug */,
+				0E410CEA55D7F254EF268A5CA67F49C7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 }
