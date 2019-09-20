@@ -271,7 +271,6 @@ extension McuMgrBleTransport: McuMgrTransport {
                 // the request can be sent.
                 Log.v(TAG, msg: "Connecting...")
                 state = .connecting
-                centralManager.delegate = self
                 centralManager.connect(targetPeripheral)
             case .connecting:
                 Log.i(TAG, msg: "Device is connecting. Wait...")
@@ -408,7 +407,6 @@ extension McuMgrBleTransport: CBCentralManagerDelegate {
             return
         }
         Log.i(TAG, msg: "Peripheral disconnected")
-        centralManager.delegate = nil
         peripheral.delegate = nil
         smpCharacteristic = nil
         lock.open(McuMgrTransportError.disconnected)
