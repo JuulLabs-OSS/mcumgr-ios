@@ -271,7 +271,6 @@ extension McuMgrBleTransport: McuMgrTransport {
                 // the request can be sent.
                 Log.v(TAG, msg: "Connecting...")
                 state = .connecting
-                centralManager.delegate = self
                 centralManager.connect(targetPeripheral)
             case .connecting:
                 Log.i(TAG, msg: "Device is connecting. Wait...")
