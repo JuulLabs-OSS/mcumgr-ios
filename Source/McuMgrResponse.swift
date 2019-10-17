@@ -512,18 +512,18 @@ public class McuMgrLogResponse: McuMgrResponse {
     }
     
     public class LogEntry: CBORMappable {
-        public var msg: [UInt8]?
+        public var msg: CBOR?
         public var ts: UInt64?
-        public var level: UInt64?
+        public var level: Level?
         public var index: UInt64?
         public var module: UInt64?
         public var type: String?
         
         public required init(cbor: CBOR?) throws {
             try super.init(cbor: cbor)
-            if case let CBOR.byteString(msg)? = cbor?["msg"] {self.msg = msg}
+            self.msg = cbor?["msg"]
             if case let CBOR.unsignedInt(ts)? = cbor?["ts"] {self.ts = ts}
-            if case let CBOR.unsignedInt(level)? = cbor?["level"] {self.level = level}
+            if case let CBOR.unsignedInt(levelRawValue)? = cbor?["level"], let level = Level(rawValue: UInt8(levelRawValue)) {self.level = level}
             if case let CBOR.unsignedInt(index)? = cbor?["index"] {self.index = index}
             if case let CBOR.unsignedInt(module)? = cbor?["module"] {self.module = module}
             if case let CBOR.utf8String(type)? = cbor?["type"] {self.type = type}
@@ -531,15 +531,70 @@ public class McuMgrLogResponse: McuMgrResponse {
         
         /// Get the string representation of the message based on type.
         public func getMessage() -> String? {
-            guard let msg = msg else { return nil }
+            guard let ts = ts, let level = level, let msg = msg else { return nil }
             if type != nil && type == "cbor" {
-                if let messageCbor = try? CBOR.decode(msg) {
+                if case let CBOR.byteString(byteString) = msg, let messageCbor = try? CBOR.decode(byteString) {
                     return messageCbor?.description
                 }
-            } else {
-                return String(bytes: msg, encoding: .utf8)
+            } else if case let .utf8String(msg) = msg {
+                return msg
             }
             return nil
+        }
+        
+        public enum Level: RawRepresentable, CustomStringConvertible {
+            case debug
+            case info
+            case warning
+            case error
+            case critical
+            case custom(UInt8)
+            
+            public typealias RawValue = UInt8
+            
+            public init?(rawValue: UInt8) {
+                switch rawValue {
+                case 0: self = .debug
+                case 1: self = .info
+                case 2: self = .warning
+                case 3: self = .error
+                case 4: self = .critical
+                default: self = .custom(rawValue)
+                }
+            }
+            
+            public var rawValue: UInt8 {
+                switch self {
+                case .debug: return 0
+                case .info: return 1
+                case .warning: return 2
+                case .error: return 3
+                case .critical: return 4
+                case let .custom(v): return v
+                }
+            }
+            
+            public var description: String {
+                switch self {
+                case .debug: return "DEBUG"
+                case .info: return "INFO"
+                case .warning: return "WARNING"
+                case .error: return "ERROR"
+                case .critical: return "CRITICAL"
+                case let .custom(v): return "CUSTOM (\(v))"
+                }
+            }
+            
+            public var shortDescription: String {
+                switch self {
+                case .debug: return "D"
+                case .info: return "I"
+                case .warning: return "W"
+                case .error: return "E"
+                case .critical: return "C"
+                case let .custom(v): return "C(\(v))"
+                }
+            }
         }
     }
 }
