@@ -162,6 +162,10 @@ extension FirmwareUpgradeViewController: FirmwareUpgradeDelegate {
     func uploadProgressDidChange(bytesSent: Int, imageSize: Int, timestamp: Date) {
         progress.setProgress(Float(bytesSent) / Float(imageSize), animated: true)
     }
+    
+    func log(_ msg: String, atLevel level: Log.Level) {
+        // Ignore.
+    }
 }
 
 // MARK: - Document Picker
