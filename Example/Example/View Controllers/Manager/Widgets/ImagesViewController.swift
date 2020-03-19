@@ -67,7 +67,7 @@ class ImagesViewController: UIViewController , McuMgrViewController{
                 for image in images {
                     info += "\nSlot \(i)\n" +
                         "• Version: \(image.version!)\n" +
-                        "• Hash: \(Data(bytes: image.hash).hexEncodedString(options: .upperCase))\n" +
+                        "• Hash: \(Data(image.hash).hexEncodedString(options: .upperCase))\n" +
                         "• Flags: "
                     if image.bootable {
                         info += "Bootable, "
