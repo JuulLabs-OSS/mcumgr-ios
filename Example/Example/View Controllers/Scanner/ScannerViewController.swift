@@ -169,6 +169,7 @@ class ScannerViewController: UITableViewController, CBCentralManagerDelegate, UI
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if central.state != .poweredOn {
             print("Central is not powered on")
+            activityIndicator.stopAnimating()
         } else {
             activityIndicator.startAnimating()
             centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])

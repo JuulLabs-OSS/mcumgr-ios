@@ -89,7 +89,7 @@ class FirmwareUpgradeViewController: UIViewController, McuMgrViewController {
             try dfuManager.start(data: imageData)
         } catch {
             print("Error reading hash: \(error)")
-            status.textColor = UIColor.red
+            status.textColor = .systemRed
             status.text = "ERROR"
             actionStart.isEnabled = false
         }
@@ -107,7 +107,7 @@ extension FirmwareUpgradeViewController: FirmwareUpgradeDelegate {
     }
     
     func upgradeStateDidChange(from previousState: FirmwareUpgradeState, to newState: FirmwareUpgradeState) {
-        status.textColor = UIColor.darkGray
+        status.textColor = .primary
         switch newState {
         case .validate:
             status.text = "VALIDATING..."
@@ -144,7 +144,7 @@ extension FirmwareUpgradeViewController: FirmwareUpgradeDelegate {
         actionCancel.isHidden = true
         actionStart.isHidden = false
         actionSelect.isEnabled = true
-        status.textColor = UIColor.red
+        status.textColor = .systemRed
         status.text = "\(error)"
     }
     
@@ -155,7 +155,7 @@ extension FirmwareUpgradeViewController: FirmwareUpgradeDelegate {
         actionCancel.isHidden = true
         actionStart.isHidden = false
         actionSelect.isEnabled = true
-        status.textColor = UIColor.darkGray
+        status.textColor = .primary
         status.text = "CANCELLED"
     }
     
@@ -186,13 +186,13 @@ extension FirmwareUpgradeViewController: UIDocumentMenuDelegate, UIDocumentPicke
                 
                 imageData = data
                 fileHash.text = hash.hexEncodedString(options: .upperCase)
-                status.textColor = UIColor.darkGray
+                status.textColor = .primary
                 status.text = "READY"
                 actionStart.isEnabled = true
             } catch {
                 print("Error reading hash: \(error)")
                 fileHash.text = ""
-                status.textColor = UIColor.red
+                status.textColor = .systemRed
                 status.text = "INVALID FILE"
                 actionStart.isEnabled = false
             }
@@ -205,7 +205,7 @@ extension FirmwareUpgradeViewController: UIDocumentMenuDelegate, UIDocumentPicke
             return try Data(contentsOf: url)
         } catch {
             print("Error reading file: \(error)")
-            status.textColor = UIColor.red
+            status.textColor = .systemRed
             status.text = "COULD NOT OPEN FILE"
             return nil
         }
