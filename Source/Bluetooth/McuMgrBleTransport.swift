@@ -74,6 +74,8 @@ public class McuMgrBleTransport: NSObject {
             }
         }
     }
+    /// The log delegate will receive transport logs.
+    public weak var logDelegate: McuMgrLogDelegate?
     
     public private(set) var state: PeripheralState = .disconnected {
         didSet {
@@ -130,8 +132,6 @@ public class McuMgrBleTransport: NSObject {
     public var name: String? {
         return peripheral?.name
     }
-    
-    public weak var logDelegate: McuMgrLogDelegate?
     
     public private(set) var identifier: UUID
 
@@ -329,7 +329,8 @@ extension McuMgrBleTransport: McuMgrTransport {
         }
         
         
-        // Write the value to the characteristic
+        // Write the value to the characteristic.
+        log(msg: "-> \(data.hexEncodedString(options: .prepend0x))", atLevel: .debug)
         targetPeripheral.writeValue(data, for: smpCharacteristic, type: .withoutResponse)
 
         // Wait for the response.
@@ -345,7 +346,10 @@ extension McuMgrBleTransport: McuMgrTransport {
         case .success:
             do {
                 // Build the McuMgrResponse.
-                let response: T = try McuMgrResponse.buildResponse(scheme: getScheme(), data: responseData)
+                log(msg: "<- \(responseData?.hexEncodedString(options: .prepend0x) ?? "0 bytes")",
+                    atLevel: .debug)
+                let response: T = try McuMgrResponse.buildResponse(scheme: getScheme(),
+                                                                   data: responseData)
                 success(response: response, callback: callback)
             } catch {
                 fail(error: error, callback: callback)
@@ -372,7 +376,7 @@ extension McuMgrBleTransport: McuMgrTransport {
         }
     }
     
-    private func log(msg: String, atLevel level: Log.Level) {
+    private func log(msg: String, atLevel level: McuMgrLogLevel) {
         Log.log(level, tag: TAG, msg: msg)
         logDelegate?.log(msg, atLevel: level)
     }
@@ -446,7 +450,11 @@ extension McuMgrBleTransport: CBPeripheralDelegate {
             return
         }
         
-        log(msg: "Services discovered: \(peripheral.services ?? [])", atLevel: .info)
+        let s = peripheral.services?
+            .map({ $0.uuid.uuidString })
+            .joined(separator: ", ")
+            ?? "none"
+        log(msg: "Services discovered: \(s)", atLevel: .info)
         
         // Get peripheral's services.
         guard let services = peripheral.services else {
@@ -474,7 +482,11 @@ extension McuMgrBleTransport: CBPeripheralDelegate {
             return
         }
         
-        log(msg: "Characteristics discovered: \(service.characteristics ?? [])", atLevel: .info)
+        let c = service.characteristics?
+            .map({ $0.uuid.uuidString })
+            .joined(separator: ", ")
+            ?? "none"
+        log(msg: "Characteristics discovered: \(c)", atLevel: .info)
         
         // Get service's characteristics.
         guard let characteristics = service.characteristics else {

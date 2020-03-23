@@ -8,6 +8,7 @@ import Foundation
 import SwiftCBOR
 
 public class RunTestManager: McuManager {
+    override class var TAG: String { "RunTestManager" }
     
     //**************************************************************************
     // MARK: Run Constants

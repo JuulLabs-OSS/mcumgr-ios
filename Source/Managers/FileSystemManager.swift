@@ -9,7 +9,7 @@ import CoreBluetooth
 import SwiftCBOR
 
 public class FileSystemManager: McuManager {
-    private static let TAG = "FileSystemManager"
+    override class var TAG: String { "FileSystemManager" }
     
     //**************************************************************************
     // MARK: FS Constants
@@ -97,7 +97,7 @@ public class FileSystemManager: McuManager {
             // Set downloading flag to true.
             transferState = .downloading
         } else {
-            Log.d(FileSystemManager.TAG, msg: "A file transfer is already in progress")
+            log(msg: "A file transfer is already in progress", atLevel: .warn)
             return false
         }
         objc_sync_exit(self)
@@ -140,7 +140,7 @@ public class FileSystemManager: McuManager {
             // Set upload flag to true.
             transferState = .uploading
         } else {
-            Log.d(FileSystemManager.TAG, msg: "A file transfer is already in progress")
+            log(msg: "A file transfer is already in progress", atLevel: .warn)
             return false
         }
         objc_sync_exit(self)
@@ -202,20 +202,20 @@ public class FileSystemManager: McuManager {
     public func cancelTransfer(error: Error? = nil) {
         objc_sync_enter(self)
         if transferState == .none {
-            Log.d(FileSystemManager.TAG, msg: "Transfer is not in progress")
+            log(msg: "Transfer is not in progress", atLevel: .warn)
         } else {
-            if error != nil {
-                Log.d(FileSystemManager.TAG, msg: "Transfer cancelled due to error: \(error!)")
+            if let error = error {
+                log(msg: "Transfer cancelled due to error: \(error)", atLevel: .error)
                 resetTransfer()
-                uploadDelegate?.uploadDidFail(with: error!)
+                uploadDelegate?.uploadDidFail(with: error)
                 uploadDelegate = nil
-                downloadDelegate?.downloadDidFail(with: error!)
+                downloadDelegate?.downloadDidFail(with: error)
                 downloadDelegate = nil
                 // Release cyclic reference.
                 cyclicReferenceHolder = nil
             } else {
                 if transferState == .paused {
-                    Log.d(FileSystemManager.TAG, msg: "Transfer cancelled!")
+                    log(msg: "Transfer cancelled", atLevel: .info)
                     resetTransfer()
                     uploadDelegate?.uploadDidCancel()
                     downloadDelegate?.downloadDidCancel()
@@ -237,9 +237,9 @@ public class FileSystemManager: McuManager {
     public func pauseTransfer() {
         objc_sync_enter(self)
         if transferState == .none {
-            Log.d(FileSystemManager.TAG, msg: "Transfer is not in progress and therefore cannot be paused")
+            log(msg: "Transfer is not in progress and therefore cannot be paused", atLevel: .warn)
         } else {
-            Log.d(FileSystemManager.TAG, msg: "Transfer paused")
+            log(msg: "Transfer paused", atLevel: .info)
             transferState = .paused
         }
         objc_sync_exit(self)
@@ -250,7 +250,7 @@ public class FileSystemManager: McuManager {
     public func continueTransfer() {
         objc_sync_enter(self)
         if transferState == .paused {
-            Log.d(FileSystemManager.TAG, msg: "Continuing transfer")
+            log(msg: "Continuing transfer", atLevel: .info)
             if let _ = downloadDelegate {
                 transferState = .downloading
                 download(name: fileName!, offset: UInt(offset), callback: downloadCallback)
@@ -259,7 +259,7 @@ public class FileSystemManager: McuManager {
                 upload(name: fileName!, data: fileData!, offset: UInt(offset), callback: uploadCallback)
             }
         } else {
-            Log.d(FileSystemManager.TAG, msg: "Transfer is not paused")
+            self.log(msg: "Transfer is not paused", atLevel: .warn)
         }
         objc_sync_exit(self)
     }
@@ -309,7 +309,7 @@ public class FileSystemManager: McuManager {
             self.uploadDelegate?.uploadProgressDidChange(bytesSent: Int(offset), fileSize: fileData.count, timestamp: Date())
             
             if self.transferState == .none {
-                Log.d(FileSystemManager.TAG, msg: "Upload cancelled!")
+                self.log(msg: "Upload cancelled", atLevel: .info)
                 self.resetTransfer()
                 self.uploadDelegate?.uploadDidCancel()
                 self.uploadDelegate = nil
@@ -320,7 +320,7 @@ public class FileSystemManager: McuManager {
             
             // Check if the upload has completed.
             if offset == fileData.count {
-                Log.d(FileSystemManager.TAG, msg: "Upload finished!")
+                self.log(msg: "Upload finished", atLevel: .info)
                 self.resetTransfer()
                 self.uploadDelegate?.uploadDidFinish()
                 self.uploadDelegate = nil
@@ -381,7 +381,7 @@ public class FileSystemManager: McuManager {
             self.downloadDelegate?.downloadProgressDidChange(bytesDownloaded: Int(self.offset), fileSize: self.fileData!.count, timestamp: Date())
             
             if self.transferState == .none {
-                Log.d(FileSystemManager.TAG, msg: "Download cancelled!")
+                self.log(msg: "Download cancelled", atLevel: .info)
                 self.resetTransfer()
                 self.downloadDelegate?.downloadDidCancel()
                 self.downloadDelegate = nil
@@ -392,7 +392,7 @@ public class FileSystemManager: McuManager {
             
             // Check if the upload has completed.
             if self.offset == self.fileData!.count {
-                Log.d(FileSystemManager.TAG, msg: "Download finished!")
+                self.log(msg: "Download finished", atLevel: .info)
                 self.downloadDelegate?.download(of: self.fileName!, didFinish: self.fileData!)
                 self.resetTransfer()
                 self.downloadDelegate = nil

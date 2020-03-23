@@ -8,6 +8,7 @@ import Foundation
 import SwiftCBOR
 
 public class LogManager: McuManager {
+    override class var TAG: String { "LogManager" }
     
     //**************************************************************************
     // MARK: Log Constants
