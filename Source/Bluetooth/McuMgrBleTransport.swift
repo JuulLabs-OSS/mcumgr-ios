@@ -75,14 +75,13 @@ public class McuMgrBleTransport: NSObject {
         }
     }
     
-    public var state: PeripheralState = .disconnected {
+    public private(set) var state: PeripheralState = .disconnected {
         didSet {
             DispatchQueue.main.async {
                 self.notifyPeripheralDelegate()
             }
         }
     }
-    
 
     /// Creates a BLE transport object for the given peripheral.
     /// The implementation will create internal instance of
@@ -222,7 +221,7 @@ extension McuMgrBleTransport: McuMgrTransport {
         if let existing = peripheral, centralManager.state != .unknown {
             targetPeripheral = existing
         } else {
-            // Close the lock
+            // Close the lock.
             lock.close()
             
             // Wait for the setup process to complete.
@@ -252,7 +251,7 @@ extension McuMgrBleTransport: McuMgrTransport {
         
         // Wait until the peripheral is ready.
         if smpCharacteristic == nil {
-            // Close the lock
+            // Close the lock.
             lock.close()
             
             switch targetPeripheral.state {
@@ -306,7 +305,7 @@ extension McuMgrBleTransport: McuMgrTransport {
                 return false
             case .success:
                 log(msg: "Device ready", atLevel: .verbose)
-                // continue
+                // Continue.
             }
         }
         
@@ -322,9 +321,9 @@ extension McuMgrBleTransport: McuMgrTransport {
         
         // Check that data length does not exceed the mtu.
         let mtu = targetPeripheral.maximumWriteValueLength(for: .withoutResponse)
-        if (data.count > mtu) {
+        if data.count > mtu {
             log(msg: "Length of data to send exceeds MTU", atLevel: .error)
-            // Fail with an insufficient MTU error
+            // Fail with an insufficient MTU error.
             fail(error: McuMgrTransportError.insufficientMtu(mtu: mtu) as Error, callback: callback)
             return false
         }
@@ -388,7 +387,9 @@ extension McuMgrBleTransport: CBCentralManagerDelegate {
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
         case .poweredOn:
-            if let peripheral = centralManager.retrievePeripherals(withIdentifiers: [identifier]).first {
+            if let peripheral = centralManager
+                .retrievePeripherals(withIdentifiers: [identifier])
+                .first {
                 self.peripheral = peripheral
                 TAG = "SMP \(peripheral.name ?? "Unknown") (\(identifier.uuidString.prefix(4)))"
                 lock.open()
@@ -456,14 +457,17 @@ extension McuMgrBleTransport: CBPeripheralDelegate {
         for service in services {
             if service.uuid == McuMgrBleTransport.SMP_SERVICE {
                 log(msg: "Discovering characteristics...", atLevel: .verbose)
-                peripheral.discoverCharacteristics([McuMgrBleTransport.SMP_CHARACTERISTIC], for: service)
+                peripheral.discoverCharacteristics([McuMgrBleTransport.SMP_CHARACTERISTIC],
+                                                   for: service)
                 return
             }
         }
         lock.open(McuMgrBleTransportError.missingService)
     }
     
-    public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+    public func peripheral(_ peripheral: CBPeripheral,
+                           didDiscoverCharacteristicsFor service: CBService,
+                           error: Error?) {
         // Check for error.
         guard error == nil else {
             lock.open(error)
@@ -493,7 +497,9 @@ extension McuMgrBleTransport: CBPeripheralDelegate {
         lock.open(McuMgrBleTransportError.missingCharacteristic)
     }
     
-    public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
+    public func peripheral(_ peripheral: CBPeripheral,
+                           didUpdateNotificationStateFor characteristic: CBCharacteristic,
+                           error: Error?) {
         guard characteristic.uuid == McuMgrBleTransport.SMP_CHARACTERISTIC else {
             return
         }
@@ -515,7 +521,9 @@ extension McuMgrBleTransport: CBPeripheralDelegate {
         lock.open()
     }
     
-    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+    public func peripheral(_ peripheral: CBPeripheral,
+                           didUpdateValueFor characteristic: CBCharacteristic,
+                           error: Error?) {
         guard characteristic.uuid == McuMgrBleTransport.SMP_CHARACTERISTIC else {
             return
         }
@@ -553,7 +561,7 @@ extension McuMgrBleTransport: CBPeripheralDelegate {
     }
 }
 
-/// Errors specific to BLE transport
+/// Errors specific to BLE transport.
 public enum McuMgrBleTransportError: Error {
     case centralManagerPoweredOff
     case centralManagerNotReady
