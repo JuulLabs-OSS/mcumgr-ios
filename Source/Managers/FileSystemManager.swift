@@ -9,7 +9,7 @@ import CoreBluetooth
 import SwiftCBOR
 
 public class FileSystemManager: McuManager {
-    override class var TAG: String { "FileSystemManager" }
+    override class var TAG: McuMgrLogCategory { .fs }
     
     //**************************************************************************
     // MARK: FS Constants
@@ -36,7 +36,8 @@ public class FileSystemManager: McuManager {
     /// - parameter name: The file name.
     /// - parameter offset: The offset from this data will be requested.
     /// - parameter callback: The callback.
-    public func download(name: String, offset: UInt, callback: @escaping McuMgrCallback<McuMgrFsDownloadResponse>) {
+    public func download(name: String, offset: UInt,
+                         callback: @escaping McuMgrCallback<McuMgrFsDownloadResponse>) {
         // Build the request payload.
         let payload: [String:CBOR] = ["name": CBOR.utf8String(name),
                                       "off": CBOR.unsignedInt(UInt64(offset))]
@@ -51,7 +52,8 @@ public class FileSystemManager: McuManager {
     /// - parameter data: The file data.
     /// - parameter offset: The offset from this data will be sent.
     /// - parameter callback: The callback.
-    public func upload(name: String, data: Data, offset: UInt, callback: @escaping McuMgrCallback<McuMgrFsUploadResponse>) {
+    public func upload(name: String, data: Data, offset: UInt,
+                       callback: @escaping McuMgrCallback<McuMgrFsUploadResponse>) {
         // Calculate the number of remaining bytes.
         let remainingBytes: UInt = UInt(data.count) - offset
         
@@ -85,7 +87,6 @@ public class FileSystemManager: McuManager {
     /// this method.
     ///
     /// - parameter name: The file name to download.
-    /// - parameter peripheral: The BLE periheral to get the data form.
     /// - parameter delegate: The delegate to recieve progress callbacks.
     ///
     /// - returns: True if the upload has started successfully, false otherwise.
@@ -97,7 +98,8 @@ public class FileSystemManager: McuManager {
             // Set downloading flag to true.
             transferState = .downloading
         } else {
-            log(msg: "A file transfer is already in progress", atLevel: .warn)
+            log(msg: "A file transfer is already in progress", atLevel: .warning)
+            objc_sync_exit(self)
             return false
         }
         objc_sync_exit(self)
@@ -112,6 +114,7 @@ public class FileSystemManager: McuManager {
         // Grab a strong reference to something holding a strong reference to self.
         cyclicReferenceHolder = { return self }
         
+        log(msg: "Downloading \(name)...", atLevel: .application)
         download(name: name, offset: 0, callback: downloadCallback)
         return true
     }
@@ -126,9 +129,6 @@ public class FileSystemManager: McuManager {
     ///
     /// - parameter name: The file name.
     /// - parameter data: The file data to be sent to the peripheral.
-    /// - parameter peripheral: The BLE periheral to send the data to. The
-    ///   peripneral must be supplied so FileSystemManager can determine the MTU and
-    ///   thus the number of bytes of file data that it can send per packet.
     /// - parameter delegate: The delegate to recieve progress callbacks.
     ///
     /// - returns: True if the upload has started successfully, false otherwise.
@@ -140,7 +140,8 @@ public class FileSystemManager: McuManager {
             // Set upload flag to true.
             transferState = .uploading
         } else {
-            log(msg: "A file transfer is already in progress", atLevel: .warn)
+            log(msg: "A file transfer is already in progress", atLevel: .warning)
+            objc_sync_exit(self)
             return false
         }
         objc_sync_exit(self)
@@ -155,6 +156,7 @@ public class FileSystemManager: McuManager {
         // Grab a strong reference to something holding a strong reference to self.
         cyclicReferenceHolder = { return self }
         
+        log(msg: "Uploading \(name) (\(data.count) bytes)...", atLevel: .application)
         upload(name: name, data: fileData!, offset: 0, callback: uploadCallback)
         return true
     }
@@ -202,7 +204,7 @@ public class FileSystemManager: McuManager {
     public func cancelTransfer(error: Error? = nil) {
         objc_sync_enter(self)
         if transferState == .none {
-            log(msg: "Transfer is not in progress", atLevel: .warn)
+            log(msg: "Transfer is not in progress", atLevel: .warning)
         } else {
             if let error = error {
                 log(msg: "Transfer cancelled due to error: \(error)", atLevel: .error)
@@ -215,7 +217,7 @@ public class FileSystemManager: McuManager {
                 cyclicReferenceHolder = nil
             } else {
                 if transferState == .paused {
-                    log(msg: "Transfer cancelled", atLevel: .info)
+                    log(msg: "Transfer cancelled", atLevel: .application)
                     resetTransfer()
                     uploadDelegate?.uploadDidCancel()
                     downloadDelegate?.downloadDidCancel()
@@ -237,9 +239,10 @@ public class FileSystemManager: McuManager {
     public func pauseTransfer() {
         objc_sync_enter(self)
         if transferState == .none {
-            log(msg: "Transfer is not in progress and therefore cannot be paused", atLevel: .warn)
+            log(msg: "Transfer is not in progress and therefore cannot be paused",
+                atLevel: .warning)
         } else {
-            log(msg: "Transfer paused", atLevel: .info)
+            log(msg: "Transfer paused", atLevel: .application)
             transferState = .paused
         }
         objc_sync_exit(self)
@@ -250,7 +253,7 @@ public class FileSystemManager: McuManager {
     public func continueTransfer() {
         objc_sync_enter(self)
         if transferState == .paused {
-            log(msg: "Continuing transfer", atLevel: .info)
+            log(msg: "Continuing transfer", atLevel: .application)
             if let _ = downloadDelegate {
                 transferState = .downloading
                 download(name: fileName!, offset: UInt(offset), callback: downloadCallback)
@@ -259,7 +262,7 @@ public class FileSystemManager: McuManager {
                 upload(name: fileName!, data: fileData!, offset: UInt(offset), callback: uploadCallback)
             }
         } else {
-            self.log(msg: "Transfer is not paused", atLevel: .warn)
+            log(msg: "Transfer is not paused", atLevel: .warning)
         }
         objc_sync_exit(self)
     }
@@ -306,10 +309,12 @@ public class FileSystemManager: McuManager {
         if let offset = response.off {
             // Set the file upload offset.
             self.offset = offset
-            self.uploadDelegate?.uploadProgressDidChange(bytesSent: Int(offset), fileSize: fileData.count, timestamp: Date())
+            self.uploadDelegate?.uploadProgressDidChange(bytesSent: Int(offset),
+                                                         fileSize: fileData.count,
+                                                         timestamp: Date())
             
             if self.transferState == .none {
-                self.log(msg: "Upload cancelled", atLevel: .info)
+                self.log(msg: "Upload cancelled", atLevel: .application)
                 self.resetTransfer()
                 self.uploadDelegate?.uploadDidCancel()
                 self.uploadDelegate = nil
@@ -320,7 +325,7 @@ public class FileSystemManager: McuManager {
             
             // Check if the upload has completed.
             if offset == fileData.count {
-                self.log(msg: "Upload finished", atLevel: .info)
+                self.log(msg: "Upload finished", atLevel: .application)
                 self.resetTransfer()
                 self.uploadDelegate?.uploadDidFinish()
                 self.uploadDelegate = nil
@@ -378,10 +383,12 @@ public class FileSystemManager: McuManager {
             // Set the file upload offset.
             self.offset = offset + UInt64(data.count)
             self.fileData!.append(contentsOf: data)
-            self.downloadDelegate?.downloadProgressDidChange(bytesDownloaded: Int(self.offset), fileSize: self.fileData!.count, timestamp: Date())
+            self.downloadDelegate?.downloadProgressDidChange(bytesDownloaded: Int(self.offset),
+                                                             fileSize: self.fileData!.count,
+                                                             timestamp: Date())
             
             if self.transferState == .none {
-                self.log(msg: "Download cancelled", atLevel: .info)
+                self.log(msg: "Download cancelled", atLevel: .application)
                 self.resetTransfer()
                 self.downloadDelegate?.downloadDidCancel()
                 self.downloadDelegate = nil
@@ -392,7 +399,7 @@ public class FileSystemManager: McuManager {
             
             // Check if the upload has completed.
             if self.offset == self.fileData!.count {
-                self.log(msg: "Download finished", atLevel: .info)
+                self.log(msg: "Download finished", atLevel: .application)
                 self.downloadDelegate?.download(of: self.fileName!, didFinish: self.fileData!)
                 self.resetTransfer()
                 self.downloadDelegate = nil
@@ -478,18 +485,19 @@ public enum FileTransferError: Error {
     case mcuMgrErrorCode(McuMgrReturnCode)
 }
 
-extension FileTransferError: CustomStringConvertible {
+extension FileTransferError: LocalizedError {
     
-    public var description: String {
+    public var errorDescription: String? {
         switch self {
         case .invalidPayload:
             return "Response payload values do not exist."
         case .invalidData:
             return "File data is nil."
         case .mcuMgrErrorCode(let code):
-            return "\(code)"
+            return "Remote error: \(code)."
         }
     }
+    
 }
 
 //******************************************************************************

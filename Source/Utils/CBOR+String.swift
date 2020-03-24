@@ -21,7 +21,15 @@ extension CBOR: CustomDebugStringConvertible {
                 .joined(separator: ", ") + "]"
         case .map(let map):
             return "{" + map
-                .map { "\($0.debugDescription) : \($1.debugDescription)" }
+                .map { key, value in
+                    // This will print the "rc" in human readable format.
+                    if case .utf8String(let k) = key, k == "rc",
+                       case .unsignedInt(let v) = value,
+                       let status = McuMgrReturnCode(rawValue: v) {
+                        return "\(key) : \(status)"
+                    }
+                    return "\(key.debugDescription) : \(value.debugDescription)"
+                }
                 .joined(separator: ", ") + "}"
         case .tagged(let tag, let cbor):
             return "\(tag.rawValue): \(cbor)"
@@ -37,6 +45,26 @@ extension CBOR: CustomDebugStringConvertible {
         case .date(let value): return "\(value)"
         #endif
         }
+    }
+    
+}
+
+extension Dictionary where Key == CBOR, Value == CBOR {
+    
+    // This overridden description takes care of printing the "rc" (Return Code)
+    // in human readable format. All other values are printed as normal.
+    public var description: String {
+        return "{" +
+            map { key, value in
+                if case .utf8String(let k) = key, k == "rc",
+                   case .unsignedInt(let v) = value,
+                   let status = McuMgrReturnCode(rawValue: v) {
+                    return "\(key) : \(status)"
+                }
+                return "\(key.description) : \(value.description)"
+            }
+            .joined(separator: ", ")
+            + "}"
     }
     
 }

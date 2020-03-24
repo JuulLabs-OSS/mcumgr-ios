@@ -9,7 +9,7 @@ import CoreBluetooth
 import SwiftCBOR
 
 public class McuManager {
-    class var TAG: String { "McuManager" }
+    class var TAG: McuMgrLogCategory { .default }
     
     //**************************************************************************
     // MARK: Mcu Manager Constants
@@ -68,22 +68,25 @@ public class McuManager {
                                         commandId: UInt8,
                                         payload: [String:CBOR]?,
                                         callback: @escaping McuMgrCallback<T>) {
-        let action = op == .read ? "Reading" : "Writing"
-        log(msg: "\(action) command \(commandId): \(payload?.debugDescription ?? "nil")",
+        log(msg: "Sending \(op) command (Group: \(group), ID: \(commandId)): \(payload?.debugDescription ?? "nil")",
             atLevel: .verbose)
         let data = McuManager.buildPacket(scheme: transporter.getScheme(), op: op,
                                           flags: flags, group: group,
                                           sequenceNumber: sequenceNumber,
                                           commandId: commandId, payload: payload)
-        let handler: McuMgrCallback<T> = { [weak self] (response, error) in
-            if let response = response {
-                self?.log(msg: "Response to command \(response.header!.commandId!): \(response)", atLevel: .verbose)
-            } else if let error = error {
-                self?.log(msg: "Request failed: \(error.localizedDescription)", atLevel: .error)
+        let _callback: McuMgrCallback<T> = logDelegate == nil ? callback : { [weak self] (response, error) in
+            if let self = self {
+                if let response = response {
+                    self.log(msg: "Response (Group: \(self.group), ID: \(response.header!.commandId!)): \(response)",
+                             atLevel: .verbose)
+                } else if let error = error {
+                    self.log(msg: "Request failed: \(error.localizedDescription)",
+                             atLevel: .error)
+                }
             }
             callback(response, error)
         }
-        send(data: data, callback: handler)
+        send(data: data, callback: _callback)
     }
     
     public func send<T: McuMgrResponse>(data: Data, callback: @escaping McuMgrCallback<T>) {
@@ -178,7 +181,7 @@ public class McuManager {
             log(msg: "MTU set to \(mtu)", atLevel: .debug)
             return true
         } else {
-            log(msg: "Invalid MTU (\(mtu)): Value must be between 23 and 1024", atLevel: .warn)
+            log(msg: "Invalid MTU (\(mtu)): Value must be between 23 and 1024", atLevel: .warning)
             return false
         }
     }
@@ -211,8 +214,7 @@ public class McuManager {
 extension McuManager {
     
     func log(msg: String, atLevel level: McuMgrLogLevel) {
-        Log.log(level, tag: Self.TAG, msg: msg)
-        logDelegate?.log(msg, atLevel: level)
+        logDelegate?.log(msg, ofCategory: Self.TAG, atLevel: level)
     }
     
 }

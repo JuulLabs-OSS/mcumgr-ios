@@ -33,9 +33,6 @@ public class McuMgrBleTransport: NSObject {
     public static let SMP_SERVICE = CBUUID(string: "8D53DC1D-1DB7-4CD3-868B-8A527460AA84")
     public static let SMP_CHARACTERISTIC = CBUUID(string: "DA2E7828-FBCE-4E01-AE9E-261174997C48")
     
-    /// Logging TAG.
-    private var TAG: String
-    
     /// Max number of retries until the transaction is failed.
     private static let MAX_RETRIES = 3
     /// Connection timeout in seconds.
@@ -97,7 +94,7 @@ public class McuMgrBleTransport: NSObject {
     ///
     /// - parameter target: The BLE peripheral with Simple Managerment
     ///   Protocol (SMP) service.
-    public convenience init?(_ target: CBPeripheral) {
+    public convenience init(_ target: CBPeripheral) {
         self.init(target.identifier)
     }
 
@@ -113,10 +110,9 @@ public class McuMgrBleTransport: NSObject {
     ///
     /// - parameter targetIdentifier: The UUID of the peripheral with Simple Managerment
     ///   Protocol (SMP) service.
-    public init?(_ targetIdentifier: UUID) {
+    public init(_ targetIdentifier: UUID) {
         self.centralManager = CBCentralManager(delegate: nil, queue: nil)
         self.identifier = targetIdentifier
-        self.TAG = "SMP (\(identifier.uuidString.prefix(4)))"
         self.dispatchQueue = DispatchQueue(label: "McuMgrBleTransport")
         self.lock = ResultLock(isOpen: false)
         self.observers = []
@@ -208,7 +204,7 @@ extension McuMgrBleTransport: McuMgrTransport {
     private func _send<T: McuMgrResponse>(data: Data, callback: @escaping McuMgrCallback<T>) -> Bool {
         // Is Bluetooth operational?
         if centralManager.state == .poweredOff || centralManager.state == .unsupported {
-            log(msg: "Central Manager powered off", atLevel: .warn)
+            log(msg: "Central Manager powered off", atLevel: .warning)
             fail(error: McuMgrBleTransportError.centralManagerPoweredOff, callback: callback)
             return false
         }
@@ -230,16 +226,16 @@ extension McuMgrBleTransport: McuMgrTransport {
             // Check for timeout, failure, or success.
             switch result {
             case .timeout:
-                log(msg: "Central Manager timed out", atLevel: .warn)
+                log(msg: "Central Manager timed out", atLevel: .warning)
                 fail(error: McuMgrTransportError.connectionTimeout, callback: callback)
                 return false
             case let .error(error):
-                log(msg: "Central Manager failed to start: \(error)", atLevel: .warn)
+                log(msg: "Central Manager failed to start: \(error)", atLevel: .warning)
                 fail(error: error, callback: callback)
                 return false
             case .success:
                 guard let target = self.peripheral else {
-                    log(msg: "Central Manager timed out", atLevel: .warn)
+                    log(msg: "Central Manager timed out", atLevel: .warning)
                     fail(error: McuMgrTransportError.connectionTimeout, callback: callback)
                     return false
                 }
@@ -285,7 +281,7 @@ extension McuMgrBleTransport: McuMgrTransport {
                 log(msg: "Retry send request...", atLevel: .verbose)
                 return true
             @unknown default:
-                log(msg: "Unknown state", atLevel: .warn)
+                log(msg: "Unknown state", atLevel: .warning)
             }
             
             // Wait for the setup process to complete.
@@ -295,12 +291,12 @@ extension McuMgrBleTransport: McuMgrTransport {
             switch result {
             case .timeout:
                 state = .disconnected
-                log(msg: "Connection timed out", atLevel: .warn)
+                log(msg: "Connection timed out", atLevel: .warning)
                 fail(error: McuMgrTransportError.connectionTimeout, callback: callback)
                 return false
             case let .error(error):
                 state = .disconnected
-                log(msg: "Connection failed: \(error)", atLevel: .warn)
+                log(msg: "Connection failed: \(error)", atLevel: .warning)
                 fail(error: error, callback: callback)
                 return false
             case .success:
@@ -377,8 +373,7 @@ extension McuMgrBleTransport: McuMgrTransport {
     }
     
     private func log(msg: String, atLevel level: McuMgrLogLevel) {
-        Log.log(level, tag: TAG, msg: msg)
-        logDelegate?.log(msg, atLevel: level)
+        logDelegate?.log(msg, ofCategory: .transport, atLevel: level)
     }
 }
 
@@ -395,7 +390,6 @@ extension McuMgrBleTransport: CBCentralManagerDelegate {
                 .retrievePeripherals(withIdentifiers: [identifier])
                 .first {
                 self.peripheral = peripheral
-                TAG = "SMP \(peripheral.name ?? "Unknown") (\(identifier.uuidString.prefix(4)))"
                 lock.open()
             } else {
                 lock.open(McuMgrBleTransportError.centralManagerNotReady)
@@ -432,7 +426,7 @@ extension McuMgrBleTransport: CBCentralManagerDelegate {
         guard self.identifier == peripheral.identifier else {
             return
         }
-        log(msg: "Peripheral failed to connect", atLevel: .warn)
+        log(msg: "Peripheral failed to connect", atLevel: .warning)
         lock.open(McuMgrTransportError.connectionFailed)
     }
 }
@@ -580,4 +574,23 @@ public enum McuMgrBleTransportError: Error {
     case missingService
     case missingCharacteristic
     case missingNotifyProperty
+}
+
+extension McuMgrBleTransportError: LocalizedError {
+    
+    public var errorDescription: String? {
+        switch self {
+        case .centralManagerPoweredOff:
+            return "Central Manager powered OFF."
+        case .centralManagerNotReady:
+            return "Central Manager not ready."
+        case .missingService:
+            return "SMP service not found."
+        case .missingCharacteristic:
+            return "SMP characteristic not found."
+        case .missingNotifyProperty:
+            return "SMP characteristic does not have notify property."
+        }
+    }
+    
 }

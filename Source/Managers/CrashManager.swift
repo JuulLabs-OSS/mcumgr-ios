@@ -8,7 +8,7 @@ import Foundation
 import SwiftCBOR
 
 public class CrashManager: McuManager {
-    override class var TAG: String { "CrashManager" }
+    override class var TAG: McuMgrLogCategory { .crash }
     
     //**************************************************************************
     // MARK: Constants
