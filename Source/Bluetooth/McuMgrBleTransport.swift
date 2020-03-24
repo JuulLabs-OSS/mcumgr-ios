@@ -300,7 +300,7 @@ extension McuMgrBleTransport: McuMgrTransport {
                 fail(error: error, callback: callback)
                 return false
             case .success:
-                log(msg: "Device ready", atLevel: .verbose)
+                log(msg: "Device ready", atLevel: .info)
                 // Continue.
             }
         }
@@ -448,7 +448,7 @@ extension McuMgrBleTransport: CBPeripheralDelegate {
             .map({ $0.uuid.uuidString })
             .joined(separator: ", ")
             ?? "none"
-        log(msg: "Services discovered: \(s)", atLevel: .info)
+        log(msg: "Services discovered: \(s)", atLevel: .verbose)
         
         // Get peripheral's services.
         guard let services = peripheral.services else {
@@ -480,7 +480,7 @@ extension McuMgrBleTransport: CBPeripheralDelegate {
             .map({ $0.uuid.uuidString })
             .joined(separator: ", ")
             ?? "none"
-        log(msg: "Characteristics discovered: \(c)", atLevel: .info)
+        log(msg: "Characteristics discovered: \(c)", atLevel: .verbose)
         
         // Get service's characteristics.
         guard let characteristics = service.characteristics else {
@@ -515,7 +515,7 @@ extension McuMgrBleTransport: CBPeripheralDelegate {
             return
         }
         
-        log(msg: "Notifications enabled", atLevel: .info)
+        log(msg: "Notifications enabled", atLevel: .verbose)
         
         // Set the SMP characteristic.
         smpCharacteristic = characteristic
