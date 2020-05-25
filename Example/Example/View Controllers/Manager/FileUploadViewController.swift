@@ -88,7 +88,7 @@ extension FileUploadViewController: FileUploadDelegate {
         actionStart.isHidden = false
         actionSelect.isEnabled = true
         status.textColor = .systemRed
-        status.text = "\(error)"
+        status.text = "\(error.localizedDescription)"
     }
     
     func uploadDidCancel() {
