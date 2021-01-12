@@ -8,7 +8,7 @@ import Foundation
 import CoreBluetooth
 import SwiftCBOR
 
-public class McuManager {
+open class McuManager {
     class var TAG: McuMgrLogCategory { .default }
     
     //**************************************************************************
