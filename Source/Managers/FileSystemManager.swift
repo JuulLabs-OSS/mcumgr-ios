@@ -23,7 +23,7 @@ public class FileSystemManager: McuManager {
     //**************************************************************************
     
     public init(transporter: McuMgrTransport) {
-        super.init(group: .fs, transporter: transporter)
+        super.init(group: McuMgrGroup.fs.rawValue, transporter: transporter)
     }
     
     //**************************************************************************

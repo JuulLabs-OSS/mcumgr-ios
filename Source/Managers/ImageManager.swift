@@ -31,7 +31,7 @@ public class ImageManager: McuManager {
     //**************************************************************************
 
     public init(transporter: McuMgrTransport) {
-        super.init(group: .image, transporter: transporter)
+        super.init(group: McuMgrGroup.image.rawValue, transporter: transporter)
     }
     
     //**************************************************************************

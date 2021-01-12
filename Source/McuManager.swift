@@ -30,7 +30,7 @@ public class McuManager {
     
     /// The command group used for in the header of commands sent using this Mcu
     /// Manager.
-    public let group: McuMgrGroup
+    public let group: UInt16
     
     /// The MTU used by this manager. This value must be between 23 and 1024.
     /// The MTU is usually only a factor when uploading files or images to the
@@ -45,7 +45,7 @@ public class McuManager {
     // MARK: Initializers
     //**************************************************************************
 
-    public init(group: McuMgrGroup, transporter: McuMgrTransport) {
+    public init(group: UInt16, transporter: McuMgrTransport) {
         self.group = group
         self.transporter = transporter
         self.mtu = McuManager.getDefaultMtu(scheme: transporter.getScheme())
@@ -109,7 +109,7 @@ public class McuManager {
     ///
     /// - returns: The raw packet data to send to the transporter.
     public static func buildPacket(scheme: McuMgrScheme, op: McuMgrOperation, flags: UInt8,
-                                   group: McuMgrGroup, sequenceNumber: UInt8,
+                                   group: UInt16, sequenceNumber: UInt8,
                                    commandId: UInt8, payload: [String:CBOR]?) -> Data {
         // If the payload map is nil, initialize an empty map.
         var payload = (payload == nil ? [:] : payload)!
@@ -124,7 +124,7 @@ public class McuManager {
         
         // Build header.
         let header = McuMgrHeader.build(op: op.rawValue, flags: flags, len: len,
-                                        group: group.rawValue, seq: sequenceNumber,
+                                        group: group, seq: sequenceNumber,
                                         id: commandId)
         
         // Build the packet based on scheme.
