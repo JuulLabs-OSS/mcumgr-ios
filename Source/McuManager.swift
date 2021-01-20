@@ -30,7 +30,7 @@ open class McuManager {
     
     /// The command group used for in the header of commands sent using this Mcu
     /// Manager.
-    public let group: UInt16
+    public let group: McuMgrGroup
     
     /// The MTU used by this manager. This value must be between 23 and 1024.
     /// The MTU is usually only a factor when uploading files or images to the
@@ -45,7 +45,7 @@ open class McuManager {
     // MARK: Initializers
     //**************************************************************************
 
-    public init(group: UInt16, transporter: McuMgrTransport) {
+    public init(group: McuMgrGroup, transporter: McuMgrTransport) {
         self.group = group
         self.transporter = transporter
         self.mtu = McuManager.getDefaultMtu(scheme: transporter.getScheme())
@@ -71,7 +71,7 @@ open class McuManager {
         log(msg: "Sending \(op) command (Group: \(group), ID: \(commandId)): \(payload?.debugDescription ?? "nil")",
             atLevel: .verbose)
         let data = McuManager.buildPacket(scheme: transporter.getScheme(), op: op,
-                                          flags: flags, group: group,
+                                          flags: flags, group: group.uInt16Value,
                                           sequenceNumber: sequenceNumber,
                                           commandId: commandId, payload: payload)
         let _callback: McuMgrCallback<T> = logDelegate == nil ? callback : { [weak self] (response, error) in
@@ -226,27 +226,42 @@ public typealias McuMgrCallback<T: McuMgrResponse> = (T?, Error?) -> Void
 ///
 /// Each group has its own manager class which contains the specific subcommands
 /// and functions. The default are contained within the McuManager class.
-public enum McuMgrGroup: UInt16 {
+public enum McuMgrGroup {
     /// Default command group (DefaultManager).
-    case `default`  = 0
+    case `default`
     /// Image command group (ImageManager).
-    case image      = 1
+    case image
     /// Statistics command group (StatsManager).
-    case stats      = 2
+    case stats
     /// System configuration command group (ConfigManager).
-    case config     = 3
+    case config
     /// Log command group (LogManager).
-    case logs       = 4
+    case logs
     /// Crash command group (CrashManager).
-    case crash      = 5
+    case crash
     /// Split image command group (Not implemented).
-    case split      = 6
+    case split
     /// Run test command group (RunManager).
-    case run        = 7
+    case run
     /// File System command group (FileSystemManager).
-    case fs         = 8
+    case fs
     /// Per user command group.
-    case peruser    = 64
+    case peruser(value: UInt16)
+    
+    var uInt16Value: UInt16 {
+        switch self {
+        case .default: return 0
+        case .image: return 1
+        case .stats: return 2
+        case .config: return 3
+        case .logs: return 4
+        case .crash: return 5
+        case .split: return 6
+        case .run: return 7
+        case .fs: return 8
+        case .peruser(let value): return value
+        }
+    }
 }
 
 /// The mcu manager operation defines whether the packet sent is a read/write

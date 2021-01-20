@@ -27,7 +27,7 @@ public class StatsManager: McuManager {
     //**************************************************************************
 
     public init(transporter: McuMgrTransport) {
-        super.init(group: McuMgrGroup.stats.rawValue, transporter: transporter)
+        super.init(group: McuMgrGroup.stats, transporter: transporter)
     }
     
     //**************************************************************************

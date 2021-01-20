@@ -27,7 +27,7 @@ public class DefaultManager: McuManager {
     //**************************************************************************
 
     public init(transporter: McuMgrTransport) {
-        super.init(group: McuMgrGroup.default.rawValue, transporter: transporter)
+        super.init(group: McuMgrGroup.default, transporter: transporter)
     }
     
     //**************************************************************************
