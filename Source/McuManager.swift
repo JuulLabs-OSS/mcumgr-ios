@@ -245,7 +245,7 @@ public enum McuMgrGroup {
     case run
     /// File System command group (FileSystemManager).
     case fs
-    /// Per user command group.
+    /// Per user command group, value must be >= 64.
     case peruser(value: UInt16)
     
     var uInt16Value: UInt16 {
