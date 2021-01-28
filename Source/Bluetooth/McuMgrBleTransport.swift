@@ -567,7 +567,6 @@ extension McuMgrBleTransport: CBPeripheralDelegate {
     }
 }
 
-/// Errors specific to BLE transport.
 //******************************************************************************
 // MARK: Result Lock Keys
 //******************************************************************************
@@ -581,6 +580,8 @@ extension McuMgrBleTransport {
         static let awaitingResponse: ResultLockKey = "McuMgrBleTransport.awaitingResponse"
     }
 }
+
+/// Errors specific to BLE transport.
 public enum McuMgrBleTransportError: Error {
     case centralManagerPoweredOff
     case centralManagerNotReady
