@@ -19,9 +19,10 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "McuManager", 
-            dependencies: ["SwiftCBOR"], 
-            path: "Source"
+            name: "McuManager",
+            dependencies: ["SwiftCBOR"],
+            path: "Source",
+            exclude:["Info.plist"]
         )
     ]
 )
