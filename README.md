@@ -7,7 +7,7 @@ A transport agnostic implementation of the McuManager protocol (aka Newt Manager
 ### CocoaPods
 
 ```
-pod 'McuManager', '~> 0.11.1'
+pod 'McuManager', '~> 0.12.0'
 ```
 
 # Introduction
