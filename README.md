@@ -1,3 +1,12 @@
+# DEPRECATED
+
+This repository is deprecated and no longer maintained, please use the following forks:
+
+- iOS: [NordicSemiconductor/IOS-nRF-Connect-Device-Manager](https://github.com/NordicSemiconductor/IOS-nRF-Connect-Device-Manager)
+- Android: [NordicSemiconductor/Android-nRF-Connect-Device-Manager](https://github.com/NordicSemiconductor/Android-nRF-Connect-Device-Manager)
+
+---
+
 # McuManager iOS
 
 A transport agnostic implementation of the McuManager protocol (aka Newt Manager (NMP), Simple Management Protocol (SMP)) for iOS. 
